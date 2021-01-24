@@ -1,0 +1,256 @@
+{% extends 'baseapp/base.html' %}
+
+{% load static %}
+
+{% block context %}
+
+<!--=================================
+    About -->
+    <section class="space-ptb">
+      <div class="container">
+        <div class="row justify-content-center pb-4 pb-md-5">
+          <div class="col-lg-12">
+            <div class="d-lg-flex align-items-center">
+              <div class="mr-4">
+                <p class="mb-0">Объедились в</p>
+                <h3 class="display-3 font-weight-bold text-primary mb-0">2011</h3>
+              </div>
+              <div class="mr-3">
+                <h2 class="mb-3 mb-lg-0">Обеспечим постоянное и динамичное развитие Вашей компании.</h2>
+              </div>
+              <div class="ml-auto">
+                <a href="{% url 'show-about' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Подробнее<i class="fas fa-arrow-right pl-3"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <div class="feature-info feature-info-style-07">
+              <div class="feature-info-img">
+                <img class="img-fluid" src="{% static 'images/about/01.jpg' %}" alt="">
+              </div>
+              <div class="feature-info-content">
+                <h4 class="feature-info-title mb-2">Миссия и принципы</h4>
+                <p>Наши принципы обеспечивают успешное завершение десятков проектов. Мы понимаем потребности заказчиков и предлагаем лучшие решения.</p>
+                <a href="{% url 'show-about' %}" class="icon-btn"><i class="fas fa-long-arrow-alt-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <div class="feature-info feature-info-style-07">
+              <div class="feature-info-img">
+                <img class="img-fluid" src="{% static 'images/about/02.jpg' %}" alt="">
+              </div>
+              <div class="feature-info-content">
+                <h4 class="feature-info-title mb-2">Вызовы</h4>
+                <p>Нам доверяют проектирование и разработку систем уровня предприятия. Интересные проекты и решения успешно реализованы в различных областях промышленности и торговли.</p>
+                <a href="{% url 'show-about' %}" class="icon-btn"><i class="fas fa-long-arrow-alt-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6  mb-4 mb-md-0">
+            <div class="feature-info feature-info-style-07">
+              <div class="feature-info-img">
+                <img class="img-fluid" src="{% static 'images/about/03.jpg' %}" alt="">
+              </div>
+              <div class="feature-info-content">
+                <h4 class="feature-info-title mb-2">Наша команда</h4>
+                <p>Мы команда, состоящая из профессионалов с опытом разработки и внедрения 10-15 лет. Мы понимаем потребности бизнесса благодаря обширнейшей гамме направлений деятельности наших постоянных клиентов.</p>
+                <a href="{% url 'show-about' %}" class="icon-btn"><i class="fas fa-long-arrow-alt-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="mb-4">
+              <div class="background-border-top"></div>
+              <div class="p-4">
+                <h4 class="text-primary">Наши инструменты</h4>
+                <p class="mb-3">В производстве мы используем популярные стеки инструментов и технологий, обеспечивающие стабильную скорость проектирования и разработки, а так-же широчайшие возможности адаптации под новые требования и интеграции с существующими информационными системами.</p>
+                <a class="btn btn-primary-round btn-round mx-0 mx-md-3" href="{% url 'show-our-tools' %}">Подробнее<i class="fas fa-arrow-right pl-3"></i></a>
+              </div>
+            </div>
+            <div class="p-4 bg-dark border-radius text-white">
+              <h4 class="text-white">Careers with us</h4>
+              <p>There’s always room for intelligent people who are excited about the digital world and are continually looking forward to seeing what’s next.</p>
+              <a class="btn btn-link text-primary" href="#">View Available Positions<i class="fas fa-arrow-right pl-3"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--=================================
+    About -->
+
+    <!--=================================
+    Category -->
+    <section class="space-ptb bg-dark-half-md">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="section-title text-center">
+              <h2 class="text-white">Мы преуспеваем в свое деятельности и Вам поможем преуспеть в своей.</h2>
+              <p class="lead text-white">Это лишь некоторые отрасли в которых мы добились глубокого понимания имеющихся процессов.</p>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-12">
+            <div class="category category-grid-style-01">
+              <div class="category-item">
+                <div class="category-icon">
+                  <i class="flaticon-car"></i>
+                </div>
+                <a href="#" class="category-title">Автомобили и автозапчасти</a>
+              </div>
+              <div class="category-item">
+                <div class="category-icon">
+                  <i class="flaticon-order"></i>
+                </div>
+                <a href="#" class="category-title">Склады и сборка грузов</a>
+              </div>
+              <div class="category-item">
+                <div class="category-icon">
+                  <i class="flaticon-icon-626443"></i>
+                </div>
+                <a href="#" class="category-title">Розница, фаст-фуд, кафе и рестораны</a>
+              </div>
+              <div class="category-item">
+                <div class="category-icon">
+                  <i class="flaticon-author"></i>
+                </div>
+                <a href="#" class="category-title">Торговые представители и мобильная торговля</a>
+              </div>              
+              <div class="category-item">
+                <div class="category-icon">
+                  <i class="flaticon-classified"></i>
+                </div>
+                <a href="#" class="category-title">Производство и оказание услуг</a>
+              </div>
+              <div class="category-item">
+                <div class="category-icon">
+                  <i class="flaticon-piggy-bank"></i>
+                </div>
+                <a href="#" class="category-title">Финансовые службы и бухгалтерия</a>
+              </div>
+              <div class="category-item">
+                <div class="category-icon">
+                  <i class="flaticon-support"></i>
+                </div>
+                <a href="#" class="category-title">Call-центры и службы поддержки</a>
+              </div>
+              <div class="category-item">
+                <div class="category-icon">
+                  <i class="flaticon-lamp"></i>
+                </div>
+                <a href="#" class="category-title">Оптовая торговля различных видов</a>
+              </div>              
+              <div class="category-item">
+                <div class="category-icon">
+                  <i class="flaticon-trolley"></i>
+                </div>
+                <a href="#" class="category-title">Логистика и службы доставки</a>
+              </div>
+              <div class="category-item">
+                <div class="category-icon">
+                  <i class="flaticon-thunder"></i>
+                </div>
+                <a href="#" class="category-title">Сервисные центры</a>
+              </div>              
+              <!-- <div class="clearfix"></div>
+              <div class="show-more-cat">
+                <a href="#" class="">Show More<i class="fas fa-arrow-right icon-btn"></i></a>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--=================================
+    Category -->
+
+    
+    <!--=================================
+    Category -->
+    <section class="space-pb">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xl-9 col-lg-10">
+            <div class="section-title text-center">
+              <h2>Направления нашей деятельности для Вашего скорейшего роста.</h2>
+              
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          {% for service in services %}
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-info feature-info-style-02">
+              <div class="feature-info-icon">
+                <i class="flaticon-data mr-4"></i>
+                <h5 class="mb-0 feature-info-title">{{ service.title }}</h5>
+              </div>
+              <div class="feature-info-content">
+                <p class="mb-0">{{ service.pre_content }}</p>
+                <a href="{% url 'show-service-detail' id=service.id %}" class="icon-btn"><i class="fas fa-long-arrow-alt-right"></i></a>
+              </div>
+              <div class="feature-info-bg-img"></div>
+            </div>
+          </div>
+          {% endfor %}
+      </div>
+    </section>
+    <!--=================================
+    Category -->
+
+    <!--=================================
+    Blog -->
+    <section class="space-pb">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-9">
+            <div class="section-title text-center">
+              <h2>Последние новости и  интересные события</h2>
+              
+            </div>
+          </div>
+        </div>
+        <div class="row border-bottom">
+
+          {% for article in articles %}
+          <div class="col-lg-4 col-sm-6 mb-4">
+            <div class="blog-post">
+              <div class="blog-post-image">
+                <img class="img-fluid" src="{% static 'images/blog/01.jpg' %}" alt="">
+              </div>
+              <div class="blog-post-content">
+                <div class="blog-post-info">
+                  <div class="blog-post-author">
+                    <a href="#" class="btn btn-light-round btn-round text-primary">{{ article.category }}</a>
+                  </div>
+                  <div class="blog-post-date">
+                    <a href="#">{{ article.date }}</a>
+                  </div>
+                </div>
+                <div class="blog-post-details">
+                  <h5 class="blog-post-title">
+                    <a href="{% url 'show-article-detail' id=article.id %}">{{ article.title }}</a>
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="row mt-5">
+          <div class="col-12 d-md-flex justify-content-center align-items-center">
+            <p class="mb-3 mb-md-0 mx-0 mx-md-3 text-light">У нас есть статьи на разные темы</p>
+            <a href="{% url 'show-articles' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Подробнее<i class="fas fa-arrow-right pl-3"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--=================================
+    BLog -->
+{% endblock %}
