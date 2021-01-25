@@ -8,9 +8,10 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
+urlpatterns = [    
     path('', include('baseapp.urls')),
+    path('crm/', include('crmapp.urls')),
+    path('admin/', admin.site.urls),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,12 +1,7 @@
 from django.shortcuts import render
 from .models import Service
 from .models import Article
-
-def get_context():
-	return {
-		'services': Service.objects.all()[:6],
-		'articles': Article.objects.all()[:3],		
-	}
+from .core import get_context
 
 def show_index(request):
 	return render(request, 'baseapp/index.html', get_context())

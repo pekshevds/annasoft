@@ -1,0 +1,40 @@
+{% extends 'baseapp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+    <!--=================================
+    Category -->
+    <section class="space-ptb bg-dark-half-md">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="section-title text-center">
+              <h2 class="text-white">Заказчики</h2>
+              <p class="lead text-white"></p>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-12">
+            <div class="category category-grid-style-01">
+              
+              {% for customer in customers %}
+              <div class="category-item">
+                <div class="category-icon">
+                  <a href="{% url 'show-customer' id=customer.id %}"><i class="flaticon-car"></i></a>
+                </div>
+                <a href="{% url 'show-customer' id=customer.id %}" class="category-title">{{ customer }}</a>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--=================================
+    Category -->
+
+{% endblock %}
