@@ -27,6 +27,7 @@
                   <a href="{% url 'show-customer' id=customer.id %}"><i class="flaticon-car"></i></a>
                 </div>
                 <a href="{% url 'show-customer' id=customer.id %}" class="category-title">{{ customer }}</a>
+                <a href="{% url 'new-task' customer_id=customer.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Новая задача</a>
               </div>
               {% endfor %}
             </div>

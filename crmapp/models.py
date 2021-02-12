@@ -67,8 +67,15 @@ class Customer(models.Model):
 
 	person = models.ForeignKey(Person, verbose_name="Физическое лицо", on_delete=models.PROTECT, null=True, blank=True)
 
+	is_performer = models.BooleanField(verbose_name="Исполнитель по умолчанию", default=False)
+
 	def __str__(self):
 		return f'{self.name}'
+
+
+	def get_employes(self):
+		return Employee.objects.filter(customer=self)
+
 
 	class Meta:        
 		verbose_name = 'Заказчик'
@@ -132,11 +139,24 @@ class Task(models.Model):
 	def __str__(self):
 		return f'Задача №{self.id} от {self.date.strftime("%d.%m.%Y")}'
 
+
+	def get_dead_line(self):
+		return f'{self.dead_line.strftime("%d.%m.%Y")}'
+
+
+	def get_predescription(self):
+		if len(self.description) <= 50:
+			return self.description
+		return self.description[:50] + "..."
+
+
 	def get_from_customer_list(self):
 		return Employee.objects.filter(customer=self.customer)
 
+
 	def get_from_performer_list(self):
 		return Employee.objects.filter(customer=self.performer)
+
 
 	class Meta:        
 		verbose_name = 'Задача'

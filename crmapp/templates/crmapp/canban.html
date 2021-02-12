@@ -1,0 +1,102 @@
+{% extends 'baseapp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<!--=================================
+    Contat Form -->
+    <section class="space-ptb">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-4">
+            <div class="row justify-content-lg-around position-relative pt-5">
+              
+              <div class="col-lg-12 col-md-7">
+                <div class="p-4 p-md-5 bg-white shadow">
+                  <h3>Запланированы</h3>
+                </div>
+              </div>
+              </div>
+              
+              {% for task in tasks_A %}
+              <div class="row justify-content-lg-around position-relative pt-2">
+              <div class="col-lg-12 col-md-7">
+                <div class="p-4 p-md-5 bg-white shadow">
+                  <h6><a href="{% url 'show-task' id=task.id %}">{{ task }}</a></h6>
+                  <h6>Заказчик: {{ task.customer }}</h6>
+                  
+                  
+                  <h5>Описание: {{ task.get_predescription }}</h5>
+                  <a href="{% url 'send-to-b' id=task.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">К выполнению</a>
+                  <h6>Выполнить до:{{ task.get_dead_line }}</h6>
+                </div>
+              </div>
+              </div>
+              {% endfor %}
+            
+          </div>
+          <div class="col-lg-4">            
+
+            <div class="row justify-content-lg-around position-relative pt-5">
+
+              <div class="col-lg-12 col-md-7">
+                <div class="p-4 p-md-5 bg-white shadow">
+                  <h3>Выполняются</h3>
+                </div>
+              </div>
+              </div>
+              
+
+              {% for task in tasks_B %}
+              <div class="row justify-content-lg-around position-relative pt-2">
+              <div class="col-lg-12 col-md-7">
+                <div class="p-4 p-md-5 bg-white shadow">
+                  <h6>{{ task }}</h6>
+                  <h6>Заказчик: {{ task.customer }}</h6>
+                  
+                  
+                  <h5>Описание: {{ task.get_predescription }}</h5>
+                  <a href="{% url 'send-to-c' id=task.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">На проверку</a>
+                  <h6>Выполнить до:{{ task.get_dead_line }}</h6>
+                </div>
+              </div>
+              </div>
+              {% endfor %}
+          </div>
+          <div class="col-lg-4"> 
+          <div class="row justify-content-lg-around position-relative pt-5">
+
+              <div class="col-lg-12 col-md-7">
+                <div class="p-4 p-md-5 bg-white shadow">
+                  <h3>Проверяются</h3>
+                </div>
+              </div>
+              </div>
+              
+              {% for task in tasks_C %}
+              <div class="row justify-content-lg-around position-relative pt-2">
+              <div class="col-lg-12 col-md-7">
+                <div class="p-4 p-md-5 bg-white shadow">
+                  <h6>{{ task }}</h6>
+                  <h6>Заказчик: {{ task.customer }}</h6>
+                  
+                  
+                  <h5>Описание: {{ task.get_predescription }}</h5>
+                  <a href="{% url 'send-to-b' id=task.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">На доработку</a>
+                  <h6>Выполнить до:{{ task.get_dead_line }}</h6>
+
+                  <a href="{% url 'send-to-b' id=task.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Выполнить</a>
+                </div>
+              </div>
+              </div>
+              {% endfor %}            
+          </div>
+        </div>        
+      </div>
+    </section>
+    <!--=================================
+    Contat Form  -->
+
+{% endblock %}
