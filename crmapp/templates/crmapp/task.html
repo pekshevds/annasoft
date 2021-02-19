@@ -5,6 +5,7 @@
 {% block content %}
 
 
+{% if user.is_authenticated %}
 <!--=================================
     Contat Form -->
     <section class="space-ptb">
@@ -12,7 +13,11 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="section-title text-center">
-              <h1>Новая задача</h1>
+              {% if task %}
+              <h4>{{ task }}</h4>
+              {% else %}
+              <h4>Новая задача</h4>
+              {% endif %}
               <p>{{ customer }}</p>
             </div>
           </div>
@@ -27,6 +32,7 @@
               	{% csrf_token %}
                 
                 <div class="form-group mb-3">
+                  <input type="hidden" class="form-control" name="id" placeholder="id" value="{{ id }}">
                   <input type="hidden" class="form-control" name="customer" placeholder="customer" value="{{ customer.id }}">
                   <input type="text" class="form-control" placeholder="Заказчик" value="{{ customer }}" disabled>
                 </div>
@@ -58,12 +64,47 @@
 
 
                 <div class="form-group mb-3">
-                  <input type="date" class="form-control" name="dead_line" placeholder="Исполнить до" value="">
+                  <input type="date" class="form-control" name="dead_line" placeholder="Исполнить до" value="{{ dead_line }}">
+                </div>
+
+
+                <div class="form-group mb-3">
+                  <h6>Фактическое время выполнения:</h6>
+                </div>
+                <div class="form-group mb-3">
+                  <div class="container">
+                    <div class="row justify-content-center">
+                      <div class="col-lg-6">
+                          <h6>Часов:</h6>
+                          <input type="number" class="form-control" name="time_scheduled_h" placeholder="Время выполнения, план" value="{{ task.time_scheduled_h }}">
+                      </div>
+                      <div class="col-lg-6">
+                          <h6>Минут:</h6>
+                          <input type="number" class="form-control" name="time_scheduled_m" placeholder="Время выполнения, план" value="{{ task.time_scheduled_m }}">                  
+                      </div>
+                   </div>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <h6>Плановое время выполнения:</h6>
+                </div>
+                <div class="form-group mb-3">
+                  <div class="container">
+                    <div class="row justify-content-center">
+                      <div class="col-lg-6">
+                          <input type="number" class="form-control" name="time_actual_h" placeholder="Время выполнения, факт" value="{{ task.time_actual_h }}">                  
+                      </div>
+                      <div class="col-lg-6">
+                          <input type="number" class="form-control" name="time_actual_m" placeholder="Время выполнения, факт" value="{{ task.time_actual_m }}">                  
+                      </div>
+                   </div>
+                  </div>
                 </div>
                 
 
                 <div class="form-group mb-4">
-                  <textarea class="form-control" name="description" placeholder="Описание" rows="5"></textarea>
+                  <textarea class="form-control" name="description" placeholder="Описание" rows="5">{{ description }}</textarea>
                 </div>                
                 <div class="form-group mb-0">
                   <button type="submit" class="btn btn-primary">Сохранить<i class="fas fa-arrow-right pl-3"></i></button>
@@ -77,5 +118,6 @@
     </section>
     <!--=================================
     Contat Form  -->
+{% endif %}
 
 {% endblock %}

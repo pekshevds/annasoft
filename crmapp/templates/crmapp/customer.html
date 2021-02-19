@@ -4,7 +4,7 @@
 
 {% block content %}
 
-
+{% if user.is_authenticated %}
 <!--=================================
     Contat Form -->
     <section class="space-ptb">
@@ -12,7 +12,11 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="section-title text-center">
-              <h1>Новый заказчик</h1>
+              {% if customer %}
+              <h4>{{ customer }}</h4>
+              {% else %}
+              <h4>Новый заказчик</h4>
+              {% endif %}
               <p>Введите данные о заказчике</p>
             </div>
           </div>
@@ -66,11 +70,32 @@
               </form>
             </div>
           </div>
+          {% if customer %}
+          <div class="col-lg-5 col-md-5 pr-lg-5">
+            <div class="p-4 p-md-5 bg-white shadow">
+              <h3>Контактные лица</h3>
+              <div class="mt-4">
+                
+                {% for employee in customer.get_employes %}
+                <div class="form-group mb-3">
+                  <a href="{% url 'show-employee' id=employee.id %}" class="btn btn-primary">{{ employee }}</a>
+                  <!-- <input type="text" class="form-control" name="name" placeholder="Наименование" value="{{ employee }}"> -->
+                </div>
+                {% endfor %}
+                
+                <div class="form-group mt-5">
+                  <a href="{% url 'new-employee' customer_id=customer.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">+Добавить</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
           
         </div>
       </div>
     </section>
     <!--=================================
     Contat Form  -->
+{% endif %}
 
 {% endblock %}

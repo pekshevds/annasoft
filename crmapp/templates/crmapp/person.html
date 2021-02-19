@@ -4,7 +4,7 @@
 
 {% block content %}
 
-
+{% if user.is_authenticated %}
 <!--=================================
     Contat Form -->
     <section class="space-ptb">
@@ -12,56 +12,81 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="section-title text-center">
-              <h1>Contact us</h1>
-              <p>Drop us a line! We’ll set up a time to chat over the phone or in-person to know more about your business needs. All primary conferences are free of charge.</p>
+              {% if person %}
+              <h6>{{ person }}</h6>              
+              <p>Измените данные о физ.лице</p>
+              {% else %}
+              <h6>Новое физ.лицо</h6>              
+              <p>Введите данные о физ.лице</p>
+              {% endif %}
             </div>
           </div>
         </div>
         <div class="row justify-content-lg-around position-relative pt-5">
-          <div class="col-lg-4 col-md-5 mb-4">
-            <div class="is-sticky">
-              <h4 class="mb-4">Let’s talk about what you want to accomplish and how we can make it happen.</h4>
-              <h5 class="text-light">This is the beginning of creating the life that you want to live.</h5>
-            </div>
-          </div>
+          
           <div class="col-lg-7 col-md-7 pr-lg-5">
-            <div class="p-4 p-md-5 bg-white shadow">
-              <h3>Need assistance? please fill the form</h3>
-              <form class="mt-4">
+            <div class="p-4 p-md-5 bg-white shadow">              
+              <form class="mt-4" action="{% url 'save-person' %}" method="post">
+                {% csrf_token %}
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" id="exampleInputName" placeholder="Name">
+                  {% if person %}
+                  <input type="hidden" class="form-control" name="id" placeholder="id" value="{{ person.id }}">
+                  {% else %}
+                  <input type="hidden" class="form-control" name="id" placeholder="id" value="0">
+                  {% endif %}
+                  <input type="text" class="form-control" name="first_name" placeholder="Имя" value="{{ person.first_name }}">
                 </div>
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" id="exampleInputLname" placeholder="Last Name">
+                  <input type="text" class="form-control" name="middle_name" placeholder="Отчество" value="{{ person.middle_name }}">
                 </div>
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" id="exampleInputEmail" placeholder="Email Address">
+                  <input type="text" class="form-control" name="last_name" placeholder="Фамилия" value="{{ person.last_name }}">
                 </div>
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" id="exampleInputEnquiry" placeholder="Enquiry Type">
+                  <input type="date" class="form-control" name="birthdate" placeholder="День роджения" value="{{ person.birthdate }}">
                 </div>
+                <div class="form-group mb-3">
+                  <select class="form-control" name="sex">
+                    
+                    <option value="M">Мужской</option>
+                    <option value="F">Женский</option>
+                  </select>                   
+                </div>
+
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control" name="email" placeholder="Email" value="{{ person.email }}">
+                </div>
+
+                <div class="form-group mb-3">                  
+                  <input type="text" class="form-control" name="address1" placeholder="Адрес по прописке" value="{{ person.address1 }}">
+                </div>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control" name="address2" placeholder="Адрес проживания" value="{{ person.address2 }}">
+                </div>
+
+                <div class="form-group mb-3">                  
+                  <input type="text" class="form-control" name="phone1" placeholder="Телефон" value="{{ person.phone1 }}">
+                </div>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control" name="phone2" placeholder="Телефон" value="{{ person.phone2 }}">
+                </div>
+
                 <div class="form-group mb-4">
-                  <textarea class="form-control" id="exampleInputEnquiry-Description" placeholder="Enquiry Description" rows="5"></textarea>
+                  <textarea class="form-control" name="description" placeholder="Описание" rows="5">{{ person.description }}</textarea>
                 </div>
-                <div class="form-group mb-4">
-                  <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                    <label class="custom-control-label small" for="customCheck1">I agree to talk about my project with Hi-soft</label>
-                  </div>
-                </div>
+                
                 <div class="form-group mb-0">
-                  <button type="submit" class="btn btn-primary">Send Massage<i class="fas fa-arrow-right pl-3"></i></button>
+                  <button type="submit" class="btn btn-primary">Сохранить<i class="fas fa-arrow-right pl-3"></i></button>
                 </div>
               </form>
             </div>
           </div>
-          <div class="contact-bg-logo">
-            <i class="fas fa-comment"></i>
-          </div>
+          
         </div>
       </div>
     </section>
     <!--=================================
     Contat Form  -->
+{% endif %}
 
 {% endblock %}
