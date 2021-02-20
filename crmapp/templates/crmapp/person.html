@@ -43,7 +43,7 @@
                   <input type="text" class="form-control" name="last_name" placeholder="Фамилия" value="{{ person.last_name }}">
                 </div>
                 <div class="form-group mb-3">
-                  <input type="date" class="form-control" name="birthdate" placeholder="День роджения" value="{{ person.birthdate }}">
+                  <input type="date" class="form-control" name="birthdate" placeholder="День роджения" value="{{ person.get_birthdate }}">
                 </div>
                 <div class="form-group mb-3">
                   <select class="form-control" name="sex">

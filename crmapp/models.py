@@ -41,6 +41,9 @@ class Person(models.Model):
 	def __str__(self):
 		return f'{self.first_name} {self.last_name}'
 
+	def get_birthdate(self):
+		return f'{self.birthdate.strftime("%Y-%m-%d")}'
+
 	class Meta:        
 		verbose_name = 'Физическое лицо'
 		verbose_name_plural = 'Физические лица'
