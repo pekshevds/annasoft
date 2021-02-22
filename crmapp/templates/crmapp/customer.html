@@ -28,41 +28,45 @@
               <h3></h3>
 
               <form class="mt-4" method="post" action="{% url 'save-customer' %}">
-              	{% csrf_token %}
+              	 {% csrf_token %}
                 <div class="form-group mb-3">
-                  <input type="hidden" class="form-control" name="id" placeholder="id" value="{{ id }}">
+                  {% if customer %}
+                  <input type="hidden" class="form-control" name="id" placeholder="id" value="{{ customer.id }}">
+                  {% else %}
+                 <input type="hidden" class="form-control" name="id" placeholder="id" value="0">
+                  {% endif %}                  
 
-                  <input type="text" class="form-control" name="name" placeholder="Наименование" value="{{ name }}">
+                  <input type="text" class="form-control" name="name" placeholder="Наименование" value="{{ customer.name }}">
                 </div>
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="fullName" placeholder="Наименование полное" value="{{ full_name }}">
+                  <input type="text" class="form-control" name="fullName" placeholder="Наименование полное" value="{{ customer.full_name }}">
                 </div>
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="inn" placeholder="ИНН" value="{{ inn }}">
+                  <input type="text" class="form-control" name="inn" placeholder="ИНН" value="{{ customer.inn }}">
                 </div>
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="kpp" placeholder="КПП" value="{{ kpp }}">
+                  <input type="text" class="form-control" name="kpp" placeholder="КПП" value="{{ customer.kpp }}">
                 </div>
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="email" placeholder="E-mail" value="{{ email }}">
-                </div>
-
-                <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="address1" placeholder="Адрес юридический" value="{{ address1 }}">
-                </div>
-                <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="address2" placeholder="Адрес фактический" value="{{ address2 }}">
+                  <input type="text" class="form-control" name="email" placeholder="E-mail" value="{{ customer.email }}">
                 </div>
 
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="phone1" placeholder="Телефон" value="{{ phone1 }}">
+                  <input type="text" class="form-control" name="address1" placeholder="Адрес юридический" value="{{ customer.address1 }}">
                 </div>
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="phone2" placeholder="Телефон" value="{{ phone2 }}">
+                  <input type="text" class="form-control" name="address2" placeholder="Адрес фактический" value="{{ customer.address2 }}">
+                </div>
+
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control" name="phone1" placeholder="Телефон" value="{{ customer.phone1 }}">
+                </div>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control" name="phone2" placeholder="Телефон" value="{{ customer.phone2 }}">
                 </div>
 
                 <div class="form-group mb-4">
-                  <textarea class="form-control" name="description" placeholder="Описание" rows="5">{{ description }}</textarea>
+                  <textarea class="form-control" name="description" placeholder="Описание" rows="5">{{ customer.description }}</textarea>
                 </div>                
                 <div class="form-group mb-0">
                   <button type="submit" class="btn btn-primary">Сохранить<i class="fas fa-arrow-right pl-3"></i></button>

@@ -64,9 +64,9 @@
                         <i class="flaticon-email"></i>
                         <span>
                           <label class="d-block">info@annasoft.ru</label>
-                          <label class="d-block"></label>
+                          <a class="d-block" href="{% url 'show-crm-index' %}">crm</a>
                         </span>
-                      </li>
+                      </li>                      
                   </ul>
                 </div>
               </div>
@@ -128,7 +128,11 @@
               <ul class="list-unstyled mb-0">
                 <li><a href="{% url 'show-about' %}">О нас</a></li>                
                 <li><a href="{% url 'show-articles' %}">Статьи</a></li>                
-                <li><a href="#">Работа у нас <span class="badge badge-success ml-2">We're hiring</span></a></li>
+                <li><a href="#">Работа у нас </a></li>
+
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'show-crm-index' %}"><span class="badge badge-success ml-2">crm</span></a></li>
+                {% endif %}
               </ul>
             </div>
           </div>

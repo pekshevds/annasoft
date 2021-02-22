@@ -40,7 +40,7 @@
                   <h5>Описание: <a href="{% url 'show-task' id=task.id %}">{{ task.get_predescription }}</a></h5>
 
                   <a href="{% url 'send-to-b' id=task.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">К выполнению</a>
-                  <h6>Выполнить до:{{ task.get_dead_line }}</h6>
+                  <h6>Выполнить до:{{ task.get_dead_line_ru }}</h6>
                 </div>
               </div>
               </div>
@@ -69,7 +69,7 @@
                   
                   <h5>Описание: <a href="{% url 'show-task' id=task.id %}">{{ task.get_predescription }}</a></h5>
                   <a href="{% url 'send-to-c' id=task.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">На проверку</a>
-                  <h6>Выполнить до:{{ task.get_dead_line }}</h6>
+                  <h6>Выполнить до:{{ task.get_dead_line_ru }}</h6>
                 </div>
               </div>
               </div>
@@ -95,7 +95,7 @@
                   
                   <h5>Описание: <a href="{% url 'show-task' id=task.id %}">{{ task.get_predescription }}</a></h5>
                   <a href="{% url 'send-to-d' id=task.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Выполнить</a>                  
-                  <h6>Выполнить до:{{ task.get_dead_line }}</h6>                  
+                  <h6>Выполнить до:{{ task.get_dead_line_ru }}</h6>                  
                   <a href="{% url 'send-to-b' id=task.id %}" ><span class="badge badge-warning">На доработку</span></a>
                 </div>
               </div>

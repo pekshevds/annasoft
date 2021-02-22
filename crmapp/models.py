@@ -131,24 +131,27 @@ class Task(models.Model):
 										choices=TASK_STATUS, default=DEFAULT_TASK_STATUS)
 
 	customer = models.ForeignKey(Customer, verbose_name="Заказчик", related_name="customer", on_delete=models.PROTECT)
-	from_customer = models.ForeignKey(Employee, verbose_name="От заказчика", related_name="from_customer", on_delete=models.PROTECT)
+	from_customer = models.ForeignKey(Employee, verbose_name="От заказчика", related_name="from_customer", on_delete=models.PROTECT, null=True)
 
 	performer = models.ForeignKey(Customer, verbose_name="Исполнитель", related_name="performer", on_delete=models.PROTECT)
-	from_performer = models.ForeignKey(Employee, verbose_name="От исполнителя", related_name="from_performer", on_delete=models.PROTECT)
+	from_performer = models.ForeignKey(Employee, verbose_name="От исполнителя", related_name="from_performer", on_delete=models.PROTECT, null=True)
 
 	dead_line = models.DateField(verbose_name="Исполнить до", null=True, blank=True)
 	description = models.TextField(verbose_name="Описание", default="", blank=True)
 
-	time_scheduled_h = models.PositiveSmallIntegerField(verbose_name="Время выполнения, план:", default=1, blank=True)
-	time_scheduled_m = models.PositiveSmallIntegerField(verbose_name="Время выполнения, план:", default=1, blank=True)
-	time_actual_h = models.PositiveSmallIntegerField(verbose_name="Время выполнения, факт:", default=1, blank=True)
-	time_actual_m = models.PositiveSmallIntegerField(verbose_name="Время выполнения, факт:", default=1, blank=True)
+	time_scheduled_h = models.PositiveSmallIntegerField(verbose_name="Время выполнения, план:", default=0, blank=True)
+	time_scheduled_m = models.PositiveSmallIntegerField(verbose_name="Время выполнения, план:", default=0, blank=True)
+	time_actual_h = models.PositiveSmallIntegerField(verbose_name="Время выполнения, факт:", default=0, blank=True)
+	time_actual_m = models.PositiveSmallIntegerField(verbose_name="Время выполнения, факт:", default=0, blank=True)
 
 	def __str__(self):
 		return f'Задача №{self.id} от {self.date.strftime("%d.%m.%Y")}'
 
 
 	def get_dead_line(self):
+		return f'{self.dead_line.strftime("%Y-%m-%d")}'
+
+	def get_dead_line_ru(self):
 		return f'{self.dead_line.strftime("%d.%m.%Y")}'
 
 
