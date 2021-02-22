@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,13 +20,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'o#(l@dxgli=rfqy(0qcwktvkho^p0+fxu76l5o=5!l^agim011'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['annasoft.ru', 'www.annasoft.ru', 'localhost',]
+
 
 
 # Application definition
@@ -37,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'django_cleanup.apps.CleanupConfig',
+    'django.contrib.sites',
 
     'baseapp',
     'crmapp',
@@ -65,6 +69,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -125,3 +131,19 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = BASE_DIR / 'media' # пустая папка, сюда будет собирать статику collectstatic
 MEDIA_URL = '/media/'
+
+
+
+# tunning
+SITE_ID = 1
+
+ACCOUNT_EMAIL_REQUIRED =True
+ACCOUNT_AUTHENTICATION_METHOD='email'
+ACCOUNT_EMAIL_VERIFICATION='mandatory'
+
+EMAIL_HOST = 'mail.hosting.reg.ru'
+EMAIL_HOST_USER = config('MAIL_USER')
+EMAIL_HOST_PASSWORD = config('MAIL_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = config('MAIL_USER')

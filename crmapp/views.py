@@ -84,18 +84,7 @@ def save_task(request):
 	time_scheduled_m 	= int(request.POST.get("time_scheduled_m", "0"))
 	time_actual_h 		= int(request.POST.get("time_actual_h", "0"))
 	time_actual_m 		= int(request.POST.get("time_actual_m", "0"))
-
 	
-	print(id)
-	print(customer)
-	print(from_customer)
-	print(performer)
-	print(from_performer)
-	print(time_scheduled_h)
-	print(time_scheduled_m)
-	print(time_actual_h)
-	print(time_actual_m)
-
 	if id == 0:
 
 		if create_new_task(customer=customer, from_customer=from_customer, performer=performer, from_performer=from_performer, 
