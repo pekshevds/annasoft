@@ -38,8 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    'django_cleanup',
+    'django_cleanup.apps.CleanupConfig',
     'django.contrib.sites',
 
     'baseapp',
@@ -85,7 +84,7 @@ WSGI_APPLICATION = 'annasoft.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, config('DB_NAME')),
     }
 }
 
