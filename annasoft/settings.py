@@ -25,7 +25,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['annasoft.ru', 'www.annasoft.ru', 'localhost',]
+ALLOWED_HOSTS = ['annasoft.site', 'www.annasoft.site', 'localhost',]
 
 
 
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'django_cleanup.apps.CleanupConfig',
+    'django_cleanup',
     'django.contrib.sites',
 
     'baseapp',
