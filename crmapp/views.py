@@ -27,22 +27,33 @@ from .core import update_person
 from .core import create_new_employee
 from .core import update_employee
 
+from .core import get_current_employee
+
 from datetime import datetime
 
 # Create your views here.
 def show_index(request):
+	
+	if request.user.is_authenticated:
+		context = get_context()	
+		return render(request, "crmapp/index.html", context)
+	return redirect('show-auth')
 
-	context = get_context()	
-	return render(request, "crmapp/index.html", context)
 
+def show_canban(request, onUser=False):
+	if request.user.is_authenticated:
+		context = get_context()
+		if onUser:
 
-def show_canban(request):
-
-	context = get_context()
-	context['tasks_A'] = get_tasks("A")
-	context['tasks_B'] = get_tasks("B")
-	context['tasks_C'] = get_tasks("C")
-	return render(request, "crmapp/canban.html", context)
+			context['tasks_A'] = get_tasks("A", request.user)
+			context['tasks_B'] = get_tasks("B", request.user)
+			context['tasks_C'] = get_tasks("C", request.user)
+		else:
+			context['tasks_A'] = get_tasks("A")
+			context['tasks_B'] = get_tasks("B")
+			context['tasks_C'] = get_tasks("C")
+		return render(request, "crmapp/canban.html", context)
+	return redirect('show-auth')
 
 
 def send_to_B(request, id):
@@ -131,6 +142,8 @@ def new_task(request, customer_id):
 	context['customer_employes'] 	= context['customer'].get_employes()
 	context['performer_employes'] 	= context['performer'].get_employes()
 
+	context['from_performer'] 		= get_current_employee(request)
+
 	context['time_scheduled_h'] 	= 0
 	context['time_scheduled_m'] 	= 0
 	context['time_actual_h'] 		= 0
@@ -140,25 +153,26 @@ def new_task(request, customer_id):
 
 
 def show_persons(request):
-	
-	context 				= get_context()
-	context['persons'] 		= Person.objects.all()
-	return render(request, "crmapp/persons.html", context)
+	if request.user.is_authenticated:
+		context 				= get_context()
+		context['persons'] 		= Person.objects.all()
+		return render(request, "crmapp/persons.html", context)
+	return redirect('show-auth')
 
 
 def new_person(request):
 
 	context 				= get_context()		
 	context['person'] 		= None
-
 	return render(request, "crmapp/person.html", context)
 
 
 def show_person(request, id):
-	
-	context 				= get_context()		
-	context['person'] 		= Person.objects.get(id=id)
-	return render(request, "crmapp/person.html", context)
+	if request.user.is_authenticated:
+		context 				= get_context()		
+		context['person'] 		= Person.objects.get(id=id)
+		return render(request, "crmapp/person.html", context)
+	return redirect('show-auth')
 
 
 def save_person(request):
@@ -194,17 +208,19 @@ def save_person(request):
 
 
 def show_customers(request):
-	
-	context = get_context()
-	context['customers'] = Customer.objects.all()
-	return render(request, "crmapp/customers.html", context)
+	if request.user.is_authenticated:
+		context = get_context()
+		context['customers'] = Customer.objects.all()
+		return render(request, "crmapp/customers.html", context)
+	return redirect('show-auth')
 
 
 def show_customer(request, id):
-
-	context = get_context()
-	context['customer'] = Customer.objects.get(id=id)
-	return render(request, "crmapp/customer.html", context)
+	if request.user.is_authenticated:
+		context = get_context()	
+		context['customer'] = Customer.objects.get(id=id)
+		return render(request, "crmapp/customer.html", context)
+	return redirect('show-auth')
 
 
 def new_customer(request):
@@ -252,14 +268,15 @@ def new_employee(request, customer_id):
 
 
 def show_employee(request, id):
-	
-	context = get_context()
-	context['employee'] = Employee.objects.get(id=id)
-	context['customer'] = context['employee'].customer
-	context['customers'] = Customer.objects.all()	
-	context['persons'] = Person.objects.all()
-	context['positions'] = Position.objects.all()
-	return render(request, "crmapp/employee.html", context)
+	if request.user.is_authenticated:
+		context = get_context()
+		context['employee'] = Employee.objects.get(id=id)
+		context['customer'] = context['employee'].customer
+		context['customers'] = Customer.objects.all()	
+		context['persons'] = Person.objects.all()
+		context['positions'] = Position.objects.all()
+		return render(request, "crmapp/employee.html", context)
+	return redirect('show-auth')
 
 
 def save_employee(request):

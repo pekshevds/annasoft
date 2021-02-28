@@ -19,8 +19,11 @@ def get_tasks_C():
 	return get_tasks("C")
 
 
-def get_tasks(status="A"):
-
+def get_tasks(status="A", user=None):
+	if user:
+		
+		return Task.objects.filter(task_status=status, 
+			from_performer=get_employee_on_user(user))
 	return Task.objects.filter(task_status=status)
 
 
@@ -160,3 +163,13 @@ def update_employee(employee, name, customer, person, position, email, address1,
 	except:
 		return False
 	return True
+
+
+def get_employee_on_user(user):
+	return Employee.objects.filter(user=user).first()
+
+
+def get_current_employee(request):
+	if request.user.is_authenticated:
+		return get_employee_on_user(request.user)
+	return None

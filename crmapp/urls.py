@@ -52,6 +52,7 @@ urlpatterns = [
     path('save-task/', save_task, name='save-task'),
     
     path('canban/', show_canban, name='show-canban'),
+    path('my-canban/', show_canban, {'onUser': True}, name='show-my-canban'),
     
     path('send-to-b/<int:id>/', send_to_B, name='send-to-b'),
     path('send-to-c/<int:id>/', send_to_C, name='send-to-c'),
