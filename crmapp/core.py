@@ -4,6 +4,8 @@ from .models import Person
 from .models import Employee
 
 
+from datetime import datetime
+
 def get_tasks_A():
 
 	return get_tasks("A")
@@ -45,6 +47,7 @@ def send_task_to_D(id):
 
 	task = Task.objects.get(id=id)
 	task.task_status = "D"
+	task.date_of_completion = datetime.now()
 	task.save()
 
 

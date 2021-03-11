@@ -150,6 +150,8 @@ class Task(models.Model):
 	time_actual_h = models.PositiveSmallIntegerField(verbose_name="Время выполнения, факт:", default=0, blank=True)
 	time_actual_m = models.PositiveSmallIntegerField(verbose_name="Время выполнения, факт:", default=0, blank=True)
 
+	date_of_completion = models.DateTimeField(verbose_name="Дата исполнения", null=True, blank=True)
+
 	def __str__(self):
 		return f'Задача №{self.id} от {self.date.strftime("%d.%m.%Y")}'
 
