@@ -29,6 +29,8 @@ from .core import update_employee
 
 from .core import get_current_employee
 
+from .core import get_completed_tasks
+
 from datetime import datetime
 
 # Create your views here.
@@ -40,7 +42,7 @@ def show_index(request):
 	return redirect('show-auth')
 
 
-def show_canban(request, onUser=False):
+def show_kanban(request, onUser=False):
 	if request.user.is_authenticated:
 		context = get_context()
 		if onUser:
@@ -52,62 +54,72 @@ def show_canban(request, onUser=False):
 			context['tasks_A'] = get_tasks("A")
 			context['tasks_B'] = get_tasks("B")
 			context['tasks_C'] = get_tasks("C")
-		return render(request, "crmapp/canban.html", context)
+		return render(request, "crmapp/kanban.html", context)
 	return redirect('show-auth')
 
 
 def send_to_B(request, id):
 
-	send_task_to_B(id)
-	return redirect('show-canban')
+	if request.user.is_authenticated:
+		send_task_to_B(id, user=request.user)
+	return redirect('show-kanban')
 
 
 def send_to_C(request, id):
 
-	send_task_to_C(id)
-	return redirect('show-canban')
+	if request.user.is_authenticated:
+		send_task_to_C(id, user=request.user)
+	return redirect('show-kanban')
 
 
 def send_to_D(request, id):
 
-	send_task_to_D(id)
-	return redirect('show-canban')
+	if request.user.is_authenticated:
+		send_task_to_D(id, user=request.user)
+	return redirect('show-kanban')
 
 
 def save_task(request):
 
-	id 					= int(request.POST.get("id", "0"))
-	customer_id 		= request.POST.get("customer", "0")
-	from_customer_id 	= request.POST.get("from_customer", "0")
-	performer_id 		= request.POST.get("performer", "0")
-	from_performer_id 	= request.POST.get("from_performer", "0")
-	dead_line 			= datetime.strptime(request.POST.get("dead_line", ""), "%Y-%m-%d")
-	description 		= request.POST.get("description", "")
+	if request.user.is_authenticated:
 
-	customer 			= Customer.objects.filter(id=customer_id).first()
-	from_customer 		= Employee.objects.filter(id=from_customer_id).first()
+		id 					= int(request.POST.get("id", "0"))
+		customer_id 		= request.POST.get("customer", "0")
+		from_customer_id 	= request.POST.get("from_customer", "0")
+		performer_id 		= request.POST.get("performer", "0")
+		from_performer_id 	= request.POST.get("from_performer", "0")
+		
+		try:
+			dead_line		= datetime.strptime(request.POST.get("dead_line", None), "%Y-%m-%d")
+		except:
+			dead_line 		= None
 
-	performer 			= Customer.objects.filter(id=performer_id).first()
-	from_performer 		= Employee.objects.filter(id=from_performer_id).first()
+		description 		= request.POST.get("description", "")
+
+		customer 			= Customer.objects.filter(id=customer_id).first()
+		from_customer 		= Employee.objects.filter(id=from_customer_id).first()
+
+		performer 			= Customer.objects.filter(id=performer_id).first()
+		from_performer 		= Employee.objects.filter(id=from_performer_id).first()
 
 
-	time_scheduled_h 	= int(request.POST.get("time_scheduled_h", "0"))
-	time_scheduled_m 	= int(request.POST.get("time_scheduled_m", "0"))
-	time_actual_h 		= int(request.POST.get("time_actual_h", "0"))
-	time_actual_m 		= int(request.POST.get("time_actual_m", "0"))
-	
-	if id == 0:
+		time_scheduled_h 	= int(request.POST.get("time_scheduled_h", "0"))
+		time_scheduled_m 	= int(request.POST.get("time_scheduled_m", "0"))
+		time_actual_h 		= int(request.POST.get("time_actual_h", "0"))
+		time_actual_m 		= int(request.POST.get("time_actual_m", "0"))
+		
+		if id == 0:
 
-		if create_new_task(customer=customer, from_customer=from_customer, performer=performer, from_performer=from_performer, 
-							dead_line=dead_line, description=description, time_scheduled_h=time_scheduled_h, 
-							time_scheduled_m=time_scheduled_m, time_actual_h=time_actual_h, time_actual_m=time_actual_m):
-			return redirect('show-canban')
-	else:
+			if create_new_task(customer=customer, from_customer=from_customer, performer=performer, from_performer=from_performer, 
+								dead_line=dead_line, description=description, time_scheduled_h=time_scheduled_h, 
+								time_scheduled_m=time_scheduled_m, time_actual_h=time_actual_h, time_actual_m=time_actual_m, user=request.user):
+				return redirect('show-kanban')
+		else:
 
-		if update_task(task=Task.objects.get(id=id), customer=customer, from_customer=from_customer, performer=performer, 
-						from_performer=from_performer, dead_line=dead_line, description=description, time_scheduled_h=time_scheduled_h,
-						time_scheduled_m=time_scheduled_m, time_actual_h=time_actual_h, time_actual_m=time_actual_m):
-			return redirect('show-canban')
+			if update_task(task=Task.objects.get(id=id), customer=customer, from_customer=from_customer, performer=performer, 
+							from_performer=from_performer, dead_line=dead_line, description=description, time_scheduled_h=time_scheduled_h,
+							time_scheduled_m=time_scheduled_m, time_actual_h=time_actual_h, time_actual_m=time_actual_m, user=request.user):
+				return redirect('show-kanban')
 
 	return redirect(request.META['HTTP_REFERER'])
 	
@@ -183,7 +195,11 @@ def save_person(request):
 	last_name 				= request.POST.get('last_name', '')
 	
 
-	birthdate 				= datetime.strptime(request.POST.get('birthdate', None), '%Y-%m-%d')
+	try:
+		birthdate 			= datetime.strptime(request.POST.get('birthdate', None), '%Y-%m-%d')
+	except:
+		birthdate			= None
+		
 	sex 					= request.POST.get('sex', '')
 	email 					= request.POST.get('email', '')
 	address1 				= request.POST.get('address1', '')
@@ -195,14 +211,14 @@ def save_person(request):
 	if id == 0:
 
 		if create_new_person(first_name=first_name, middle_name=middle_name, last_name=last_name, birthdate=birthdate, 
-							sex=sex, email=email, address1=address1, address2=address2, phone1=phone1, phone2=phone2, description=description):
-			return redirect('show-crm-index')
+							sex=sex, email=email, address1=address1, address2=address2, phone1=phone1, phone2=phone2, description=description):			
+			return redirect('persons')
 	else:
 
 		if update_person(person=Person.objects.get(id=id), first_name=first_name, middle_name=middle_name, last_name=last_name, 
 						birthdate=birthdate, sex=sex, email=email, address1=address1, address2=address2, phone1=phone1,
 						phone2=phone2, description=description):
-			return redirect('show-crm-index')
+			return redirect('persons')
 
 	return redirect(request.META['HTTP_REFERER'])
 
@@ -309,3 +325,28 @@ def save_employee(request):
 			pass	
 
 	return redirect('show-customer', id=str(customer_id))
+
+
+def show_report_001(request):
+	if request.user.is_authenticated:
+		context = get_context()
+
+		if request.method == 'POST':
+
+			try:
+				param_from		= datetime.strptime(request.POST.get('param_from', datetime.now()), '%Y-%m-%d')
+			except:
+				param_from		= datetime.now()
+
+			try:
+				param_to		= datetime.strptime(request.POST.get('param_to', datetime.now()), '%Y-%m-%d')
+			except:
+				param_to		= datetime.now()
+			
+			context['param_from'] = param_from.strftime("%Y-%m-%d")
+			context['param_to'] = param_to.strftime("%Y-%m-%d")
+			context['tasks'] = get_completed_tasks(param_from=param_from, param_to=param_to)
+
+		return render(request, "crmapp/report_001.html", context)
+
+	return redirect(request.META['HTTP_REFERER'])

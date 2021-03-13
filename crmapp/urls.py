@@ -16,7 +16,9 @@ from .views import new_employee
 from .views import show_employee
 from .views import save_employee
 
-from .views import show_canban
+from .views import show_kanban
+
+from .views import show_report_001
 
 from .views import send_to_B
 from .views import send_to_C
@@ -51,8 +53,10 @@ urlpatterns = [
     path('task/<int:id>/', show_task, name='show-task'),
     path('save-task/', save_task, name='save-task'),
     
-    path('canban/', show_canban, name='show-canban'),
-    path('my-canban/', show_canban, {'onUser': True}, name='show-my-canban'),
+    path('kanban/', show_kanban, name='show-kanban'),
+    path('my-kanban/', show_kanban, {'onUser': True}, name='show-my-kanban'),
+
+    path('report_001/', show_report_001, name='show-report-001'),
     
     path('send-to-b/<int:id>/', send_to_B, name='send-to-b'),
     path('send-to-c/<int:id>/', send_to_C, name='send-to-c'),

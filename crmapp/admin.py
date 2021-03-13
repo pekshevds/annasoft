@@ -5,6 +5,7 @@ from .models import Customer
 from .models import Employee
 from .models import Position
 from .models import Task
+from .models import Record
 
 # Register your models here.
 
@@ -46,6 +47,18 @@ class TaskAdmin(admin.ModelAdmin):
 	)
 		
 	list_filter = ( 'task_status', )
+
+
+class RecordAdmin(admin.ModelAdmin):
+	list_display = (	
+		'id',
+		'date',
+		'task',
+		'task_status',
+		'user',		
+	)
+		
+	list_filter = ( 'user', )
 	
 	
 
@@ -53,3 +66,4 @@ admin.site.register(Person, PersonAdmin)
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Position)
 admin.site.register(Task, TaskAdmin)
+admin.site.register(Record, RecordAdmin)

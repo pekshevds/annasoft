@@ -20,7 +20,7 @@
               <p>Введите данные о сотруднике</p>
               {% endif %}
             </div>
-          </div>
+          </div>          
         </div>
         <div class="row justify-content-lg-around position-relative pt-5">
           
@@ -113,11 +113,23 @@
                   <input type="text" class="form-control" name="phone2" placeholder="Телефон" value="{{ employee.phone2 }}">
                 </div>
 
-                
-                
                 <div class="form-group mb-0">
-                  <button type="submit" class="btn btn-primary">Сохранить<i class="fas fa-arrow-right pl-3"></i></button>
+                  <div class="container">
+                    <div class="row">
+                      <div class="form-group mb-0 col-lg-7 col-md-7">
+                        <button type="submit" class="btn btn-primary">Сохранить<i class="fas fa-arrow-right pl-3"></i></button>
+                      </div>
+                      
+                      <div class="form-group mb-0 col-lg-5 col-md-5">
+                        <a href="{% url 'new-person' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">+Физ.лицо</a> 
+                      </div>                  
+                    </div>
+                  </div>
                 </div>
+
+                
+                
+
               </form>
             </div>
           </div>

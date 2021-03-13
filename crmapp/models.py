@@ -145,15 +145,19 @@ class Task(models.Model):
 	dead_line = models.DateField(verbose_name="Исполнить до", null=True, blank=True)
 	description = models.TextField(verbose_name="Описание", default="", blank=True)
 
-	time_scheduled_h = models.PositiveSmallIntegerField(verbose_name="Время выполнения, план:", default=0, blank=True)
-	time_scheduled_m = models.PositiveSmallIntegerField(verbose_name="Время выполнения, план:", default=0, blank=True)
-	time_actual_h = models.PositiveSmallIntegerField(verbose_name="Время выполнения, факт:", default=0, blank=True)
-	time_actual_m = models.PositiveSmallIntegerField(verbose_name="Время выполнения, факт:", default=0, blank=True)
+	time_scheduled_h = models.PositiveSmallIntegerField(verbose_name="Время выполнения, факт (час):", default=0, blank=True)
+	time_scheduled_m = models.PositiveSmallIntegerField(verbose_name="Время выполнения, факт (мин.):", default=0, blank=True)
+	time_actual_h = models.PositiveSmallIntegerField(verbose_name="Время выполнения, норма (час):", default=0, blank=True)
+	time_actual_m = models.PositiveSmallIntegerField(verbose_name="Время выполнения, норма (мин.):", default=0, blank=True)
 
 	date_of_completion = models.DateTimeField(verbose_name="Дата исполнения", null=True, blank=True)
 
+
 	def __str__(self):
 		return f'Задача №{self.id} от {self.date.strftime("%d.%m.%Y")}'
+
+	def save(self, *args, **kwargs):
+		super(Task, self).save(*args, **kwargs)
 
 
 	def get_dead_line(self):
@@ -162,22 +166,64 @@ class Task(models.Model):
 	def get_dead_line_ru(self):
 		return f'{self.dead_line.strftime("%d.%m.%Y")}'
 
+	def get_date_of_completion(self):
+		return f'{self.date_of_completion.strftime("%Y-%m-%d")}'
+
+	def get_date_of_completion_ru(self):
+		return f'{self.date_of_completion.strftime("%d.%m.%Y")}'
+
+
+	def is_danger(self):		
+		if self.task_status == "D":
+			
+			if self.date_of_completion.date()>self.dead_line:
+				return True
+		return False
+
+
+	def get_time_scheduled(self):
+		return self.time_scheduled_h * 60 + self.time_scheduled_m
+
+	def get_time_actual(self):
+		return self.time_actual_h * 60 + self.time_actual_m
+
+	def get_profit(self):
+		return self.get_time_actual() - self.get_time_scheduled()
+
 
 	def get_predescription(self):
 		if len(self.description) <= 50:
 			return self.description
 		return self.description[:50] + "..."
 
-
 	def get_from_customer_list(self):
 		return Employee.objects.filter(customer=self.customer)
 
-
 	def get_from_performer_list(self):
 		return Employee.objects.filter(customer=self.performer)
+
+	def is_ready(self):
+		if self.task_status == 'B' or self.task_status == 'C':
+			return True
+		return False
 
 
 	class Meta:
 		verbose_name = 'Задача'
 		verbose_name_plural = 'Задачи'
 		ordering = ['dead_line']
+
+
+class Record(models.Model):#record of status change log
+
+	date = models.DateTimeField(verbose_name="Дата", auto_now_add=True)
+	task = models.ForeignKey(Task, verbose_name="Задача", related_name="task", on_delete=models.PROTECT)
+	task_status = models.CharField(max_length=1, verbose_name="Статус", 
+										choices=TASK_STATUS, default=DEFAULT_TASK_STATUS)
+	user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.PROTECT, null=True, blank=True)
+
+
+	class Meta:
+		verbose_name = 'Запись'
+		verbose_name_plural = 'Журнал изменения статусов'
+		ordering = ['date']
