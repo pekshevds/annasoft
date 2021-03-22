@@ -1,7 +1,11 @@
 from django.db import models
-
 from django.contrib.auth.models import User
+
+from django import forms
+from django.forms import ModelForm
+
 # Create your models here.
+
 DEFAULT_SEX = 'M'
 SEX = (
 	(DEFAULT_SEX, 'Мужской'),
@@ -48,6 +52,49 @@ class Person(models.Model):
 		verbose_name = 'Физическое лицо'
 		verbose_name_plural = 'Физические лица'
 		ordering = ['last_name']
+
+
+class PersonForm(ModelForm):
+
+	id = forms.IntegerField(widget=forms.TextInput(attrs={
+												'type': 'hidden',
+												'class': 'form-control',
+												}))
+	first_name = forms.CharField(max_length=255)
+	middle_name = forms.CharField(max_length=255, required=False)
+	last_name = forms.CharField(max_length=1024, required=False)
+	birthdate = forms.DateField(required=False)#, attrs={'type': 'date'}
+	sex = forms.CharField(max_length=1, widget=forms.Select(choices=SEX))
+
+	email = forms.EmailField(max_length=254, required=False)
+
+	address1 = forms.CharField(max_length=1024, required=False)
+	address2 = forms.CharField(max_length=1024, required=False)
+
+	phone1 = forms.CharField(max_length=25, required=False)
+	phone2 = forms.CharField(max_length=25, required=False)
+
+	description = forms.CharField(max_length=1024, required=False)
+
+	class Meta:
+		model = Person
+		fields = [
+			'id',
+			'first_name',
+			'middle_name',
+			'birthdate',
+			'sex',
+			'email',
+			'address1',
+			'address2',
+			'phone1',
+			'phone2',
+			'description',
+			]
+
+		widgets = {
+			'description': forms.Textarea(),			
+		}
 
 
 class Customer(models.Model):

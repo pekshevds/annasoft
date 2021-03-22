@@ -7,6 +7,8 @@ from .models import Customer
 from .models import Employee
 from .models import Task
 from .models import Person
+from .models import PersonForm
+
 from .models import Position
 
 from .core import get_tasks
@@ -175,7 +177,7 @@ def show_persons(request):
 def new_person(request):
 
 	context 				= get_context()		
-	context['person'] 		= None
+	context['person'] 		= PersonForm()
 	return render(request, "crmapp/person.html", context)
 
 

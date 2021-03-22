@@ -12,7 +12,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="section-title text-center">
-              {% if person %}
+              {% if person.id > 0 %}
               <h6>{{ person }}</h6>              
               <p>Измените данные о физ.лице</p>
               {% else %}
@@ -28,7 +28,7 @@
             <div class="p-4 p-md-5 bg-white shadow">              
               <form class="mt-4" action="{% url 'save-person' %}" method="post">
                 {% csrf_token %}
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                   {% if person %}
                   <input type="hidden" class="form-control" name="id" placeholder="id" value="{{ person.id }}">
                   {% else %}
@@ -73,8 +73,12 @@
 
                 <div class="form-group mb-4">
                   <textarea class="form-control" name="description" placeholder="Описание" rows="5">{{ person.description }}</textarea>
+                </div> -->
+
+                <div class="form-group mb-3">
+                  {{ person.id }}
                 </div>
-                
+
                 <div class="form-group mb-0">
                   <button type="submit" class="btn btn-primary">Сохранить<i class="fas fa-arrow-right pl-3"></i></button>
                 </div>
