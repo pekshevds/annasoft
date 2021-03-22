@@ -12,8 +12,8 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="section-title text-center">
-              {% if person.id > 0 %}
-              <h6>{{ person }}</h6>              
+              {% if person.instance %}
+              <h6>{{ person.instance }}</h6>              
               <p>Измените данные о физ.лице</p>
               {% else %}
               <h6>Новое физ.лицо</h6>              
@@ -28,55 +28,55 @@
             <div class="p-4 p-md-5 bg-white shadow">              
               <form class="mt-4" action="{% url 'save-person' %}" method="post">
                 {% csrf_token %}
-                <!-- <div class="form-group mb-3">
-                  {% if person %}
-                  <input type="hidden" class="form-control" name="id" placeholder="id" value="{{ person.id }}">
-                  {% else %}
-                  <input type="hidden" class="form-control" name="id" placeholder="id" value="0">
-                  {% endif %}
-                  <input type="text" class="form-control" name="first_name" placeholder="Имя" value="{{ person.first_name }}">
-                </div>
-                <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="middle_name" placeholder="Отчество" value="{{ person.middle_name }}">
-                </div>
-                <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="last_name" placeholder="Фамилия" value="{{ person.last_name }}">
-                </div>
-                <div class="form-group mb-3">
-                  <input type="date" class="form-control" name="birthdate" placeholder="День роджения" value="{{ person.get_birthdate }}">
-                </div>
-                <div class="form-group mb-3">
-                  <select class="form-control" name="sex">
-                    
-                    <option value="M">Мужской</option>
-                    <option value="F">Женский</option>
-                  </select>                   
-                </div>
-
-                <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="email" placeholder="Email" value="{{ person.email }}">
-                </div>
-
-                <div class="form-group mb-3">                  
-                  <input type="text" class="form-control" name="address1" placeholder="Адрес по прописке" value="{{ person.address1 }}">
-                </div>
-                <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="address2" placeholder="Адрес проживания" value="{{ person.address2 }}">
-                </div>
-
-                <div class="form-group mb-3">                  
-                  <input type="text" class="form-control" name="phone1" placeholder="Телефон" value="{{ person.phone1 }}">
-                </div>
-                <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="phone2" placeholder="Телефон" value="{{ person.phone2 }}">
-                </div>
-
-                <div class="form-group mb-4">
-                  <textarea class="form-control" name="description" placeholder="Описание" rows="5">{{ person.description }}</textarea>
-                </div> -->
-
+                
                 <div class="form-group mb-3">
                   {{ person.id }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ person.first_name }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ person.middle_name }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ person.last_name }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ person.birthdate }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ person.sex }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ person.email }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ person.address1 }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ person.address2 }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ person.phone1 }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ person.phone2 }}
+                </div>
+
+                
+
+                <div class="form-group mb-4">
+                 {{ person.description }}
                 </div>
 
                 <div class="form-group mb-0">

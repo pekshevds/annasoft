@@ -12,8 +12,8 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="section-title text-center">
-              {% if customer %}
-              <h4>{{ customer }}</h4>
+              {% if customer.instance %}
+              <h4>{{ customer.instance }}</h4>
               {% else %}
               <h4>Новый заказчик</h4>
               {% endif %}
@@ -28,59 +28,68 @@
               <h3></h3>
 
               <form class="mt-4" method="post" action="{% url 'save-customer' %}">
-              	 {% csrf_token %}
-                <div class="form-group mb-3">
-                  {% if customer %}
-                  <input type="hidden" class="form-control" name="id" placeholder="id" value="{{ customer.id }}">
-                  {% else %}
-                 <input type="hidden" class="form-control" name="id" placeholder="id" value="0">
-                  {% endif %}                  
+              	{% csrf_token %}
+                          
 
-                  <input type="text" class="form-control" name="name" placeholder="Наименование" value="{{ customer.name }}">
-                </div>
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="fullName" placeholder="Наименование полное" value="{{ customer.full_name }}">
-                </div>
-                <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="inn" placeholder="ИНН" value="{{ customer.inn }}">
-                </div>
-                <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="kpp" placeholder="КПП" value="{{ customer.kpp }}">
-                </div>
-                <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="email" placeholder="E-mail" value="{{ customer.email }}">
+                  {{ customer.id }}
                 </div>
 
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="address1" placeholder="Адрес юридический" value="{{ customer.address1 }}">
-                </div>
-                <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="address2" placeholder="Адрес фактический" value="{{ customer.address2 }}">
+                  {{ customer.name }}
                 </div>
 
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="phone1" placeholder="Телефон" value="{{ customer.phone1 }}">
+                  {{ customer.full_name }}
                 </div>
+
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="phone2" placeholder="Телефон" value="{{ customer.phone2 }}">
+                  {{ customer.inn }}
                 </div>
+
+                <div class="form-group mb-3">
+                  {{ customer.kpp }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ customer.email }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ customer.address1 }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ customer.address2 }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ customer.phone1 }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ customer.phone2 }}
+                </div>
+
+                
 
                 <div class="form-group mb-4">
-                  <textarea class="form-control" name="description" placeholder="Описание" rows="5">{{ customer.description }}</textarea>
-                </div>                
+                 {{ customer.description }}
+                </div>
+
                 <div class="form-group mb-0">
                   <button type="submit" class="btn btn-primary">Сохранить<i class="fas fa-arrow-right pl-3"></i></button>
                 </div>
               </form>
             </div>
           </div>
-          {% if customer %}
+          {% if customer.instance %}
           <div class="col-lg-5 col-md-5 pr-lg-5">
             <div class="p-4 p-md-5 bg-white shadow">
               <h3>Контактные лица</h3>
               <div class="mt-4">
                 
-                {% for employee in customer.get_employes %}
+                {% for employee in customer.instance.get_employes %}
                 <div class="form-group mb-3">
                   <a href="{% url 'show-employee' id=employee.id %}" class="btn btn-primary">{{ employee }}</a>
                   <!-- <input type="text" class="form-control" name="name" placeholder="Наименование" value="{{ employee }}"> -->
@@ -88,11 +97,11 @@
                 {% endfor %}
                 
                 <div class="form-group mt-5">
-                  <a href="{% url 'new-employee' customer_id=customer.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">+Добавить</a>
+                  <a href="{% url 'new-employee' customer_id=customer.instance.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">+Добавить</a>
                 </div>
 
                 <div class="form-group mt-5">
-                  <a href="{% url 'new-task' customer_id=customer.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">+Задача</a>
+                  <a href="{% url 'new-task' customer_id=customer.instance.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">+Задача</a>
                 </div>
               </div>
             </div>

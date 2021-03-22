@@ -12,8 +12,8 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="section-title text-center">
-              {% if employee %}
-              <h6>{{ employee }}</h6>              
+              {% if employee.instance %}
+              <h6>{{ employee.instance }}</h6>              
               <p>Измените данные о сотруднике</p>
               {% else %}
               <h6>Новый сотрудник</h6>              
@@ -28,89 +28,52 @@
             <div class="p-4 p-md-5 bg-white shadow">              
               <form class="mt-4" action="{% url 'save-employee' %}" method="post">
                 {% csrf_token %}
-                <div class="form-group mb-3">
-                  {% if employee %}
-                  <input type="hidden" class="form-control" name="id" placeholder="id" value="{{ employee.id }}">
-                  {% else %}
-                  <input type="hidden" class="form-control" name="id" placeholder="id" value="0">
-                  {% endif %}
-                  <input type="text" class="form-control" name="name" placeholder="Имя" value="{{ employee.name }}">
-                </div>                
+                
                 
                 <div class="form-group mb-3">
-                  {% if employee %}
-                    <input type="hidden" class="form-control" name="customer_id" placeholder="id" value="{{ employee.customer.id }}">
-                    <input type="text" class="form-control" placeholder="Заказчик" value="{{ employee.customer }}" disabled>
-                  {% else %}
-                    {% if customer %}
-                      <input type="hidden" class="form-control" name="customer_id" placeholder="id" value="{{ customer.id }}">
-                      <input type="text" class="form-control" placeholder="Заказчик" value="{{ customer }}" disabled>
-                    {% else %}
-                      <select class="form-control" name="customer_id">
-                        {% for customer in customers %}
-                        <option value="{{ customer.id }}">
-                          {{ customer }}
-                        </option>
-                        {% endfor %}
-                      </select>
-                    {% endif %}
-                  {% endif %}
+                  {{ employee.id }}
                 </div>
 
                 <div class="form-group mb-3">
-                  
-                  <select class="form-control" name="person_id">
-                    {% for person in persons %}
-                    <option value="{{ person.id }}">
-                      {{ person }}
-                    </option>
-                    {% endfor %}
-
-                    {% if employee %}
-                    <option selected value="{{ employee.person.id }}">
-                      {{ employee.person }}
-                    </option>
-                    {% endif %}
-                  </select>
-
+                  {{ employee.name }}
                 </div>
 
                 <div class="form-group mb-3">
-                    
-
-                  <select class="form-control" name="position_id">
-                    {% for position in positions %}
-                    <option value="{{ position.id }}">
-                      {{ position }}
-                    </option>
-                    {% endfor %}
-
-                    {% if employee %}
-                    <option selected value="{{ employee.position.id }}">
-                      {{ employee.position }}
-                    </option>
-                    {% endif %}
-                  </select>                                 
+                  {{ employee.customer }}
                 </div>
 
-
-               
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="email" placeholder="Email" value="{{ employee.email }}">
+                  {{ employee.position }}
                 </div>
 
-                <div class="form-group mb-3">                  
-                  <input type="text" class="form-control" name="address1" placeholder="Адрес юридический" value="{{ employee.address1 }}">
-                </div>
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="address2" placeholder="Адрес фактический" value="{{ employee.address2 }}">
+                  {{ employee.person }}
                 </div>
 
-                <div class="form-group mb-3">                  
-                  <input type="text" class="form-control" name="phone1" placeholder="Телефон" value="{{ employee.phone1 }}">
-                </div>
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="phone2" placeholder="Телефон" value="{{ employee.phone2 }}">
+                  {{ employee.email }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ employee.address1 }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ employee.address2 }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ employee.phone1 }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ employee.phone2 }}
+                </div>
+
+                
+
+                <div class="form-group mb-4">
+                 {{ employee.description }}
                 </div>
 
                 <div class="form-group mb-0">

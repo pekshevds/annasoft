@@ -13,8 +13,8 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="section-title text-center">
-              {% if task %}
-              <h4>{{ task }}</h4>
+              {% if task.instance %}
+              <h4>{{ task.instance }}</h4>
               {% else %}
               <h4>Новая задача</h4>
               {% endif %}
@@ -32,7 +32,7 @@
               	{% csrf_token %}
                 
                 
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                   
                   {% if task %}
                     <input type="hidden" class="form-control" name="id" placeholder="id" value="{{ task.id }}">
@@ -118,7 +118,71 @@
 
                 <div class="form-group mb-4">
                   <textarea class="form-control" name="description" placeholder="Описание" rows="5">{{ description }}</textarea>
-                </div> 
+                </div> --> 
+
+                <div class="form-group mb-3">
+                  {{ task.id }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ task.customer }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ task.from_customer }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ task.performer }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ task.from_performer }}
+                </div>
+
+                <div class="form-group mb-3">
+                  {{ task.dead_line }}
+                </div>
+
+                 <div class="form-group mb-3">
+                  <h6>Фактическое время выполнения:</h6>
+                </div>
+                <div class="form-group mb-3">
+                  <div class="container">
+                    <div class="row justify-content-center">
+                      <div class="col-lg-6">
+                          <h6>Часов:</h6>
+                          {{ task.time_scheduled_h }}
+                      </div>
+                      <div class="col-lg-6">
+                          <h6>Минут:</h6>
+                          {{ task.time_scheduled_m }}
+                      </div>
+                   </div>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <h6>Нормативное время выполнения:</h6>
+                </div>
+                <div class="form-group mb-3">
+                  <div class="container">
+                    <div class="row justify-content-center">
+                      <div class="col-lg-6">
+                          {{ task.time_actual_h }}
+                      </div>
+                      <div class="col-lg-6">
+                          {{ task.time_actual_m }}
+                      </div>
+                   </div>
+                  </div>
+                </div>
+
+
+                <div class="form-group mb-4">
+                  {{ task.description }}
+                </div>
+
                 <div class="form-group mb-0">
                   <div class="container">
                     <div class="row">
