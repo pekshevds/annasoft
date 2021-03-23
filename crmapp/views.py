@@ -89,45 +89,7 @@ def send_to_D(request, id):
 
 def save_task(request):
 
-	# if request.user.is_authenticated:
-
-	# 	id 					= int(request.POST.get("id", "0"))
-	# 	customer_id 		= request.POST.get("customer", "0")
-	# 	from_customer_id 	= request.POST.get("from_customer", "0")
-	# 	performer_id 		= request.POST.get("performer", "0")
-	# 	from_performer_id 	= request.POST.get("from_performer", "0")
-		
-	# 	try:
-	# 		dead_line		= datetime.strptime(request.POST.get("dead_line", None), "%Y-%m-%d")
-	# 	except:
-	# 		dead_line 		= None
-
-	# 	description 		= request.POST.get("description", "")
-
-	# 	customer 			= Customer.objects.filter(id=customer_id).first()
-	# 	from_customer 		= Employee.objects.filter(id=from_customer_id).first()
-
-	# 	performer 			= Customer.objects.filter(id=performer_id).first()
-	# 	from_performer 		= Employee.objects.filter(id=from_performer_id).first()
-
-
-	# 	time_scheduled_h 	= int(request.POST.get("time_scheduled_h", "0"))
-	# 	time_scheduled_m 	= int(request.POST.get("time_scheduled_m", "0"))
-	# 	time_actual_h 		= int(request.POST.get("time_actual_h", "0"))
-	# 	time_actual_m 		= int(request.POST.get("time_actual_m", "0"))
-		
-	# 	if id == 0:
-
-	# 		if create_new_task(customer=customer, from_customer=from_customer, performer=performer, from_performer=from_performer, 
-	# 							dead_line=dead_line, description=description, time_scheduled_h=time_scheduled_h, 
-	# 							time_scheduled_m=time_scheduled_m, time_actual_h=time_actual_h, time_actual_m=time_actual_m, user=request.user):
-	# 			return redirect('show-kanban')
-	# 	else:
-
-	# 		if update_task(task=Task.objects.get(id=id), customer=customer, from_customer=from_customer, performer=performer, 
-	# 						from_performer=from_performer, dead_line=dead_line, description=description, time_scheduled_h=time_scheduled_h,
-	# 						time_scheduled_m=time_scheduled_m, time_actual_h=time_actual_h, time_actual_m=time_actual_m, user=request.user):
-	# 			return redirect('show-kanban')
+	
 	if request.user.is_authenticated:
 		if request.method == 'POST':
 			
@@ -136,18 +98,29 @@ def save_task(request):
 			except:
 				task = None
 
-			print(task)
-			print(request.POST)
-			taskForm = TaskForm(request.POST, instance=task)
+			
+
+			# Связано с ошибкой валидации формы
+			post = request.POST.copy()
+			del post['from_customer']
+			del post['from_performer']
+
+
+
+			taskForm = TaskForm(post, instance=task)
+			
 			if taskForm.is_valid():
 				task = taskForm.save(commit=False)
 
 				task.customer = taskForm.cleaned_data['customer']
-				task.from_customer = taskForm.cleaned_data['from_customer']
+				task.from_customer = Employee.objects.filter(id=int(request.POST.get("from_customer", "0"))).first()
 				task.performer = taskForm.cleaned_data['performer']
-				task.from_performer = taskForm.cleaned_data['from_performer']
+				task.from_performer = Employee.objects.filter(id=int(request.POST.get("from_performer", "0"))).first()
+
+				task.save()
 
 				return redirect('show-kanban')
+			print(taskForm.errors)
 	return redirect(request.META['HTTP_REFERER'])
 	
 
@@ -159,22 +132,25 @@ def show_task(request, id):
 	context['task']	= TaskForm(instance=task, 
 								customer=task.customer,
 								performer=task.performer)
-
+	context['customer'] = task.customer
+	context['performer'] = task.performer
 	return render(request, "crmapp/task.html", context)
 
 
 def new_task(request, customer_id):
 	
 	customer = Customer.objects.get(id=customer_id)
+	performer = get_default_performer()
 
 	context = get_context()		
 	context['task'] = TaskForm(initial = {
 						'customer': customer,
-						'performer': get_default_performer(),
+						'performer': performer,
 					}, 
 					customer=customer,
-					performer=get_default_performer())
-
+					performer=performer)
+	context['customer'] = customer
+	context['performer'] = performer
 	return render(request, "crmapp/task.html", context)
 
 

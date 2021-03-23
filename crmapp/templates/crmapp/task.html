@@ -129,11 +129,19 @@
                 </div>
 
                 <div class="form-group mb-3">
+                 <input type="text" class="form-control" placeholder="Заказчик" value="{{ customer }}" disabled>
+                </div>
+
+                <div class="form-group mb-3">
                   {{ task.from_customer }}
                 </div>
 
                 <div class="form-group mb-3">
                   {{ task.performer }}
+                </div>
+
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control" placeholder="Заказчик" value="{{ performer }}" disabled>
                 </div>
 
                 <div class="form-group mb-3">

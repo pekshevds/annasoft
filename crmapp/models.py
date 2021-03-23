@@ -373,10 +373,10 @@ class Task(models.Model):
 										choices=TASK_STATUS, default=DEFAULT_TASK_STATUS)
 
 	customer = models.ForeignKey(Customer, verbose_name="Заказчик", related_name="customer", on_delete=models.PROTECT)
-	from_customer = models.ForeignKey(Employee, verbose_name="От заказчика", related_name="from_customer", on_delete=models.PROTECT, null=True)
+	from_customer = models.ForeignKey(Employee, verbose_name="От заказчика", related_name="from_customer", on_delete=models.PROTECT, null=True, blank=True)
 
 	performer = models.ForeignKey(Customer, verbose_name="Исполнитель", related_name="performer", on_delete=models.PROTECT)
-	from_performer = models.ForeignKey(Employee, verbose_name="От исполнителя", related_name="from_performer", on_delete=models.PROTECT, null=True)
+	from_performer = models.ForeignKey(Employee, verbose_name="От исполнителя", related_name="from_performer", on_delete=models.PROTECT, null=True, blank=True)
 
 	dead_line = models.DateField(verbose_name="Исполнить до", null=True, blank=True)
 	description = models.TextField(verbose_name="Описание", default="", blank=True)
@@ -459,32 +459,40 @@ class TaskForm(ModelForm):
 		'class': 'form-control',
 	}), initial=0)
 	
-	customer = forms.ModelChoiceField(queryset=Customer.objects.all(),
-		 widget=forms.Select(attrs={
+	# customer = forms.ModelChoiceField(queryset=Customer.objects.all(),
+	# 	 widget=forms.Select(attrs={
+	# 	'class': 'form-control',
+	# 	'placeholder': 'Заказчик',
+	# 	'disabled': 'disabled',
+	# }), required=True)
+
+	customer = forms.IntegerField(widget=forms.HiddenInput(attrs={
 		'class': 'form-control',
-		'placeholder': 'Заказчик',
-		'readonly': 'readonly',
-	}), required=True)
+	}), initial=0)
 
 	from_customer = forms.ModelChoiceField(queryset=Employee.objects.all(),
 		 widget=forms.Select(attrs={
 		'class': 'form-control',
 		'placeholder': 'От заказчика',
 	}), required=False)
+	
+	# performer = forms.ModelChoiceField(queryset=Customer.objects.all(),
+	# 	 widget=forms.Select(attrs={
+	# 	'class': 'form-control',
+	# 	'placeholder': 'Исполнитель',
+	# 	'disabled': 'disabled',
+	# }), required=True)
 
-	performer = forms.ModelChoiceField(queryset=Customer.objects.all(),
-		 widget=forms.Select(attrs={
+	performer = forms.IntegerField(widget=forms.HiddenInput(attrs={
 		'class': 'form-control',
-		'placeholder': 'Исполнитель',
-		'readonly': 'readonly',
-	}), required=True)
+	}), initial=0)
 	
 	from_performer = forms.ModelChoiceField(queryset=Employee.objects.all(),
 		 widget=forms.Select(attrs={
 		'class': 'form-control',
 		'placeholder': 'От исполнителя',
 	}), required=False)
-
+	
 	dead_line = forms.DateField(required=True, widget=forms.TextInput(attrs={
 		'class': 'form-control',
 		'type': 'date',
@@ -526,6 +534,7 @@ class TaskForm(ModelForm):
 		self.fields['from_customer'].queryset = Employee.objects.filter(customer=customer)
 		self.fields['from_performer'].queryset = Employee.objects.filter(customer=performer)
 
+
 	class Meta:
 		model = Task
 		fields = [
@@ -546,7 +555,7 @@ class TaskForm(ModelForm):
 class Record(models.Model):#record of status change log
 
 	date = models.DateTimeField(verbose_name="Дата", auto_now_add=True)
-	task = models.ForeignKey(Task, verbose_name="Задача", related_name="task", on_delete=models.PROTECT)
+	task = models.ForeignKey(Task, verbose_name="Задача", related_name="task", on_delete=models.CASCADE)
 	task_status = models.CharField(max_length=1, verbose_name="Статус", 
 										choices=TASK_STATUS, default=DEFAULT_TASK_STATUS)
 	user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.PROTECT, null=True, blank=True)
