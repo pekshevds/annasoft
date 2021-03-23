@@ -23,18 +23,6 @@ from .core import send_task_to_C
 from .core import send_task_to_D
 from .core import get_default_performer
 
-from .core import create_new_task
-from .core import update_task
-
-from .core import create_new_customer
-from .core import update_customer
-
-from .core import create_new_person
-from .core import update_person
-
-from .core import create_new_employee
-from .core import update_employee
-
 from .core import get_current_employee
 
 from .core import get_completed_tasks
