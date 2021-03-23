@@ -98,29 +98,28 @@ def save_task(request):
 			except:
 				task = None
 
-			
-
-			# Связано с ошибкой валидации формы
-			post = request.POST.copy()
-			del post['from_customer']
-			del post['from_performer']
-
-
-
-			taskForm = TaskForm(post, instance=task)
-			
+			taskForm = TaskForm(request.POST)			
 			if taskForm.is_valid():
-				task = taskForm.save(commit=False)
+				
+				if not task:
+					task = Task()
 
-				task.customer = taskForm.cleaned_data['customer']
-				task.from_customer = Employee.objects.filter(id=int(request.POST.get("from_customer", "0"))).first()
-				task.performer = taskForm.cleaned_data['performer']
-				task.from_performer = Employee.objects.filter(id=int(request.POST.get("from_performer", "0"))).first()
+				task.customer = Customer.objects.get(id=int(taskForm.cleaned_data['customer']))
+				task.from_customer = taskForm.cleaned_data['from_customer']
+				task.performer = Customer.objects.get(id=int(taskForm.cleaned_data['performer']))
+				task.from_performer = taskForm.cleaned_data['from_performer']
+
+				task.dead_line = taskForm.cleaned_data['dead_line']
+				task.description = taskForm.cleaned_data['description']
+				task.time_scheduled_h = taskForm.cleaned_data['time_scheduled_h']
+				task.time_scheduled_m = taskForm.cleaned_data['time_scheduled_m']
+				task.time_actual_h = taskForm.cleaned_data['time_actual_h']
+				task.time_actual_m = taskForm.cleaned_data['time_actual_m']
 
 				task.save()
 
 				return redirect('show-kanban')
-			print(taskForm.errors)
+			
 	return redirect(request.META['HTTP_REFERER'])
 	
 
@@ -129,11 +128,29 @@ def show_task(request, id):
 	task = Task.objects.get(id=id)
 	
 	context = get_context()	
-	context['task']	= TaskForm(instance=task, 
+	context['task']	= TaskForm(initial = {
+						'id': task.id,
+						'customer': task.customer.id,
+						'customer_name': task.customer.name,
+						'from_customer': task.from_customer,
+
+						'performer': task.performer.id,
+						'performer_name': task.performer.name,						
+						'from_performer': task.from_performer,
+						
+						'dead_line': task.dead_line,
+						
+						'time_scheduled_h': task.time_scheduled_h,
+						'time_scheduled_m': task.time_scheduled_m,
+						'time_actual_h': task.time_actual_h,
+						'time_actual_m': task.time_actual_m,
+						
+						'description': task.description,
+					}, 
 								customer=task.customer,
 								performer=task.performer)
-	context['customer'] = task.customer
-	context['performer'] = task.performer
+	context['customer']	= task.customer
+	context['caption']	= task
 	return render(request, "crmapp/task.html", context)
 
 
@@ -144,13 +161,15 @@ def new_task(request, customer_id):
 
 	context = get_context()		
 	context['task'] = TaskForm(initial = {
-						'customer': customer,
-						'performer': performer,
+						'customer': customer.id,
+						'customer_name': customer.name,
+						'performer': performer.id,
+						'performer_name': performer.name,
 					}, 
 					customer=customer,
-					performer=performer)
-	context['customer'] = customer
-	context['performer'] = performer
+					performer=performer)	
+	context['customer']	= customer
+	context['caption']	= 'Новая задача'
 	return render(request, "crmapp/task.html", context)
 
 

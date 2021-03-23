@@ -381,10 +381,10 @@ class Task(models.Model):
 	dead_line = models.DateField(verbose_name="Исполнить до", null=True, blank=True)
 	description = models.TextField(verbose_name="Описание", default="", blank=True)
 
-	time_scheduled_h = models.PositiveSmallIntegerField(verbose_name="Время выполнения, факт (час):", default=0, blank=True)
-	time_scheduled_m = models.PositiveSmallIntegerField(verbose_name="Время выполнения, факт (мин.):", default=0, blank=True)
-	time_actual_h = models.PositiveSmallIntegerField(verbose_name="Время выполнения, норма (час):", default=0, blank=True)
-	time_actual_m = models.PositiveSmallIntegerField(verbose_name="Время выполнения, норма (мин.):", default=0, blank=True)
+	time_scheduled_h = models.PositiveSmallIntegerField(verbose_name="Время выполнения, факт (час):", default=0, null=True, blank=True)
+	time_scheduled_m = models.PositiveSmallIntegerField(verbose_name="Время выполнения, факт (мин.):", default=0, null=True, blank=True)
+	time_actual_h = models.PositiveSmallIntegerField(verbose_name="Время выполнения, норма (час):", default=0, null=True, blank=True)
+	time_actual_m = models.PositiveSmallIntegerField(verbose_name="Время выполнения, норма (мин.):", default=0, null=True, blank=True)
 
 	date_of_completion = models.DateTimeField(verbose_name="Дата исполнения", null=True, blank=True)
 
@@ -396,8 +396,20 @@ class Task(models.Model):
 		return f'Задача № от '
 
 	def save(self, *args, **kwargs):
-		super(Task, self).save(*args, **kwargs)
+		
+		if self.time_scheduled_h is None:
+			self.time_scheduled_h = 0
 
+		if self.time_scheduled_m is None:
+			self.time_scheduled_m = 0
+
+		if self.time_actual_h is None:
+			self.time_actual_h = 0
+
+		if self.time_actual_m is None:
+			self.time_actual_m = 0
+		
+		super(Task, self).save(*args, **kwargs)
 
 	def get_dead_line(self):
 		return f'{self.dead_line.strftime("%Y-%m-%d")}'
@@ -453,21 +465,20 @@ class Task(models.Model):
 		ordering = ['dead_line']
 
 
-class TaskForm(ModelForm):
+class TaskForm(forms.Form):
 
 	id = forms.IntegerField(widget=forms.HiddenInput(attrs={
 		'class': 'form-control',
 	}), initial=0)
-	
-	# customer = forms.ModelChoiceField(queryset=Customer.objects.all(),
-	# 	 widget=forms.Select(attrs={
-	# 	'class': 'form-control',
-	# 	'placeholder': 'Заказчик',
-	# 	'disabled': 'disabled',
-	# }), required=True)
-
+		
 	customer = forms.IntegerField(widget=forms.HiddenInput(attrs={
 		'class': 'form-control',
+	}), initial=0)
+
+	customer_name = forms.CharField(max_length=255, widget=forms.TextInput(attrs={
+		'class': 'form-control',
+		'placeholder': 'Заказчик',
+		'readonly': 'readonly',
 	}), initial=0)
 
 	from_customer = forms.ModelChoiceField(queryset=Employee.objects.all(),
@@ -476,15 +487,14 @@ class TaskForm(ModelForm):
 		'placeholder': 'От заказчика',
 	}), required=False)
 	
-	# performer = forms.ModelChoiceField(queryset=Customer.objects.all(),
-	# 	 widget=forms.Select(attrs={
-	# 	'class': 'form-control',
-	# 	'placeholder': 'Исполнитель',
-	# 	'disabled': 'disabled',
-	# }), required=True)
-
 	performer = forms.IntegerField(widget=forms.HiddenInput(attrs={
 		'class': 'form-control',
+	}), initial=0)
+
+	performer_name = forms.CharField(max_length=255, widget=forms.TextInput(attrs={
+		'class': 'form-control',
+		'placeholder': 'Исполнитель',
+		'readonly': 'readonly',
 	}), initial=0)
 	
 	from_performer = forms.ModelChoiceField(queryset=Employee.objects.all(),
@@ -531,8 +541,11 @@ class TaskForm(ModelForm):
 		performer = kwargs.pop('performer', None)
 
 		super(TaskForm, self).__init__(*args, **kwargs)
-		self.fields['from_customer'].queryset = Employee.objects.filter(customer=customer)
-		self.fields['from_performer'].queryset = Employee.objects.filter(customer=performer)
+		
+		if customer:
+			self.fields['from_customer'].queryset = Employee.objects.filter(customer=customer)
+		if performer:
+			self.fields['from_performer'].queryset = Employee.objects.filter(customer=performer)
 
 
 	class Meta:

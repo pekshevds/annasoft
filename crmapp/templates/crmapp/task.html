@@ -13,11 +13,8 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="section-title text-center">
-              {% if task.instance %}
-              <h4>{{ task.instance }}</h4>
-              {% else %}
-              <h4>Новая задача</h4>
-              {% endif %}
+              
+              <h4>{{ caption }}</h4>              
               <p>{{ customer }}</p>
             </div>
           </div>
@@ -31,95 +28,6 @@
               <form class="mt-4" method="post" action="{% url 'save-task' %}">
               	{% csrf_token %}
                 
-                
-                <!-- <div class="form-group mb-3">
-                  
-                  {% if task %}
-                    <input type="hidden" class="form-control" name="id" placeholder="id" value="{{ task.id }}">
-                  {% else %}
-                    <input type="hidden" class="form-control" name="id" placeholder="id" value="0">
-                  {% endif %}                  
-                  
-
-                  <input type="hidden" class="form-control" name="customer" placeholder="customer" value="{{ customer.id }}">
-                  <input type="text" class="form-control" placeholder="Заказчик" value="{{ customer }}" disabled>
-                </div>
-
-                <div class="form-group mb-3">
-                  <select class="form-control" name="from_customer">
-                    {% for employee in customer_employes %}
-                    {% if employee == from_customer %}
-                      <option selected value="{{ employee.id }}">{{ employee }}</option>
-                    {% else %}                    
-                      <option value="{{ employee.id }}">{{ employee }}</option>
-                    {% endif %}
-                    {% endfor %}
-                  </select>                  
-                </div>
-                
-                <div class="form-group mb-3">
-                  <input type="hidden" class="form-control" name="performer" placeholder="performer" value="{{ performer.id }}">
-                  <input type="text" class="form-control" placeholder="Исполнитель" value="{{ performer }}" disabled>
-                </div>
-
-                <div class="form-group mb-3">
-                  <select class="form-control" name="from_performer">
-                    {% for employee in performer_employes %}  
-
-                    {% if employee == from_performer %}
-                    <option selected value="{{ employee.id }}">{{ employee }}</option>
-                    {% else %}                    
-                    <option value="{{ employee.id }}">{{ employee }}</option>
-                    {% endif %}
-                    {% endfor %}
-                  </select>                  
-                </div>
-
-
-                <div class="form-group mb-3">
-                  <input type="date" class="form-control" name="dead_line" placeholder="Исполнить до" value="{{ dead_line }}">
-                </div>
-
-
-                <div class="form-group mb-3">
-                  <h6>Фактическое время выполнения:</h6>
-                </div>
-                <div class="form-group mb-3">
-                  <div class="container">
-                    <div class="row justify-content-center">
-                      <div class="col-lg-6">
-                          <h6>Часов:</h6>
-                          <input type="number" class="form-control" name="time_scheduled_h" placeholder="Время выполнения, факт" value="{{ time_scheduled_h }}">
-                      </div>
-                      <div class="col-lg-6">
-                          <h6>Минут:</h6>
-                          <input type="number" class="form-control" name="time_scheduled_m" placeholder="Время выполнения, факт" value="{{ time_scheduled_m }}">                  
-                      </div>
-                   </div>
-                  </div>
-                </div>
-
-                <div class="form-group mb-3">
-                  <h6>Нормативное время выполнения:</h6>
-                </div>
-                <div class="form-group mb-3">
-                  <div class="container">
-                    <div class="row justify-content-center">
-                      <div class="col-lg-6">
-                          <input type="number" class="form-control" name="time_actual_h" placeholder="Время выполнения, норма" value="{{ time_actual_h }}">                  
-                      </div>
-                      <div class="col-lg-6">
-                          <input type="number" class="form-control" name="time_actual_m" placeholder="Время выполнения, норма" value="{{ time_actual_m }}">                  
-                      </div>
-                   </div>
-                  </div>
-                </div>
-                
-
-                <div class="form-group mb-4">
-                  <textarea class="form-control" name="description" placeholder="Описание" rows="5">{{ description }}</textarea>
-                </div> --> 
-
                 <div class="form-group mb-3">
                   {{ task.id }}
                 </div>
@@ -129,7 +37,7 @@
                 </div>
 
                 <div class="form-group mb-3">
-                 <input type="text" class="form-control" placeholder="Заказчик" value="{{ customer }}" disabled>
+                  {{ task.customer_name }}
                 </div>
 
                 <div class="form-group mb-3">
@@ -141,7 +49,7 @@
                 </div>
 
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" placeholder="Заказчик" value="{{ performer }}" disabled>
+                  {{ task.performer_name }}
                 </div>
 
                 <div class="form-group mb-3">
