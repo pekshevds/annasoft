@@ -358,7 +358,7 @@ def show_report_001(request):
 		context['tasks'] = tasks
 		context['time_scheduled'] = time_scheduled
 		context['time_actual'] = time_actual
-		context['profit'] = time_scheduled - time_actual
+		context['profit'] = time_actual-time_scheduled
 		return render(request, "crmapp/report_001.html", context)
 
 	return redirect(request.META['HTTP_REFERER'])
