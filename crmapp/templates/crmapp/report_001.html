@@ -74,7 +74,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                 {% for task in settings.tasks %}
+                 {% for task in tasks %}
 
                  {% if task.is_danger %}
                  <tr class="table-danger">
@@ -88,8 +88,8 @@
                     <td>{{ task.get_dead_line_ru }}</td>
                     <td>{{ task.get_date_of_completion_ru }}</td>
 
-                    <td>{{ task.get_time_scheduled }}</td>
-                    <td>{{ task.get_time_actual }}</td>
+                    <td>{{ task.get_time_scheduled_h }}</td>
+                    <td>{{ task.get_time_actual_h }}</td>
                     <td>{{ task.get_profit }}</td>
                   </tr>
                   {% endfor %}
@@ -105,8 +105,8 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
 
-                    <th scope="col">{{ time_scheduled_m }}</th>
-                    <th scope="col">{{ time_actual_m }}</th>
+                    <th scope="col">{{ time_scheduled }}</th>
+                    <th scope="col">{{ time_actual }}</th>
                     <th scope="col">{{ profit }}</th>
                   </tr>
                 </tfoot>

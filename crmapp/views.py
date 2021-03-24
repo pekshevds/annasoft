@@ -334,29 +334,31 @@ def show_report_001(request):
 		reportForm = show_report_001_Form(initial={
 					'param_from': param_from,
 					'param_to': param_to,
-					'customer': customer,
-					'tasks': tasks,
+					'customer': customer,					
 					})
 
-		time_scheduled_m = 0
-		time_actual_m = 0
+		time_scheduled = 0
+		time_actual = 0
 
 		if tasks:
 			for task in tasks:
 				try:
-					time_scheduled_m = time_scheduled_m + task.time_scheduled_m
+					time_scheduled = time_scheduled + task.get_time_scheduled_h()
 				except:
-					time_scheduled_m = time_scheduled_m + 0
+					time_scheduled = time_scheduled + 0
 
+								
 				try:
-					time_actual_m = time_actual_m + task.time_actual_m
+					time_actual = time_actual + task.get_time_actual_h()
 				except:
-					time_actual_m = time_actual_m + 0
+					time_actual = time_actual + 0
 
+				
 		context['settings'] = reportForm
-		context['time_scheduled_m'] = time_scheduled_m
-		context['time_actual_m'] = time_actual_m
-		context['profit'] = time_scheduled_m - time_actual_m
+		context['tasks'] = tasks
+		context['time_scheduled'] = time_scheduled
+		context['time_actual'] = time_actual
+		context['profit'] = time_scheduled - time_actual
 		return render(request, "crmapp/report_001.html", context)
 
 	return redirect(request.META['HTTP_REFERER'])
