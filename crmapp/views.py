@@ -342,8 +342,15 @@ def show_report_001(request):
 		time_actual_m = 0
 
 		for task in tasks:
-			time_scheduled_m = time_scheduled_m + task.time_scheduled_m
-			time_actual_m = time_actual_m + task.time_actual_m
+			try:
+				time_scheduled_m = time_scheduled_m + task.time_scheduled_m
+			except:
+				time_scheduled_m = time_scheduled_m + 0
+
+			try:
+				time_actual_m = time_actual_m + task.time_actual_m
+			except:
+				time_actual_m = time_actual_m + 0
 
 		context['settings'] = reportForm
 		context['time_scheduled_m'] = time_scheduled_m
