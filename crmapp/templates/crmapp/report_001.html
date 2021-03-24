@@ -28,16 +28,20 @@
                 <div class="container">
                   <div class="row">
 
-                    <div class="form-group col-lg-6 col-md-6 pr-lg-6 mb-3">
+                    <div class="form-group col-lg-3 col-md-3 pr-lg-3 mb-3">
                       <button type="submit" class="btn btn-primary">Сформировать<i class="fas fa-arrow-right pl-3"></i></button>
                     </div>
-
+                    
                     <div class="form-group col-lg-3 col-md-3 pr-lg-3 mb-3">
-                      <input type="date" class="form-control" name="param_from" placeholder="Период с" value="{{ param_from }}">
+                      {{ settings.customer }}
                     </div>
 
                     <div class="form-group col-lg-3 col-md-3 pr-lg-3 mb-3">
-                      <input type="date" class="form-control" name="param_to" placeholder="по" value="{{ param_to }}">
+                      {{ settings.param_from }}
+                    </div>
+
+                    <div class="form-group col-lg-3 col-md-3 pr-lg-3 mb-3">
+                      {{ settings.param_to }}
                     </div>
                     
                   </div>
@@ -60,16 +64,17 @@
                     <th scope="col">#</th>
                     <th scope="col">Задача</th>
                     <th scope="col">Заказчик</th>
+                    <th scope="col">Исполнитель</th>
                     <th scope="col">Дедлайн</th>
                     <th scope="col">Исполнено</th>
 
-                    <th scope="col">Фактичеки, мин.</th>
+                    <th scope="col">Фактически, мин.</th>
                     <th scope="col">По норме, мин.</th>
                     <th scope="col">Профит, мин.</th>
                   </tr>
                 </thead>
                 <tbody>
-                 {% for task in tasks %}
+                 {% for task in settings.tasks %}
 
                  {% if task.is_danger %}
                  <tr class="table-danger">
@@ -79,6 +84,7 @@
                     <th scope="row">{{ forloop.counter }}</th>
                     <td><a href="{% url 'show-task' id=task.id %}" class="text-dark">{{ task }}</a></td>
                     <td>{{ task.customer }}</td>
+                    <td>{{ task.from_performer }}</td>
                     <td>{{ task.get_dead_line_ru }}</td>
                     <td>{{ task.get_date_of_completion_ru }}</td>
 
@@ -97,10 +103,11 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
 
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="col">{{ time_scheduled_m }}</th>
+                    <th scope="col">{{ time_actual_m }}</th>
+                    <th scope="col">{{ profit }}</th>
                   </tr>
                 </tfoot>
               </table>

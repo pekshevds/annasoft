@@ -80,7 +80,20 @@ def get_current_employee(request):
 	return None
 
 
-def get_completed_tasks(param_from, param_to):
+def get_completed_tasks(param_from, param_to, customer=None):
+	param_from = datetime(year=param_from.year, month=param_from.month, day=param_from.day,)
+	param_to = datetime(year=param_to.year, month=param_to.month, day=param_to.day,)
 
-	return Task.objects.filter(date_of_completion__gte=param_from.replace(hour=0, minute=0, second=0, microsecond=0), 
-		date_of_completion__lte=param_to.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(1))
+	if customer:
+
+		return Task.objects.filter(
+					customer=customer,
+					date_of_completion__gte=param_from.replace(hour=0, minute=0, second=0, microsecond=0), 
+					date_of_completion__lte=param_to.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(1)
+					)
+	else:
+	
+		return Task.objects.filter(					
+					date_of_completion__gte=param_from.replace(hour=0, minute=0, second=0, microsecond=0), 
+					date_of_completion__lte=param_to.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(1)
+					)

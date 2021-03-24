@@ -17,6 +17,8 @@ from .models import PersonForm
 
 from .models import Position
 
+from .forms import show_report_001_Form
+
 from .core import get_tasks
 from .core import send_task_to_B
 from .core import send_task_to_C
@@ -28,6 +30,7 @@ from .core import get_current_employee
 from .core import get_completed_tasks
 
 from datetime import datetime
+from datetime import date
 
 # Create your views here.
 def show_index(request):
@@ -153,6 +156,7 @@ def new_task(request, customer_id):
 						'customer_name': customer.name,
 						'performer': performer.id,
 						'performer_name': performer.name,
+						'dead_line': date.today(),
 					}, 
 					customer=customer,
 					performer=performer)	
@@ -307,22 +311,44 @@ def show_report_001(request):
 	if request.user.is_authenticated:
 		context = get_context()
 
+		param_from		= date.today()
+		param_to		= date.today()
+		customer 		= None				
+		tasks 			= None
+
+		
 		if request.method == 'POST':
-
-			try:
-				param_from		= datetime.strptime(request.POST.get('param_from', datetime.now()), '%Y-%m-%d')
-			except:
-				param_from		= datetime.now()
-
-			try:
-				param_to		= datetime.strptime(request.POST.get('param_to', datetime.now()), '%Y-%m-%d')
-			except:
-				param_to		= datetime.now()
 			
-			context['param_from'] = param_from.strftime("%Y-%m-%d")
-			context['param_to'] = param_to.strftime("%Y-%m-%d")
-			context['tasks'] = get_completed_tasks(param_from=param_from, param_to=param_to)
+			reportForm = show_report_001_Form(request.POST)
+			if reportForm.is_valid():
+				
+				param_from = reportForm.cleaned_data['param_from']
+				param_to = reportForm.cleaned_data['param_to']
+				customer = reportForm.cleaned_data['customer']
 
+				tasks = get_completed_tasks(
+					param_from=param_from, 
+					param_to=param_to, 
+					customer=customer)
+			
+		reportForm = show_report_001_Form(initial={
+					'param_from': param_from,
+					'param_to': param_to,
+					'customer': customer,
+					'tasks': tasks,
+					})
+
+		time_scheduled_m = 0
+		time_actual_m = 0
+
+		for task in tasks:
+			time_scheduled_m = time_scheduled_m + task.time_scheduled_m
+			time_actual_m = time_actual_m + task.time_actual_m
+
+		context['settings'] = reportForm
+		context['time_scheduled_m'] = time_scheduled_m
+		context['time_actual_m'] = time_actual_m
+		context['profit'] = time_scheduled_m - time_actual_m
 		return render(request, "crmapp/report_001.html", context)
 
 	return redirect(request.META['HTTP_REFERER'])
