@@ -28,6 +28,7 @@ from .core import get_default_performer
 from .core import get_current_employee
 
 from .core import get_completed_tasks
+from .core import get_completed_tasks_on_customers
 
 from datetime import datetime
 from datetime import date
@@ -309,7 +310,7 @@ def save_employee(request):
 	return redirect(request.META['HTTP_REFERER'])
 
 
-def show_report_001(request):
+def show_report_001(request):#Закрытые задачи
 	if request.user.is_authenticated:
 		context = get_context()
 
@@ -358,9 +359,66 @@ def show_report_001(request):
 				
 		context['settings'] = reportForm
 		context['tasks'] = tasks
-		context['time_scheduled'] = time_scheduled
-		context['time_actual'] = time_actual
-		context['profit'] = time_actual-time_scheduled
+		context['time_scheduled'] = round(time_scheduled, 1)
+		context['time_actual'] = round(time_actual, 1)
+		context['profit'] = round(time_actual-time_scheduled, 1)
 		return render(request, "crmapp/report_001.html", context)
+
+	return redirect(request.META['HTTP_REFERER'])
+
+
+def show_report_002(request):#Выработка по заказчикам
+	if request.user.is_authenticated:
+		context = get_context()
+
+		param_from		= date.today()
+		param_to		= date.today()
+		customer 		= None				
+		records			= None
+
+		
+		if request.method == 'POST':
+			
+			reportForm = show_report_001_Form(request.POST)
+			if reportForm.is_valid():
+				
+				param_from = reportForm.cleaned_data['param_from']
+				param_to = reportForm.cleaned_data['param_to']
+				customer = reportForm.cleaned_data['customer']
+
+				records = get_completed_tasks_on_customers(
+					param_from=param_from, 
+					param_to=param_to, 
+					customer=customer)
+			
+		reportForm = show_report_001_Form(initial={
+					'param_from': param_from,
+					'param_to': param_to,
+					'customer': customer,					
+					})
+
+		time_scheduled = 0
+		time_actual = 0
+
+		if records:
+			for record in records:
+				try:
+					time_scheduled = time_scheduled + record.time_scheduled
+				except:
+					time_scheduled = time_scheduled + 0
+
+								
+				try:
+					time_actual = time_actual + record.time_actual
+				except:
+					time_actual = time_actual + 0
+
+				
+		context['settings'] = reportForm
+		context['records'] = records
+		context['time_scheduled'] = round(time_scheduled, 1)
+		context['time_actual'] = round(time_actual, 1)
+		context['profit'] = round(time_actual-time_scheduled, 1)
+		return render(request, "crmapp/report_002.html", context)
 
 	return redirect(request.META['HTTP_REFERER'])

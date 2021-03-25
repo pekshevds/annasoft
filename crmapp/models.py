@@ -436,16 +436,16 @@ class Task(models.Model):
 		return self.time_scheduled_h * 60 + self.time_scheduled_m
 
 	def get_time_scheduled_h(self):
-		return self.time_scheduled_h + self.time_scheduled_m/60
+		return self.time_scheduled_h + round(self.time_scheduled_m/60, 1)
 
 	def get_time_actual(self):
 		return self.time_actual_h * 60 + self.time_actual_m
 
 	def get_time_actual_h(self):
-		return self.time_actual_h + self.time_actual_m/60
+		return self.time_actual_h + round(self.time_actual_m/60, 1)
 
 	def get_profit(self):
-		return self.get_time_actual_h() - self.get_time_scheduled_h()
+		return round(self.get_time_actual_h() - self.get_time_scheduled_h(), 1)
 
 
 	def get_predescription(self):
