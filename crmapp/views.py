@@ -142,6 +142,7 @@ def show_task(request, id):
 								performer=task.performer)
 	context['customer']	= task.customer
 	context['caption']	= task
+	context['is_ready']	= task.is_ready()
 	return render(request, "crmapp/task.html", context)
 
 
@@ -162,6 +163,7 @@ def new_task(request, customer_id):
 					performer=performer)	
 	context['customer']	= customer
 	context['caption']	= 'Новая задача'
+	context['is_ready']	= False
 	return render(request, "crmapp/task.html", context)
 
 

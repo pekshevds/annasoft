@@ -11,13 +11,20 @@
     <section class="space-ptb">
       <div class="container">
         <div class="row justify-content-center">
+
+          <div class="col-lg-2">
+            <div class="section-title text-center">
+              <a href="{% url 'show-crm-index' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">crm</a>
+            </div>
+          </div>
+
           <div class="col-lg-2">
             <div class="section-title text-center">
               <a href="{% url 'show-my-kanban' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Отобрать</a>
             </div>
           </div>
 
-          <div class="col-lg-6">
+          <div class="col-lg-4">
             <div class="section-title text-center">
               <h2>Канбан</h2>              
             </div>
@@ -51,13 +58,14 @@
               <div class="col-lg-12 col-md-7">
                 <div class="p-4 p-md-5 bg-white shadow">
                   <h6><a href="{% url 'show-task' id=task.id %}">{{ task }}</a></h6>
-                  <h6>Заказчик: <a href="{% url 'show-customer' id=task.customer.id %}">{{ task.customer }}</a></h6>
+                  <h6><a href="{% url 'show-customer' id=task.customer.id %}">{{ task.customer }}</a></h6>
+
+                  <h6>{{ task.from_performer }}</h6>
                   
-                  
-                  <h5>Описание: <a href="{% url 'show-task' id=task.id %}">{{ task.get_predescription }}</a></h5>
+                  <h5><a href="{% url 'show-task' id=task.id %}">{{ task.get_predescription }}</a></h5>
 
                   <a href="{% url 'send-to-b' id=task.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">К выполнению</a>
-                  <h6>Выполнить до:{{ task.get_dead_line_ru }}</h6>
+                  <h6>{{ task.get_dead_line_ru }}</h6>
                 </div>
               </div>
               </div>
@@ -83,12 +91,13 @@
               <div class="col-lg-12 col-md-7">
                 <div class="p-4 p-md-5 bg-white shadow">
                   <h6><a href="{% url 'show-task' id=task.id %}">{{ task }}</a></h6>
-                  <h6>Заказчик: <a href="{% url 'show-customer' id=task.customer.id %}">{{ task.customer }}</a></h6>
+                  <h6><a href="{% url 'show-customer' id=task.customer.id %}">{{ task.customer }}</a></h6>
                   
-                  
-                  <h5>Описание: <a href="{% url 'show-task' id=task.id %}">{{ task.get_predescription }}</a></h5>
+                  <h6>{{ task.from_performer }}</h6>
+
+                  <h5><a href="{% url 'show-task' id=task.id %}">{{ task.get_predescription }}</a></h5>
                   <a href="{% url 'send-to-c' id=task.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">На проверку</a>
-                  <h6>Выполнить до:{{ task.get_dead_line_ru }}</h6>
+                  <h6>{{ task.get_dead_line_ru }}</h6>
                 </div>
               </div>
               </div>
@@ -109,12 +118,13 @@
               <div class="col-lg-12 col-md-7">
                 <div class="p-4 p-md-5 bg-white shadow">
                   <h6><a href="{% url 'show-task' id=task.id %}">{{ task }}</a></h6>
-                  <h6>Заказчик: <a href="{% url 'show-customer' id=task.customer.id %}">{{ task.customer }}</a></h6>
+                  <h6><a href="{% url 'show-customer' id=task.customer.id %}">{{ task.customer }}</a></h6>
                   
+                  <h6>{{ task.from_performer }}</h6>
                   
-                  <h5>Описание: <a href="{% url 'show-task' id=task.id %}">{{ task.get_predescription }}</a></h5>
+                  <h5><a href="{% url 'show-task' id=task.id %}">{{ task.get_predescription }}</a></h5>
                   <a href="{% url 'send-to-d' id=task.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Выполнить</a>                  
-                  <h6>Выполнить до:{{ task.get_dead_line_ru }}</h6>                  
+                  <h6>{{ task.get_dead_line_ru }}</h6>                  
                   <a href="{% url 'send-to-b' id=task.id %}" ><span class="badge badge-warning">На доработку</span></a>
                 </div>
               </div>

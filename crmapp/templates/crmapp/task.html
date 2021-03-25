@@ -105,9 +105,9 @@
                       <div class="form-group mb-0 col-lg-7 col-md-7">
                   <button type="submit" class="btn btn-primary">Сохранить<i class="fas fa-arrow-right pl-3"></i></button>
                   </div>
-                  {% if task.is_ready %}
+                  {% if is_ready %}
                   <div class="form-group mb-0 col-lg-5 col-md-5">
-                  <a href="{% url 'send-to-d' id=task.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Выполнить</a> 
+                  <a href="{% url 'send-to-d' id=caption.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Выполнить</a> 
                   </div>
                   {% endif %}
                   </div>
