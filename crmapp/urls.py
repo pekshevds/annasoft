@@ -18,8 +18,11 @@ from .views import save_employee
 
 from .views import show_kanban
 
+from .views import show_reports
 from .views import show_report_001
 from .views import show_report_002
+from .views import show_report_003
+
 
 from .views import send_to_B
 from .views import send_to_C
@@ -57,8 +60,13 @@ urlpatterns = [
     path('kanban/', show_kanban, name='show-kanban'),
     path('my-kanban/', show_kanban, {'onUser': True}, name='show-my-kanban'),
 
+
+    path('reports/', show_reports, name='show-reports'),
+    
     path('report_001/', show_report_001, name='show-report-001'),
     path('report_002/', show_report_002, name='show-report-002'),
+    path('report_003/', show_report_003, name='show-report-003'),
+
     
     path('send-to-b/<int:id>/', send_to_B, name='send-to-b'),
     path('send-to-c/<int:id>/', send_to_C, name='send-to-c'),

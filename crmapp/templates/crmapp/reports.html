@@ -13,7 +13,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-10">
             <div class="section-title text-center">
-              <h2 class="text-white">Управление клиентами</h2>
+              <h2 class="text-white">Отчеты</h2>
               <p class="lead text-white"></p>
             </div>
           </div>
@@ -23,32 +23,30 @@
             <div class="category category-grid-style-01">
               
               
+              
               <div class="category-item">
                 <div class="category-icon">
-                  <a href="{% url 'show-kanban'%}"><i class="flaticon-order"></i></a>
-                </div>
-                <a href="{% url 'show-kanban' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Канбан</a>
-              </div>
-              <div class="category-item">
-                <div class="category-icon">
-                  <a href="#"><i class="flaticon-android"></i></a>
-                </div>                
-                <a href="{% url 'customers' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Заказчики</a>
+                  <a href="#"><i class="flaticon-emoji"></i></a>
+                </div>               
+                <a href="{% url 'show-report-001' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Отчет.1</a>
+                <p>Закрытые задачи (позадачно)</p>
               </div>
 
               <div class="category-item">
                 <div class="category-icon">
                   <a href="#"><i class="flaticon-emoji"></i></a>
                 </div>               
-                <a href="{% url 'persons' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Физ.лица</a>
+                <a href="{% url 'show-report-002' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Отчет.2</a>
+                <p>Выработка по клиентам</p>
               </div>
-              
+
               <div class="category-item">
                 <div class="category-icon">
                   <a href="#"><i class="flaticon-emoji"></i></a>
                 </div>               
-                <a href="{% url 'show-reports' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Отчеты</a>
-              </div>              
+                <a href="{% url 'show-report-003' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Отчет.3</a>
+                <p>Выработка по исполнителям</p>
+              </div>
               
             </div>
           </div>

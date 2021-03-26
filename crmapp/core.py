@@ -104,17 +104,21 @@ def get_completed_tasks(param_from, param_to, customer=None):
 
 
 
-class Record:
-	"""docstring for record"""
-	def __init__(self, customer, time_scheduled, time_actual):
-		self.customer = customer
-		self.time_scheduled = time_scheduled
-		self.time_actual = time_actual
-		self.profit = round(self.time_actual-self.time_scheduled, 1)
+
 		
 
 def get_completed_tasks_on_customers(param_from, param_to, customer=None):
 	
+	class Record:
+	
+		def __init__(self, customer, time_scheduled, time_actual):
+			self.customer = customer
+			self.time_scheduled = time_scheduled
+			self.time_actual = time_actual
+			self.profit = round(self.time_actual-self.time_scheduled, 1)
+
+
+
 	tasks = get_completed_tasks(param_from=param_from, param_to=param_to, customer=customer)
 
 	df = pd.DataFrame.from_records(tasks.values('customer', 'time_scheduled_h', 'time_scheduled_m',
@@ -141,6 +145,66 @@ def get_completed_tasks_on_customers(param_from, param_to, customer=None):
 	
 		for item in df.itertuples(index=False):
 			records.append(Record(Customer.objects.get(id=item.customer),
+								item.time_scheduled_h + round(item.time_scheduled_m/60, 1),
+								item.time_actual_h + round(item.time_actual_m/60, 1)))
+	
+	return records
+
+
+
+def get_completed_tasks_on_employees(param_from, param_to, employee=None):
+
+	class Record:
+	
+		def __init__(self, employee, time_scheduled, time_actual):
+			self.employee = employee
+			self.time_scheduled = time_scheduled
+			self.time_actual = time_actual
+			self.profit = round(self.time_actual-self.time_scheduled, 1)
+
+	
+	param_from = datetime(year=param_from.year, month=param_from.month, day=param_from.day,)
+	param_to = datetime(year=param_to.year, month=param_to.month, day=param_to.day,)
+
+	if employee:
+
+		tasks = Task.objects.filter(
+					from_performer=employee,
+					date_of_completion__gte=param_from.replace(hour=0, minute=0, second=0, microsecond=0), 
+					date_of_completion__lte=param_to.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(1)
+					)
+	else:
+	
+		tasks = Task.objects.filter(					
+					date_of_completion__gte=param_from.replace(hour=0, minute=0, second=0, microsecond=0), 
+					date_of_completion__lte=param_to.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(1)
+					)
+
+	print(tasks)
+	df = pd.DataFrame.from_records(tasks.values('from_performer', 'time_scheduled_h', 'time_scheduled_m',
+												'time_actual_h', 'time_actual_m'))
+
+	# df = df.groupby(['customer'], as_index=False).agg({
+	# 	'time_scheduled_h': 'sum',
+	# 	'time_scheduled_m': 'sum',
+	# 	'time_actual_h': 'sum',
+	# 	'time_actual_m': 'sum',
+	# 	})
+
+	records = []
+
+	if tasks:
+		df = df.groupby(['from_performer'], as_index=False)[
+			'time_scheduled_h',
+			'time_scheduled_m',
+			'time_actual_h',
+			'time_actual_m',
+			].sum()
+
+	
+	
+		for item in df.itertuples(index=False):
+			records.append(Record(Employee.objects.get(id=item.from_performer),
 								item.time_scheduled_h + round(item.time_scheduled_m/60, 1),
 								item.time_actual_h + round(item.time_actual_m/60, 1)))
 	
