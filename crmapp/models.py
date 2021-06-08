@@ -392,7 +392,7 @@ class Task(models.Model):
 	def __str__(self):
 
 		if self.date:
-			return f'Задача №{self.id} от {self.date.strftime("%d.%m.%Y")}'
+			return f'{self.id} от {self.date.strftime("%d.%m.%Y")}'
 		return f'Задача № от '
 
 	def save(self, *args, **kwargs):
@@ -449,9 +449,9 @@ class Task(models.Model):
 
 
 	def get_predescription(self):
-		if len(self.description) <= 50:
+		if len(self.description) <= 80:
 			return self.description
-		return self.description[:50] + "..."
+		return self.description[:80] + "..."
 
 	def get_from_customer_list(self):
 		return Employee.objects.filter(customer=self.customer)

@@ -238,7 +238,7 @@ def new_customer(request):
 
 	context = get_context()	
 	context['customer'] = CustomerForm()
-	return render(request, "crmapp/customer.html", context)
+	return render(request, "crmapp/new_customer.html", context)
 
 
 def save_customer(request):

@@ -87,24 +87,6 @@
           <div class="col-lg-5 col-md-5 pr-lg-5">
             <div class="p-4 p-md-5 bg-white shadow">
               <h3>Контактные лица</h3>
-              <div class="mt-4">
-                
-                {% for employee in customer.instance.get_employes %}
-                <div class="form-group mb-3">
-                  <a href="{% url 'show-employee' id=employee.id %}" class="btn btn-primary">{{ employee }}</a>
-                  <!-- <input type="text" class="form-control" name="name" placeholder="Наименование" value="{{ employee }}"> -->
-                </div>
-                {% endfor %}
-                {% if customer.instance %}
-                <div class="form-group mt-5">
-                  <a href="{% url 'new-employee' customer_id=customer.instance.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">+Добавить</a>
-                </div>
-                {% endif %}
-
-                <div class="form-group mt-5">
-                  <a href="{% url 'new-task' customer_id=customer.instance.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">+Задача</a>
-                </div>
-              </div>
             </div>
           </div>
           {% endif %}

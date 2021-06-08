@@ -47,7 +47,7 @@
             <div class="row justify-content-lg-around position-relative pt-5">
               
               <div class="col-lg-12 col-md-7">
-                <div class="p-4 p-md-5 bg-white shadow">
+                <div class="p-3 bg-white shadow">
                   <h3>Запланированы</h3>
                 </div>
               </div>
@@ -56,21 +56,31 @@
               {% for task in tasks_A %}
               <div class="row justify-content-lg-around position-relative pt-2">
               <div class="col-lg-12 col-md-7">
-                <div class="p-4 p-md-5 bg-white shadow">
-                  <h6><a href="{% url 'show-task' id=task.id %}">{{ task }}</a></h6>
-                  <h6><a href="{% url 'show-customer' id=task.customer.id %}">{{ task.customer }}</a></h6>
-
-                  <h6>{{ task.from_performer }}</h6>
-                  
-                  <h5><a href="{% url 'show-task' id=task.id %}">{{ task.get_predescription }}</a></h5>
-
+                <div class="p-2 bg-white shadow">
+                  <div class="row">
+                    <div class="col-6">
+                      <h6 style="margin-bottom: 0px;" class="float-left"><a href="{% url 'show-task' id=task.id %}">{{ task }}</a></h6>
+                    </div>
+                    <div class="col-6">
+                      <a href="{% url 'send-to-d' id=task.id %}" class="float-right"><span class="badge badge-success">Выполнить</span></a>
+                    </div>
+                  </div>
+                    <h6 style="margin-bottom: 0px;">{{ task.from_performer }}</h6>
+                  <div>
+                    <p style="margin-bottom: 0px;"><a style="color: black;" href="{% url 'show-task' id=task.id %}">{{ task.get_predescription }}</a></p>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <h6 class="float-left"><a href="{% url 'show-customer' id=task.customer.id %}">{{ task.customer }}</a></h6>
+                    </div>
+                    <div class="col-6">
+                      <h6 class="float-right">{{ task.get_dead_line_ru }}</h6>
+                    </div>
+                  </div>
                   <a href="{% url 'send-to-b' id=task.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">К выполнению</a>
-                  <h6>{{ task.get_dead_line_ru }}</h6>
                 </div>
               </div>
               </div>
-
-              
               {% endfor %}
               
           </div>
@@ -79,7 +89,7 @@
             <div class="row justify-content-lg-around position-relative pt-5">
 
               <div class="col-lg-12 col-md-7">
-                <div class="p-4 p-md-5 bg-white shadow">
+                <div class="p-3 bg-white shadow">
                   <h3>Выполняются</h3>
                 </div>
               </div>
@@ -89,15 +99,28 @@
               {% for task in tasks_B %}
               <div class="row justify-content-lg-around position-relative pt-2">
               <div class="col-lg-12 col-md-7">
-                <div class="p-4 p-md-5 bg-white shadow">
-                  <h6><a href="{% url 'show-task' id=task.id %}">{{ task }}</a></h6>
-                  <h6><a href="{% url 'show-customer' id=task.customer.id %}">{{ task.customer }}</a></h6>
-                  
-                  <h6>{{ task.from_performer }}</h6>
-
-                  <h5><a href="{% url 'show-task' id=task.id %}">{{ task.get_predescription }}</a></h5>
+                <div class="p-2 bg-white shadow">
+                  <div class="row">
+                    <div class="col-6">
+                      <h6 style="margin-bottom: 0px;" class="float-left"><a href="{% url 'show-task' id=task.id %}">{{ task }}</a></h6>
+                    </div>
+                    <div class="col-6">
+                      <a href="{% url 'send-to-d' id=task.id %}" class="float-right"><span class="badge badge-success">Выполнить</span></a>
+                    </div>
+                  </div>
+                    <h6 style="margin-bottom: 0px;">{{ task.from_performer }}</h6>
+                  <div>
+                    <p style="margin-bottom: 0px;"><a style="color: black;" href="{% url 'show-task' id=task.id %}">{{ task.get_predescription }}</a></p>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <h6 class="float-left"><a href="{% url 'show-customer' id=task.customer.id %}">{{ task.customer }}</a></h6>
+                    </div>
+                    <div class="col-6">
+                      <h6 class="float-right">{{ task.get_dead_line_ru }}</h6>
+                    </div>
+                  </div>
                   <a href="{% url 'send-to-c' id=task.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">На проверку</a>
-                  <h6>{{ task.get_dead_line_ru }}</h6>
                 </div>
               </div>
               </div>
@@ -107,7 +130,7 @@
           <div class="row justify-content-lg-around position-relative pt-5">
 
               <div class="col-lg-12 col-md-7">
-                <div class="p-4 p-md-5 bg-white shadow">
+                <div class="p-3 bg-white shadow">
                   <h3>Проверяются</h3>
                 </div>
               </div>
@@ -116,16 +139,28 @@
               {% for task in tasks_C %}
               <div class="row justify-content-lg-around position-relative pt-2">
               <div class="col-lg-12 col-md-7">
-                <div class="p-4 p-md-5 bg-white shadow">
-                  <h6><a href="{% url 'show-task' id=task.id %}">{{ task }}</a></h6>
-                  <h6><a href="{% url 'show-customer' id=task.customer.id %}">{{ task.customer }}</a></h6>
-                  
-                  <h6>{{ task.from_performer }}</h6>
-                  
-                  <h5><a href="{% url 'show-task' id=task.id %}">{{ task.get_predescription }}</a></h5>
+                <div class="p-2 bg-white shadow">
+                  <div class="row">
+                    <div class="col-6">
+                      <h6 style="margin-bottom: 0px;" class="float-left"><a href="{% url 'show-task' id=task.id %}">{{ task }}</a></h6>
+                    </div>
+                    <div class="col-6">
+                      <a href="{% url 'send-to-b' id=task.id %}" class="float-right"><span class="badge badge-warning">На доработку</span></a>
+                    </div>
+                  </div>
+                  <h6 style="margin-bottom: 0px;">{{ task.from_performer }}</h6>
+                  <div>
+                    <p style="margin-bottom: 0px;"><a style="color: black;" href="{% url 'show-task' id=task.id %}">{{ task.get_predescription }}</a></p>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <h6 class="float-left"><a href="{% url 'show-customer' id=task.customer.id %}">{{ task.customer }}</a></h6>
+                    </div>
+                    <div class="col-6">
+                      <h6 class="float-right">{{ task.get_dead_line_ru }}</h6>
+                    </div>
+                  </div>
                   <a href="{% url 'send-to-d' id=task.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Выполнить</a>                  
-                  <h6>{{ task.get_dead_line_ru }}</h6>                  
-                  <a href="{% url 'send-to-b' id=task.id %}" ><span class="badge badge-warning">На доработку</span></a>
                 </div>
               </div>
               </div>
