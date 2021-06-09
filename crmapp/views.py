@@ -53,10 +53,14 @@ def show_kanban(request, onUser=False):
 			context['tasks_A'] = get_tasks("A", request.user)
 			context['tasks_B'] = get_tasks("B", request.user)
 			context['tasks_C'] = get_tasks("C", request.user)
+
 		else:
 			context['tasks_A'] = get_tasks("A")
 			context['tasks_B'] = get_tasks("B")
 			context['tasks_C'] = get_tasks("C")
+
+		context.update({'onUser': onUser})
+
 		return render(request, "crmapp/kanban.html", context)
 	return redirect('show-auth')
 
@@ -65,21 +69,27 @@ def send_to_B(request, id):
 
 	if request.user.is_authenticated:
 		send_task_to_B(id, user=request.user)
-	return redirect('show-kanban')
+
+	current_path = request.META['HTTP_REFERER']
+	return redirect(current_path)
 
 
 def send_to_C(request, id):
 
 	if request.user.is_authenticated:
 		send_task_to_C(id, user=request.user)
-	return redirect('show-kanban')
+
+	current_path = request.META['HTTP_REFERER']
+	return redirect(current_path)
 
 
 def send_to_D(request, id):
 
 	if request.user.is_authenticated:
 		send_task_to_D(id, user=request.user)
-	return redirect('show-kanban')
+
+	current_path = request.META['HTTP_REFERER']
+	return redirect(current_path)
 
 
 def save_task(request):
