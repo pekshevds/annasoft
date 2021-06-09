@@ -23,14 +23,7 @@
           
           <div class="col-lg-7 col-md-7 pr-lg-5">
             <div class="p-4 p-md-5 bg-white shadow">
-              {% if caption %}
-              <div class="section-title">
-                <a href="{% url 'send-to-e' id=caption.id %}" class="float-right"><span class="badge badge-danger">Отменить задачу</span>
-              </div>
-              {% endif %}
-              </a>
               <h3></h3>
-
               <form class="mt-4" method="post" action="{% url 'save-task' %}">
               	{% csrf_token %}
                 

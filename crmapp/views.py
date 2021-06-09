@@ -25,6 +25,7 @@ from .core import get_tasks
 from .core import send_task_to_B
 from .core import send_task_to_C
 from .core import send_task_to_D
+from .core import send_task_to_E
 from .core import get_default_performer
 
 from .core import get_current_employee
@@ -90,6 +91,13 @@ def send_to_D(request, id):
 
 	current_path = request.META['HTTP_REFERER']
 	return redirect(current_path)
+
+def send_to_E(request, id):
+
+	if request.user.is_authenticated:
+		send_task_to_E(id, user=request.user)
+
+	return redirect('show-kanban')
 
 
 def save_task(request):
@@ -178,7 +186,7 @@ def new_task(request, customer_id):
 	context['customer']	= customer
 	context['caption']	= 'Новая задача'
 	context['is_ready']	= False
-	return render(request, "crmapp/task.html", context)
+	return render(request, "crmapp/new_task.html", context)
 
 
 def show_persons(request):

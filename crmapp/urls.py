@@ -27,6 +27,7 @@ from .views import show_report_003
 from .views import send_to_B
 from .views import send_to_C
 from .views import send_to_D
+from .views import send_to_E
 
 from .views import new_task
 from .views import save_task
@@ -71,4 +72,5 @@ urlpatterns = [
     path('send-to-b/<int:id>/', send_to_B, name='send-to-b'),
     path('send-to-c/<int:id>/', send_to_C, name='send-to-c'),
     path('send-to-d/<int:id>/', send_to_D, name='send-to-d'),
+    path('send-to-e/<int:id>/', send_to_E, name='send-to-e'),
 ]

@@ -61,6 +61,15 @@ def send_task_to_D(id, user):
 
 	add_record(task=task, task_status="D", user=user)
 
+def send_task_to_E(id, user):
+
+	task = Task.objects.get(id=id)
+	task.task_status = "E"
+	task.date_of_completion = datetime.now()
+	task.save()
+
+	add_record(task=task, task_status="E", user=user)	
+
 
 def get_default_performer():
 
