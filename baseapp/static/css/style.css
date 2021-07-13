@@ -3036,14 +3036,16 @@ ul.category-list li a:after,
     width: 25%;
     padding-right: 15px;
     padding-left: 15px;
-    margin-bottom: 45px; }
+    /*margin-bottom: 45px;*/
+    margin-bottom: 15px; }
     .category-grid-style-02 ul li a {
       -webkit-box-flex: 0;
           -ms-flex: 0 0 100%;
               flex: 0 0 100%;
       font-size: 18px;
       color: #022d62;
-      padding-bottom: 35px;
+      /*padding-bottom: 35px;*/
+      padding-bottom: 15px;
       border-bottom: 1px solid #eeeeee; }
       .category-grid-style-02 ul li a:hover {
         color: #ef3139; }
@@ -3185,9 +3187,11 @@ ul.category-list {
     padding: 20px 5px; }
   .category-grid-style-02 ul li {
     width: 33.3333%;
-    margin-bottom: 35px; }
+    /*margin-bottom: 35px; }*/
+    margin-bottom: 10px; }
     .category-grid-style-02 ul li a {
-      padding-bottom: 25px; } }
+      /*padding-bottom: 25px;*/ 
+      padding-bottom: 10px; } }
 
 @media (max-width: 767px) {
   .category-grid-style-01 .category-item {

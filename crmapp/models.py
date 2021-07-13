@@ -168,7 +168,6 @@ class Customer(models.Model):
 	def get_employes(self):
 		return Employee.objects.filter(customer=self)
 
-
 	class Meta:
 		verbose_name = 'Заказчик'
 		verbose_name_plural = 'Заказчики'
