@@ -100,7 +100,7 @@
                     <td>{{ forloop.counter }}</td>
                     <td><a href="{% url 'show-task' id=task.id %}" class="text-dark">{{ task }}</a></td>
                     <td>{{ task.description|slice:":300" }}</td>
-                    <td>{{ task.get_time_scheduled_h }}</td>
+                    <td>{{ task.get_time_actual_h }}</td>
                     <td>{% if task.for_payment %} V {% endif %}</td>
                   </tr> 
                   {% endfor %}
