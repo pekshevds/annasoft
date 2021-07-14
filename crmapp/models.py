@@ -135,8 +135,6 @@ class PersonForm(ModelForm):
 			'description',
 			]
 
-		
-
 
 class Customer(models.Model):
 	
@@ -265,7 +263,7 @@ class Position(models.Model):
 class Employee(models.Model):
 
 	""" Сотрудники заказчиков """
-	customer = models.ForeignKey(Customer, verbose_name="Заказчик", on_delete=models.PROTECT)
+	customer = models.ForeignKey(Customer, verbose_name="Заказчик", on_delete=models.PROTECT, default=None, null=True, blank=True)
 
 	name = models.CharField(max_length=1024, verbose_name="Наименование")
 	position = models.ForeignKey(Position, verbose_name="Должность", on_delete=models.PROTECT, null=True, blank=True)
@@ -284,6 +282,12 @@ class Employee(models.Model):
 
 	def __str__(self):
 		return f'{self.name}'
+
+	def get_fio_person(self):
+
+		from_performer = self.person
+		fio = from_performer.last_name + ' ' + from_performer.first_name[0] + '. ' + from_performer.middle_name[0] + '.'
+		return fio	
 
 	class Meta:
 		verbose_name = 'Сотрудник заказчика'
@@ -372,7 +376,7 @@ class Task(models.Model):
 	task_status = models.CharField(max_length=1, verbose_name="Статус", 
 										choices=TASK_STATUS, default=DEFAULT_TASK_STATUS)
 
-	customer = models.ForeignKey(Customer, verbose_name="Заказчик", related_name="customer", on_delete=models.PROTECT)
+	customer = models.ForeignKey(Customer, verbose_name="Заказчик", related_name="customer", on_delete=models.PROTECT, default=None, null=True, blank=True)
 	from_customer = models.ForeignKey(Employee, verbose_name="От заказчика", related_name="from_customer", on_delete=models.PROTECT, null=True, blank=True)
 
 	performer = models.ForeignKey(Customer, verbose_name="Исполнитель", related_name="performer", on_delete=models.PROTECT)
@@ -387,6 +391,10 @@ class Task(models.Model):
 	time_actual_m = models.PositiveSmallIntegerField(verbose_name="Время выполнения, норма (мин.):", default=0, null=True, blank=True)
 
 	date_of_completion = models.DateTimeField(verbose_name="Дата исполнения", null=True, blank=True)
+
+	for_payment = models.BooleanField(verbose_name="Оплачивается", default=False)
+
+
 
 
 	def __str__(self):
@@ -464,6 +472,14 @@ class Task(models.Model):
 			return True
 		return False
 
+	def get_fio_from_performer(self):
+
+		from_performer = Employee.objects.filter(id=self.from_performer.id).first().person
+		fio = from_performer.last_name + ' ' + from_performer.first_name[0] + '. ' + from_performer.middle_name[0] + '.'
+
+		return fio
+
+
 
 	class Meta:
 		verbose_name = 'Задача'
@@ -539,6 +555,11 @@ class TaskForm(forms.Form):
 		'class': 'form-control',
 		'rows': '5',
 		'placeholder': 'Описание',
+	}))
+
+	for_payment = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={
+		'class': 'custom-control-input',
+		'id' : 'for_payment'
 	}))
 
 	def __init__(self, *args, **kwargs):

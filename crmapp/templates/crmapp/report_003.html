@@ -9,7 +9,7 @@
 <!--=================================
     Contat Form -->
 
-    <section class="space-ptb">
+    <section class="" style="padding: 30px 0;">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-1">
@@ -32,7 +32,7 @@
             </div>
           </div>
         </div>
-        <div class="row justify-content-lg-around position-relative pt-5">
+        <div class="row justify-content-lg-around position-relative pt-1">
           
           <div class="col-lg-12 col-md-12 pr-lg-12">
             <div class="p-4 p-md-5 bg-white shadow">              
@@ -90,7 +90,7 @@
                   <tr>
                     
                     <td scope="row">{{ forloop.counter }}</td>                    
-                    <td>{{ record.employee }}</td>
+                    <td>{{ record.employee.get_fio_person }}</td>
                    
                     <td>{{ record.time_scheduled }}</td>
                     <td>{{ record.time_actual }}</td>

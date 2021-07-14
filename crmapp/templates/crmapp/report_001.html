@@ -9,7 +9,7 @@
 <!--=================================
     Contat Form -->
 
-    <section class="space-ptb">
+    <section class="" style="padding: 30px 0;">
       <div class="container">
         <div class="row justify-content-center">
           
@@ -32,10 +32,11 @@
           <div class="col-lg-10">
             <div class="section-title text-center">
             <h2>Закрытые задачи</h2>
+            <h3>(позадачно)</h3>
             </div>
           </div>
         </div>
-        <div class="row justify-content-lg-around position-relative pt-5">
+        <div class="row justify-content-lg-around position-relative pt-1">
           
           <div class="col-lg-12 col-md-12 pr-lg-12">
             <div class="p-4 p-md-5 bg-white shadow">              
@@ -88,6 +89,7 @@
                     <th scope="col">Фактически, час.</th>
                     <th scope="col">По норме, час.</th>
                     <th scope="col">Профит, час.</th>
+                    <th scope="col">Оплата</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -101,13 +103,14 @@
                     <th scope="row">{{ forloop.counter }}</th>
                     <td><a href="{% url 'show-task' id=task.id %}" class="text-dark">{{ task }}</a></td>
                     <td>{{ task.customer }}</td>
-                    <td>{{ task.from_performer }}</td>
+                    <td>{{ task.get_fio_from_performer }}</td>
                     <td>{{ task.get_dead_line_ru }}</td>
                     <td>{{ task.get_date_of_completion_ru }}</td>
 
                     <td>{{ task.get_time_scheduled_h }}</td>
                     <td>{{ task.get_time_actual_h }}</td>
                     <td>{{ task.get_profit }}</td>
+                    <td>{% if task.for_payment %} V {% else %} {% endif %}</td>
                   </tr>
                   {% endfor %}
                   

@@ -3,7 +3,7 @@ from django.contrib import admin
 from .models import Person
 from .models import Customer
 from .models import Employee
-from .models import Position
+# from .models import Position
 from .models import Task
 from .models import Record
 
@@ -64,6 +64,6 @@ class RecordAdmin(admin.ModelAdmin):
 
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Customer, CustomerAdmin)
-admin.site.register(Position)
+# admin.site.register(Position)
 admin.site.register(Task, TaskAdmin)
 admin.site.register(Record, RecordAdmin)

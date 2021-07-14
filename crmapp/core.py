@@ -189,7 +189,6 @@ def get_completed_tasks_on_employees(param_from, param_to, employee=None):
 					date_of_completion__lte=param_to.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(1)
 					)
 
-	print(tasks)
 	df = pd.DataFrame.from_records(tasks.values('from_performer', 'time_scheduled_h', 'time_scheduled_m',
 												'time_actual_h', 'time_actual_m'))
 
@@ -218,3 +217,23 @@ def get_completed_tasks_on_employees(param_from, param_to, employee=None):
 								item.time_actual_h + round(item.time_actual_m/60, 1)))
 	
 	return records
+
+def sort_task_by_customer(tasks):
+
+	temp_customer = []
+	sorted_tasks = []
+	for task in tasks.order_by('customer'):
+		if task.customer not in temp_customer:
+
+			sorted_tasks.append([task.customer, tasks.filter(customer=task.customer), get_summ_of_tasks(tasks.filter(customer=task.customer))])
+
+			temp_customer.append(task.customer)
+
+	return sorted_tasks
+
+def get_summ_of_tasks(tasks):
+	summ = 0
+	for task in tasks:
+		summ += task.get_time_scheduled_h()
+
+	return summ

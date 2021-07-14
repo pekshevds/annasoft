@@ -33,6 +33,7 @@ from .core import get_current_employee
 from .core import get_completed_tasks
 from .core import get_completed_tasks_on_customers
 from .core import get_completed_tasks_on_employees
+from .core import sort_task_by_customer
 
 from datetime import datetime
 from datetime import date
@@ -128,6 +129,8 @@ def save_task(request):
 				task.time_scheduled_m = taskForm.cleaned_data['time_scheduled_m']
 				task.time_actual_h = taskForm.cleaned_data['time_actual_h']
 				task.time_actual_m = taskForm.cleaned_data['time_actual_m']
+				print(taskForm.cleaned_data['for_payment'])
+				task.for_payment = taskForm.cleaned_data['for_payment']
 
 				task.save()
 
@@ -159,6 +162,7 @@ def show_task(request, id):
 						'time_actual_m': task.time_actual_m,
 						
 						'description': task.description,
+						'for_payment': task.for_payment,
 					}, 
 								customer=task.customer,
 								performer=task.performer)
@@ -511,5 +515,65 @@ def show_report_003(request):#Выработка по исполнителям
 		context['time_actual'] = round(time_actual, 1)
 		context['profit'] = round(time_actual-time_scheduled, 1)
 		return render(request, "crmapp/report_003.html", context)
+
+	return redirect(request.META['HTTP_REFERER'])
+
+def show_report_004(request):
+	
+	if request.user.is_authenticated:
+		context = get_context()
+
+		param_from		= date.today()
+		param_to		= date.today()
+		customer 		= None				
+		tasks 			= None
+
+		
+		if request.method == 'POST':
+			
+			reportForm = report_001_Form(request.POST)
+			if reportForm.is_valid():
+				
+				param_from = reportForm.cleaned_data['param_from']
+				param_to = reportForm.cleaned_data['param_to']
+				customer = reportForm.cleaned_data['customer']
+
+				tasks = get_completed_tasks(
+					param_from=param_from, 
+					param_to=param_to, 
+					customer=customer)
+			
+		reportForm = report_001_Form(initial={
+					'param_from': param_from,
+					'param_to': param_to,
+					'customer': customer,					
+					})
+
+		time_scheduled = 0
+		time_actual = 0
+
+		sorted_tasks = []
+
+		if tasks:
+			for task in tasks:
+				try:
+					time_scheduled = time_scheduled + task.get_time_scheduled_h()
+				except:
+					time_scheduled = time_scheduled + 0
+
+								
+				try:
+					time_actual = time_actual + task.get_time_actual_h()
+				except:
+					time_actual = time_actual + 0
+
+			sorted_tasks = sort_task_by_customer(tasks)
+				
+		context['settings'] = reportForm
+		context['sorted_tasks'] = sorted_tasks
+		context['time_scheduled'] = round(time_scheduled, 1)
+		context['time_actual'] = round(time_actual, 1)
+		context['profit'] = round(time_actual-time_scheduled, 1)
+		return render(request, "crmapp/report_004.html", context)
 
 	return redirect(request.META['HTTP_REFERER'])
