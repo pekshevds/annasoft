@@ -37,3 +37,7 @@ def show_service(request, id):
 
 def show_services(request):
 	return render(request, 'baseapp/services.html', get_context())
+
+def show_e_commerce_and_1c(request):
+	return render(request, 'baseapp/e_commerce_and_1c.html', get_context())
+

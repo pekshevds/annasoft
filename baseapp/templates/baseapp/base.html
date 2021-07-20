@@ -63,7 +63,7 @@
                       <li>
                         <i class="flaticon-email"></i>
                         <span>
-                          <label class="d-block">info@annasoft.ru</label>
+                         <label class="d-block">info@annasoft.ru</label>
                           <a class="d-block" href="{% url 'show-crm-index' %}">crm</a>
                         </span>
                       </li>                      
@@ -90,24 +90,71 @@
         <div class="bg-dark text-center rounded py-5 px-3">
           <h2 class="text-white">Расскажите нам о Вашей идее, мы поможем ее реализовать.</h2>
           <h6 class="text-white">Есть проблемма и нужно найти ее решение? Это наша работа!</h6>
-          <a href="#" class="btn btn-primary-round btn-round mx-0 mx-md-3 text-white">Начнем!<i class="fas fa-arrow-right pl-3"></i></a>
+          <a type="button" data-toggle="modal" data-target="#connectModal" href="#" class="btn btn-primary-round btn-round mx-0 mx-md-3 text-white">Начнем!<i class="fas fa-arrow-right pl-3"></i></a>
         </div>
       </div>
     </section>
     <!--=================================
     Action Box -->
 
+    <div class="modal fade bd-example-modal-lg" id="connectModal" tabindex="-1" role="dialog" aria-labelledby="connectModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Свяжитесь со мной</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="col-lg-12 col-md-12 ">
+
+                  <form class="mt-4">
+                    <div class="form-group mb-3">
+                      <input type="text" class="form-control" id="exampleInputName" placeholder="Name">
+                    </div>
+                    <div class="form-group mb-3">
+                      <input type="text" class="form-control" id="exampleInputLname" placeholder="Last Name">
+                    </div>
+                    <div class="form-group mb-3">
+                      <input type="text" class="form-control" id="exampleInputEmail" placeholder="Email Address">
+                    </div>
+                    <div class="form-group mb-3">
+                      <input type="text" class="form-control" id="exampleInputEnquiry" placeholder="Enquiry Type">
+                    </div>
+                    <div class="form-group mb-4">
+                      <textarea class="form-control" id="exampleInputEnquiry-Description" placeholder="Enquiry Description" rows="5"></textarea>
+                    </div>
+                    <div class="form-group mb-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                        <label class="custom-control-label small" for="customCheck1">Я согласен на обработку персональных данных</label>
+                      </div>
+                    </div>
+                  </form>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+              <button type="button" class="btn btn-primary">Отправить</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 <!--=================================
     footer-->
-    <footer class="footer space-pt">
+    <footer class="footer">
       <div class="container">
         <div class="row">
           <div class="col-lg-3 col-md-6">
             <div class="footer-contact-info">
               <a href="{% url 'show-index' %}"><img class="img-fluid mb-4" src="{% static 'images/logo.svg' %}" alt="logo"></a>
-              <p class="mb-2 mb-sm-4">Белгород, Б.Хмельницкого проспект 111, оф 422</p>
-              <h4 class="mb-2 mb-sm-4 font-weight-bold"><a href="#">+ 4722 500 842</a></h4>
-              <a class="text-dark" href="#">info@annasoft.ru</a>
+              <p class="mb-2 mb-sm-4">Белгород <br/> Б.Хмельницкого проспект 111 <br/> офис 540</p>
+              <h4 class="mb-2 mb-sm-4 font-weight-bold"><a href="tel:+74722500842">+ 4722 500 842</a></h4>
+              <a class="text-dark" href="mailto:info@annasoft.ru">info@annasoft.ru</a>
             </div>
           </div>
           <div class="col-lg-5 col-md-6 mt-4 mt-md-0 pl-lg-5">
@@ -126,6 +173,7 @@
             <h5 class="text-primary mb-2 mb-sm-4">Компания</h5>
             <div class="footer-link">
               <ul class="list-unstyled mb-0">
+                <li><a href="{% url 'show-show_e_commerce_and_1c' %}">Интернет магазин + 1С</a></li>
                 <li><a href="{% url 'show-about' %}">О нас</a></li>                
                 <li><a href="{% url 'show-articles' %}">Статьи</a></li>                
                 <li><a href="#">Работа у нас </a></li>
@@ -144,7 +192,7 @@
           <div class="row">
             <div class="col-lg-8 text-center text-lg-left mb-3 mb-lg-0">
               <ul class="list-unstyled mb-0 social-icon">
-                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>                
+                <!-- <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>                 -->
               </ul>
             </div>
             <div class="col-lg-4 text-center text-lg-right">

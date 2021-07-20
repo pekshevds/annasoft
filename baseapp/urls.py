@@ -6,6 +6,8 @@ from .views import show_article
 from .views import show_articles
 from .views import show_service
 from .views import show_services
+from .views import show_e_commerce_and_1c
+
 
 urlpatterns = [    
     path('', show_index, name='show-index'),
@@ -16,4 +18,5 @@ urlpatterns = [
     path('articles/', show_articles, name='show-articles'),
     path('our-tools/', show_our_tools, name='show-our-tools'),
     path('about/', show_about, name='show-about'),
+    path('e-commerce-and-1c/', show_e_commerce_and_1c, name='show-show_e_commerce_and_1c'),
 ]
