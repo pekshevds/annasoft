@@ -176,7 +176,7 @@
                 <li><a href="{% url 'show-show_e_commerce_and_1c' %}">Интернет магазин + 1С</a></li>
                 <li><a href="{% url 'show-about' %}">О нас</a></li>                
                 <li><a href="{% url 'show-articles' %}">Статьи</a></li>                
-                <li><a href="#">Работа у нас </a></li>
+                <li><a href="{% url 'show-work-with-us' %}">Работа у нас </a></li>
 
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'show-crm-index' %}"><span class="badge badge-success ml-2">crm</span></a></li>

@@ -41,3 +41,7 @@ def show_services(request):
 def show_e_commerce_and_1c(request):
 	return render(request, 'baseapp/e_commerce_and_1c.html', get_context())
 
+
+def show_work_with_us(request):
+	return render(request, 'baseapp/work_with_us.html', get_context())
+
