@@ -234,6 +234,6 @@ def sort_task_by_customer(tasks):
 def get_summ_of_tasks(tasks):
 	summ = 0
 	for task in tasks:
-		summ += task.get_time_scheduled_h()
+		summ += task.get_time_actual_h()
 
 	return summ
