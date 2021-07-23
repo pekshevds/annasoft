@@ -335,7 +335,7 @@ hr.light-bg {
 
 /* Page section margin padding */
 .space-ptb {
-  padding: 100px 0; }
+  padding: 50px 0; }
 
 .space-pt {
   padding: 100px 0 0; }
@@ -2963,7 +2963,15 @@ ul.category-list li a:after,
     border-right: 1px solid #eeeeee;
     border-bottom: 1px solid #eeeeee;
     position: relative;
-    cursor: pointer; }
+    /*as*/
+    /*cursor: pointer; */
+    /*as*/
+    }
+    .category-grid-style-01 .category-item a {
+      /*as*/
+      cursor: default; 
+      /*as*/
+    }
     .category-grid-style-01 .category-item:nth-child(5n+0) {
       border-right: none; }
     .category-grid-style-01 .category-item:before {
