@@ -4,31 +4,42 @@
 
 {% block content %}
 
-
-<!--=================================
-    Service details -->
-    <section class="space-ptb">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-xl-10">
-            <div class="service-details">
-              <h4 class="font-weight-bold">Сбор и обработка данных</h4>
-              <p class="mb-4 mb-md-3">Обладание оперативной информацией это огромное конкурентное преимущество для любого бизнеса. Всем компаниям хочется иметь представление о ценовых предложениях своих конкурентов или собрать статистические данные по перспективным рынкам сбыта. Такого рода общедоступной информации огромные массивы в Интернет, но её сбор и систематизация отнимает огромные человеческие ресурсы.</p>
-              <p class="mb-4 mb-md-3">Мы накопили некоторой опыт в этом не простом деле и способны облегчить доступ к огромным массивам данных для каждого.</p>
-
-              <p class="mb-4 mb-md-2">Мы поможем:</p>
-              <ul class="list list-unstyled mb-4 mb-md-5">
-                <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>В сборе данных о ценах на товары или услуги в интернет-магазинах конкурентов или поставщиков</span></li>
-                <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>В сборе данных о предложениях из различных общедоступных каталогов</span></li>
-                <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>В сборе данных доступности различных объектов резервирования или аренды (дома, квартиры, туристические путевки, номера отелей или гостиниц и т.д.)</span></li>
-              </ul>
-                          
-            </div>
-          </div>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'show-index' %}">На главную</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Сбор и обработка данных</li>
+            </ol>
+          </nav>
         </div>
       </div>
-    </section>
-    <!--=================================
-    Service details -->
+    </div>   
+  </div>
+</section>
+<section class="space-ptb">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-10">
+        <div class="service-details">
+          <h2 class="font-weight-bold">Сбор и обработка данных</h4>
+          <p class="mb-4 mb-md-3">Обладание оперативной информацией это огромное конкурентное преимущество для любого бизнеса. Всем компаниям хочется иметь представление о ценовых предложениях своих конкурентов или собрать статистические данные по перспективным рынкам сбыта. Такого рода общедоступной информации огромные массивы в Интернет, но её сбор и систематизация отнимает огромные человеческие ресурсы.</p>
+          <p class="mb-4 mb-md-3">Мы накопили некоторой опыт в этом не простом деле и способны облегчить доступ к огромным массивам данных для каждого.</p>
+
+          <p class="mb-4 mb-md-2">Мы поможем:</p>
+          <ul class="list list-unstyled mb-4 mb-md-5">
+            <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>В сборе данных о ценах на товары или услуги в интернет-магазинах конкурентов или поставщиков</span></li>
+            <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>В сборе данных о предложениях из различных общедоступных каталогов</span></li>
+            <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>В сборе данных доступности различных объектов резервирования или аренды (дома, квартиры, туристические путевки, номера отелей или гостиниц и т.д.)</span></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 {% endblock %}

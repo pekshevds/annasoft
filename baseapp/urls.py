@@ -8,6 +8,7 @@ from .views import show_service
 from .views import show_services
 from .views import show_e_commerce_and_1c
 from .views import show_work_with_us
+from .views import send_contact_form
 
 
 
@@ -23,4 +24,5 @@ urlpatterns = [
     path('about/', show_about, name='show-about'),
     path('work-with-us/', show_work_with_us, name='show-work-with-us'),
     path('e-commerce-and-1c/', show_e_commerce_and_1c, name='show-show_e_commerce_and_1c'),
+    path('send-contact-form/', send_contact_form, name='send_contact_form'),
 ]

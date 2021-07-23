@@ -3,36 +3,46 @@
 {% load static %}
 
 {% block content %}
-
-
-<!--=================================
-    Service details -->
-    <section class="space-ptb">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-xl-10">
-            <div class="service-details">
-              <h4 class="font-weight-bold">Интеграция 1С и web-решений</h4>
-              <p class="mb-4 mb-md-3">В наше время учетные системы, например 1С:Предприятие 8, редко работают изолировано или самостоятельно, зачастую приходится обеспечивать обмен данными с различными системами разработанными на разных языках программирования и с использованием различных технологий. Таким примером может служить обмен данными 1С: Предприятие 8 с интернет-магазинами, сайтами поставщиков и покупателей, службами доставки и т.д.</p>
-              <p class="mb-4 mb-md-3">Мы накопили достаточно большой опыт в разработке таких подсистем. Наши заказчики это интернет-магазины, транспортные компании, медицинские клиники. После обследования учетных систем заказчика мы проектируем функционал минимально требовательный к ресурсам, работающий максимально быстро и автономно.</p>
-
-              <p class="mb-4 mb-md-2">Мы решали задачи по передаче данных:</p>
-              <ul class="list list-unstyled mb-4 mb-md-5">
-                <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>О товарах, цена и остатках в интернет-магазины и в электронные каталоги</span></li>
-                <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>Об оформленных заказах и данных клиентов из CRM-систем, интернет-магазинов и каталогов в 1С:Предприятие 8</span></li>
-                <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>О рабочих часах врачей и свободных часах приема</span></li>
-                <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>О записях на прием к врачам</span></li>
-                <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>О заказах на перевозку грузов</span></li>
-                <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>О статусах нахождения грузов на доставке</span></li>
-              </ul>
-              
-                            
-            </div>
-          </div>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'show-index' %}">На главную</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Интеграция 1С и web-решений</li>
+            </ol>
+          </nav>
         </div>
       </div>
-    </section>
-    <!--=================================
-    Service details -->
+    </div>   
+  </div>
+</section>
 
+<section class="space-ptb">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-10">
+        <div class="service-details">
+          <h2 class="font-weight-bold">Интеграция 1С и web-решений</h4>
+          <p class="mb-4 mb-md-3">В наше время учетные системы, например 1С:Предприятие 8, редко работают изолировано или самостоятельно, зачастую приходится обеспечивать обмен данными с различными системами разработанными на разных языках программирования и с использованием различных технологий. Таким примером может служить обмен данными 1С: Предприятие 8 с интернет-магазинами, сайтами поставщиков и покупателей, службами доставки и т.д.</p>
+          <p class="mb-4 mb-md-3">Мы накопили достаточно большой опыт в разработке таких подсистем. Наши заказчики это интернет-магазины, транспортные компании, медицинские клиники. После обследования учетных систем заказчика мы проектируем функционал минимально требовательный к ресурсам, работающий максимально быстро и автономно.</p>
+
+          <p class="mb-4 mb-md-2">Мы решали задачи по передаче данных:</p>
+          <ul class="list list-unstyled mb-4 mb-md-5">
+            <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>О товарах, цена и остатках в интернет-магазины и в электронные каталоги</span></li>
+            <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>Об оформленных заказах и данных клиентов из CRM-систем, интернет-магазинов и каталогов в 1С:Предприятие 8</span></li>
+            <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>О рабочих часах врачей и свободных часах приема</span></li>
+            <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>О записях на прием к врачам</span></li>
+            <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>О заказах на перевозку грузов</span></li>
+            <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>О статусах нахождения грузов на доставке</span></li>
+          </ul>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}

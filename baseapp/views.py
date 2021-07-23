@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Service
 from .models import Article
 from .core import get_context
+from authapp.forms import ContactForm
 
 def show_index(request):
 	return render(request, 'baseapp/index.html', get_context())
@@ -45,3 +46,21 @@ def show_e_commerce_and_1c(request):
 def show_work_with_us(request):
 	return render(request, 'baseapp/work_with_us.html', get_context())
 
+def send_contact_form(request):
+
+	if request.user.is_authenticated:
+
+		if request.method == 'POST':
+
+			contactForm = ContactForm(request.POST)
+
+			if contactForm.is_valid():
+
+				first_name = contactForm.cleaned_data['firstName']
+				lastName = contactForm.cleaned_data['lastName']
+				Email = contactForm.cleaned_data['Email']
+				phone = contactForm.cleaned_data['phone']
+				comment = contactForm.cleaned_data['comment']
+				accessData = contactForm.cleaned_data['accessData']
+
+				
