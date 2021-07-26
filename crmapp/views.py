@@ -100,9 +100,7 @@ def send_to_E(request, id):
 
 	return redirect('show-kanban')
 
-
 def save_task(request):
-
 	
 	if request.user.is_authenticated:
 		if request.method == 'POST':
@@ -134,10 +132,10 @@ def save_task(request):
 
 				task.save()
 
-				return redirect('show-kanban')
+				return redirect('show-task', id=task.id)
 			
 	return redirect(request.META['HTTP_REFERER'])
-	
+
 
 def show_task(request, id):
 	

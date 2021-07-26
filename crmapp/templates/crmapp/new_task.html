@@ -22,7 +22,7 @@
           <div class="col-lg-7 col-md-7 pr-lg-5">
             <div class="p-4 p-md-5 bg-white shadow">
               <h3></h3>
-              <form class="mt-4" method="post" action="{% url 'save-task' %}">
+              <form id="task_form" class="mt-4" method="post" action="{% url 'save-task' %}">
               	{% csrf_token %}
                 
                 <div class="form-group mb-3">
@@ -103,21 +103,20 @@
                   </div>
                 </div>
 
-                <div class="form-group mb-0">
-                  <div class="container">
-                    <div class="row">
-                      <div class="form-group mb-0 col-lg-7 col-md-7">
-                  <button type="submit" class="btn btn-primary">Сохранить<i class="fas fa-arrow-right pl-3"></i></button>
+
+              </form>
+              <div class="form-group mb-0">
+              <div class="container">
+                <div class="row">
+                  <div class="form-group mb-1 col-lg-6 col-md-6">
+                    <a href="{% url 'show-my-kanban' %}"><button class="btn btn-primary">Назад</button></a>
                   </div>
-                  {% if is_ready %}
-                  <div class="form-group mb-0 col-lg-5 col-md-5">
-                  <a href="{% url 'send-to-d' id=caption.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Выполнить</a> 
-                  </div>
-                  {% endif %}
-                  </div>
+                  <div class="form-group mb-1 col-lg-6 col-md-6">
+                    <button form="task_form" type="submit" class="btn btn-primary">Сохранить<i class="fas fa-arrow-right pl-3"></i></button>
                   </div>
                 </div>
-              </form>
+              </div>
+            </div>
             </div>
           </div>
           

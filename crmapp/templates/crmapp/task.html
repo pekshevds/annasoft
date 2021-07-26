@@ -6,8 +6,7 @@
 
 
 {% if user.is_authenticated %}
-<!--=================================
-    Contat Form -->
+
     <section class="" style="padding: 30px 0;">
       <div class="container">
         <div class="row justify-content-center">
@@ -18,20 +17,20 @@
           </div>
         </div>
         <div class="row justify-content-lg-around position-relative pt-1">
-          
+
           <div class="col-lg-7 col-md-7 pr-lg-5">
             <div class="p-4 p-md-5 bg-white shadow">
               {% if caption %}
               <div class="section-title">
                 <a href="{% url 'send-to-e' id=caption.id %}" class="float-right"><span class="badge badge-danger">Отменить задачу</span>
-              </div>
-              {% endif %}
+                </div>
+                {% endif %}
               </a>
               <h3></h3>
 
-              <form class="mt-4" method="post" action="{% url 'save-task' %}">
+              <form id="task_form" class="mt-4" method="post" action="{% url 'save-task' %}">
               	{% csrf_token %}
-                
+
                 <div class="form-group mb-3">
                   {{ task.id }}
                 </div>
@@ -64,21 +63,21 @@
                   {{ task.dead_line }}
                 </div>
 
-                 <div class="form-group mb-3">
+                <div class="form-group mb-3">
                   <h6>Фактическое время выполнения:</h6>
                 </div>
                 <div class="form-group mb-3">
                   <div class="container">
                     <div class="row justify-content-center">
                       <div class="col-lg-6">
-                          <h6>Часов:</h6>
-                          {{ task.time_scheduled_h }}
+                        <h6>Часов:</h6>
+                        {{ task.time_scheduled_h }}
                       </div>
                       <div class="col-lg-6">
-                          <h6>Минут:</h6>
-                          {{ task.time_scheduled_m }}
+                        <h6>Минут:</h6>
+                        {{ task.time_scheduled_m }}
                       </div>
-                   </div>
+                    </div>
                   </div>
                 </div>
 
@@ -89,12 +88,12 @@
                   <div class="container">
                     <div class="row justify-content-center">
                       <div class="col-lg-6">
-                          {{ task.time_actual_h }}
+                        {{ task.time_actual_h }}
                       </div>
                       <div class="col-lg-6">
-                          {{ task.time_actual_m }}
+                        {{ task.time_actual_m }}
                       </div>
-                   </div>
+                    </div>
                   </div>
                 </div>
 
@@ -106,33 +105,32 @@
                 <div class="form-group mb-4">
                   <div class="custom-control custom-checkbox">
                    {{ task.for_payment }}
-                    <label class="custom-control-label small" for="for_payment">Оплачивается</label>
-                  </div>
-                </div>
+                   <label class="custom-control-label small" for="for_payment">Оплачивается</label>
+                 </div>
+               </div>
 
-                <div class="form-group mb-0">
-                  <div class="container">
-                    <div class="row">
-                      <div class="form-group mb-0 col-lg-7 col-md-7">
-                  <button type="submit" class="btn btn-primary">Сохранить<i class="fas fa-arrow-right pl-3"></i></button>
+
+             </form>
+
+             <div class="form-group mb-0">
+              <div class="container">
+                <div class="row">
+                  <div class="form-group mb-1 col-lg-6 col-md-6">
+                    <a href="{% url 'show-my-kanban' %}"><button class="btn btn-primary">Назад</button></a>
                   </div>
-                  {% if is_ready %}
-                  <div class="form-group mb-0 col-lg-5 col-md-5">
-                  <a href="{% url 'send-to-d' id=caption.id %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Выполнить</a> 
-                  </div>
-                  {% endif %}
-                  </div>
-                  </div>
+                  <div class="form-group mb-1 col-lg-6 col-md-6">
+                    <button form="task_form" type="submit" class="btn btn-primary">Сохранить<i class="fas fa-arrow-right pl-3"></i></button>
+                  </div> 
                 </div>
-              </form>
+              </div>
             </div>
           </div>
-          
         </div>
+
       </div>
-    </section>
-    <!--=================================
-    Contat Form  -->
+    </div>
+  </section>
+
 {% endif %}
 
 {% endblock %}
