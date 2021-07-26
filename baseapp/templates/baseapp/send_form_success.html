@@ -1,0 +1,33 @@
+{% extends 'baseapp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'show-index' %}">На главную</a></li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>   
+  </div>
+</section>
+
+<section class="space-ptb">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <h2 class="text-dark">Форма обратной связи успешно отправлена.</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

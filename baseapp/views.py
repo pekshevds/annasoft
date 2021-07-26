@@ -4,6 +4,12 @@ from .models import Article
 from .core import get_context
 from authapp.forms import ContactForm
 
+from decouple import config
+
+import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
 def show_index(request):
 	return render(request, 'baseapp/index.html', get_context())
 
@@ -48,19 +54,63 @@ def show_work_with_us(request):
 
 def send_contact_form(request):
 
-	if request.user.is_authenticated:
+	context = get_context()
 
-		if request.method == 'POST':
+	if request.method == 'POST':
 
-			contactForm = ContactForm(request.POST)
+		contactForm = ContactForm(request.POST)
 
-			if contactForm.is_valid():
+		if contactForm.is_valid():
 
-				first_name = contactForm.cleaned_data['firstName']
-				lastName = contactForm.cleaned_data['lastName']
-				Email = contactForm.cleaned_data['Email']
-				phone = contactForm.cleaned_data['phone']
-				comment = contactForm.cleaned_data['comment']
-				accessData = contactForm.cleaned_data['accessData']
+			first_name = contactForm.cleaned_data['firstName']
+			lastName = contactForm.cleaned_data['lastName']
+			Email = contactForm.cleaned_data['Email']
+			phone = contactForm.cleaned_data['phone']
+			comment = contactForm.cleaned_data['comment']
+			accessData = contactForm.cleaned_data['accessData']
 
-				
+			send_mail(first_name, lastName, Email, phone, comment, accessData)
+
+			return render(request, 'baseapp/send_form_success.html', context)
+
+def send_mail(first_name, lastName, Email, phone, comment, accessData):
+
+	HOST = "mail.hosting.reg.ru"
+	sender_email = config('MAIL_USER')
+	receiver_email = ['info@annasoft.ru', 'm.dyshlik@annasoft.ru']
+	password = config('MAIL_PASSWORD')
+
+	message = MIMEMultipart("alternative")
+	message["Subject"] = "Свяжитесь с {} {}. Контакты: {} {} ".format(first_name, lastName, phone, Email) 
+	message["From"] = sender_email
+	message["To"] = ','.join(receiver_email)
+
+	text_body = """\
+	"""
+
+	html = """\
+	<html>
+      <body>
+        <H3>Свяжитесь с {0} {1}. Контакты: {2} {3}</H3>
+        <H3>Контакты:</H3>
+        <p>Телефон: {2}</p>
+        <p>Email: {3}</p>
+        <p></p>
+        <p>Комментарий:</p>
+        <p>{4}</p>
+      </body>
+    </html>
+	""".format(first_name, lastName, phone, Email, comment)
+
+	part1 = MIMEText(text_body, "plain")
+	part2 = MIMEText(html, "html")
+	message.attach(part1)
+	message.attach(part2)
+
+	context = ssl.create_default_context()
+
+	server = smtplib.SMTP(HOST, 587)
+	server.starttls()
+	server.login(sender_email, password)
+	server.sendmail(sender_email, receiver_email , message.as_string())
+	server.quit()

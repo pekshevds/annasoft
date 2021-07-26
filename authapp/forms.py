@@ -10,7 +10,7 @@ class ContactForm(forms.Form):
 	
 	firstName = forms.CharField(max_length=30)
 	lastName = forms.CharField(max_length=30, required=False)
-	Email = forms.CharField(max_length=30)
+	Email = forms.EmailField(max_length=30)
 	phone = forms.CharField(max_length=30, required=False)
 	comment = forms.CharField(max_length=2048, required=False)
 	accessData = forms.BooleanField(required=False)
