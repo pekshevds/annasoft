@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['annasoft.site', 'www.annasoft.site', 'localhost']
+ALLOWED_HOSTS = ['annasoft.ru', 'www.annasoft.ru', 'localhost']
 
 
 
