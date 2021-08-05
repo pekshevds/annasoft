@@ -11,8 +11,6 @@ from .views import show_work_with_us
 from .views import send_contact_form
 
 
-
-
 urlpatterns = [    
     path('', show_index, name='show-index'),
     
