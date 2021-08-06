@@ -118,4 +118,11 @@ def add_record(request):
 				new_record.save()
 
 	current_path = request.META['HTTP_REFERER']
-	return redirect(current_path)			
+	return redirect(current_path)
+
+def show_record(request, id):
+	
+	if user.is_authenticated:
+
+		pass
+

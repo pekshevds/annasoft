@@ -5,8 +5,7 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<!--=================================
-    Contat Form -->
+
     <section class="" style="padding: 30px 0;">
       <div class="container">
         <div class="row justify-content-center">
@@ -22,7 +21,7 @@
             <div class="p-4 p-md-5 bg-white shadow">
               <h3></h3>
 
-              <form class="mt-4" method="post" action="{% url 'save-customer' %}">
+              <form class="mt-4" id="customerForm" method="POST" action="{% url 'save-customer' %}">
               	{% csrf_token %}
                           
 
@@ -73,7 +72,7 @@
                 </div>
 
                 <div class="form-group mb-0">
-                  <button type="submit" class="btn btn-primary">Сохранить<i class="fas fa-arrow-right pl-3"></i></button>
+                  <button type="submit" form="customerForm" class="btn btn-primary">Сохранить<i class="fas fa-arrow-right pl-3"></i></button>
                 </div>
               </form>
             </div>
@@ -101,14 +100,83 @@
                 </div>
               </div>
             </div>
+            <!--  <div class="p-4  bg-white shadow mt-3">
+              <h4>Информация</h4>
+              <div class="mt-2">
+                <ul class="list-list pl-0">
+                  {% if info %}
+                  {% for item in info %}
+                  <a href="" style="color: black;" data-toggle="modal" data-target="#recordModal{{ item.id }}"><li class="list-group-item">{{ item }}</li></a>
+                  {% endfor %}
+                  {% endif %}
+                  <a href="" style="color: black;"><li class="list-group-item" style="text-align: right;">Новая запись</li></a>
+                  {% if info %}<a href="" style="color: black;"><li class="list-group-item" style="text-align: right;">Все записи</li></a>{% endif %}
+                </ul>
+              </div>
+            </div> -->
           </div>
           {% endif %}
           
         </div>
       </div>
     </section>
-    <!--=================================
-    Contat Form  -->
+ 
+  {% if info %}
+    {%  for item in info %}
+        <div class="modal" id="recordModal{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="recordModalLabel{{ item.id }}" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="recordModalLabel{{ item.id }}">{{ item.title }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form class="mt-4" id="recordForm{{ item.id }}" action="#" method="POST">
+                  {% csrf_token %}
+                  <div class="form-group mb-3">
+                    <input type="text" class="form-control" name="input_title" id="input_title" placeholder="Название" value="{{ item.title }}" required>
+                  </div>
+                  <div class="form-group mb-3">
+                    <select class="form-control" name="input_section" id="input_section" required>
+                      {% if item.section %}
+                      <option selected value="{{ section.id }}" > {{ item.section }} </option>
+                      {% else %}
+                      <option selected value="" > ... </option>
+                      {% endif %}
+                      {% for section in select_sections %}
+                      {% if not section == item.section %}
+                      <option value="{{ section.id }}"> {{ section }} </option>
+                      {% endif %}
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group mb-3">
+                    <select disabled="true" class="form-control" name="input_customer" id="input_customer" required>
+                      {% if item.customer %}
+                      <option selected value="{{ item.id }}" >{{ item.customer }}</option>
+                      {% else %}
+                      <option selected value=""> ... </option>
+                      {% endif %}
+                    </select>
+                  </div>
+                  <div class="form-group mb-3">
+                    <textarea type="text" class="form-control" name="input_description" id="input_description" rows="15" placeholder="Описание">{{ item.description }}</textarea>
+                  </div>
+
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <button type="submit" class="btn btn-primary" form="recordForm{{ item.id }}">Сохранить</button>
+              </div>
+            </div>
+          </div>
+        </div> 
+    {% endfor %}    
+  {% endif %}
+
 {% endif %}
 
 {% endblock %}

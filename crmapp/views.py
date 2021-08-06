@@ -38,6 +38,8 @@ from .core import sort_task_by_customer
 from datetime import datetime
 from datetime import date
 
+from knowledge_baseapp.models import Record, Customer, Section
+
 # Create your views here.
 def show_index(request):
 	
@@ -249,7 +251,10 @@ def show_customer(request, id):
 	if request.user.is_authenticated:
 	
 		context = get_context()	
-		context['customer'] = CustomerForm(instance=Customer.objects.get(id=id))		
+		context['customer'] = CustomerForm(instance=Customer.objects.get(id=id))
+		context['info']	= Record.objects.filter(customer__id=id).order_by('-id')[:3]
+		context['select_sections'] = Section.objects.all().order_by('title')
+
 		return render(request, "crmapp/customer.html", context)
 	return redirect('show-auth')
 
