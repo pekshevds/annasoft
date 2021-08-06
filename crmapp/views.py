@@ -253,6 +253,7 @@ def show_customer(request, id):
 		context = get_context()	
 		context['customer'] = CustomerForm(instance=Customer.objects.get(id=id))
 		context['info']	= Record.objects.filter(customer__id=id).order_by('-id')[:3]
+		context['select_customers'] = Customer.objects.all().order_by('name').exclude(id=id)
 		context['select_sections'] = Section.objects.all().order_by('title')
 
 		return render(request, "crmapp/customer.html", context)

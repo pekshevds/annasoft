@@ -26,8 +26,8 @@ class Record(models.Model):
 
 	title = models.CharField(max_length=255, verbose_name="Заголовок")
 	description = models.TextField(verbose_name="Описание", default="", blank=True)
-	customer = models.ForeignKey(Customer, verbose_name="Заказчик", on_delete=models.PROTECT)
-	section = models.ForeignKey(Section, verbose_name="Раздел", on_delete=models.PROTECT)
+	customer = models.ForeignKey(Customer, verbose_name="Заказчик", on_delete=models.PROTECT, blank=True)
+	section = models.ForeignKey(Section, verbose_name="Раздел", on_delete=models.PROTECT, blank=True)
 	history = HistoricalRecords()
 
 	def __str__(self):

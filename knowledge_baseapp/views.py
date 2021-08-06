@@ -120,6 +120,64 @@ def add_record(request):
 	current_path = request.META['HTTP_REFERER']
 	return redirect(current_path)
 
+
+def save_record(request, id):
+
+	if request.user.is_authenticated:
+
+		if request.method == 'POST':
+
+			record_form = KnowledgeBaseForm(request.POST)
+
+			if record_form.is_valid():
+
+				changed = False
+
+				title = record_form.cleaned_data['input_title']
+				customer_id = record_form.cleaned_data['input_customer']
+				section_id = record_form.cleaned_data['input_section']
+				description = record_form.cleaned_data['input_description']
+				print(title, customer_id, section_id, description, id)
+
+				try :
+					record = Record.objects.get(id=id)
+				except:
+					record = None
+
+				if record:
+					if record.title != title:
+						record.title = title
+						changed = True
+
+					try:
+						customer = Customer.objects.get(id=customer_id)
+					except:
+						customer = None
+
+					if record.customer != customer:
+						record.customer = customer
+						changed = True		
+					
+					try:
+						section = Section.objects.get(id=section_id)
+					except:
+						section = None
+
+					if record.section != section:
+						record.section = section
+						changed = True
+
+					if record.description != description:
+						record.description = description
+						changed = True
+
+				if changed:
+					record.save()
+
+	current_path = request.META['HTTP_REFERER']
+	return redirect(current_path)
+
+
 def show_record(request, id):
 	
 	if user.is_authenticated:
