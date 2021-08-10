@@ -73,6 +73,16 @@ def send_contact_form(request):
 
 			return render(request, 'baseapp/send_form_success.html', context)
 
+
+def trade_1c(request):
+	return render(request, 'baseapp/1c_trade.html', get_context())
+
+def show_privacy(request):
+	return render(request, 'baseapp/privacy.html', get_context())
+
+
+
+
 def send_mail(first_name, lastName, Email, phone, comment, accessData):
 
 	HOST = "mail.hosting.reg.ru"

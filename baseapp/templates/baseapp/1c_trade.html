@@ -1,0 +1,195 @@
+{% extends 'baseapp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'show-index' %}">На главную</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Продажа 1С</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>   
+  </div>
+</section>
+
+<section>
+	<div class="container">
+		<div class="row justify-content-end">
+			<div class="col-12 mt-sm-n5 position-relative z-index-1">
+				<div class="bg-primary p-4 p-sm-5 border-radius shadow d-inline-block float-left float-sm-right">
+					<a type="button" data-toggle="modal" data-target="#connectModal" class="text-white font-xlll" href="#">
+						<span>Обратный звонок</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="" style="padding: 50px 0;">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6 mb-4 mb-lg-0">
+				<img class="img-fluid" src="{% static 'products/buh.jpg' %}" alt="">
+			</div>
+			<div class="col-lg-6">
+				<h3 class="mb-2">1С: Бухгалтерия 8</h3>
+				<p class="mb-4">Учетная программа для всех форм собственности, систем налогообложения и направлений бизнеса. Подходит и малым компания и крупным корпорациям. Сложно, а во многом невозможно ведение бухгалтерского учета не прибегая к помощи этой программы. С недавнего времени реализован функционал учета розничных продаж, что открывает возможность применения этой программы еще шире.</p>
+				<div class="row mb-4">
+					<div class="col-12 col-lg-6">
+						<h6 class="mb-0">Базовая: <b class="text-primary font-xll">&#8381; 5400</b></h6>
+					</div>
+					<div class="col-12 col-lg-6">
+						<h6 class="mb-0">ПРОФ: <b class="text-primary font-xll">&#8381; 13000</b></h6>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12" align="right">
+						<a type="button" data-toggle="modal" data-target="#connectModal" href="#" class="btn btn-primary btn-round text-white w-space">Заказать</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="" style="padding: 50px 0;">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6 mb-4 mb-lg-0">
+				<img class="img-fluid" src="{% static 'products/retail.jpg' %}" alt="">
+			</div>
+			<div class="col-lg-6">
+				<h3 class="mb-2">1С: Розница 8</h3>
+				<p class="mb-4">Разработана специально для розницы. С помощью этой программы можно автоматизировать как магазин «у дома», так внедрить ее в качестве узла большой торговой сети. Поддерживает массу торгового оборудования. Учет в этой программе легок и во многом приятен! Может быть базой для автоматизации различных специфичных направлений розницы. Поддерживает работу с маркируемой продукцией и ЕГАИС.</p>
+				<div class="row mb-4">
+					<div class="col-12 col-lg-6">
+						<h6 class="mb-0">Базовая: <b class="text-primary font-xll">&#8381; 3300</b></h6>
+					</div>
+					<div class="col-12 col-lg-6">
+						<h6 class="mb-0">ПРОФ: <b class="text-primary font-xll">&#8381; 13000</b></h6>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12" align="right">
+						<a type="button" data-toggle="modal" data-target="#connectModal" href="#" class="btn btn-primary btn-round text-white w-space">Заказать</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="" style="padding: 50px 0;">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6 mb-4 mb-lg-0">
+				<img class="img-fluid" src="{% static 'products/personal.jpg' %}" alt="">
+			</div>
+			<div class="col-lg-6">
+				<h3 class="mb-2">1С: Зарплата и управление персоналом 8</h3>
+				<p class="mb-4">Как и 1С:Бухгалтерия 8, является, пожалуй, промышленным стандартом применяемым во многих компаниях. Позволяет в комплексе автоматизировать задачи, связанные с расчетом заработной платы персонала и реализацией кадровой политики, с учетом требований законодательства и реальной практики работы предприятий. Успешно применяется в службах управления персоналом и бухгалтериях предприятий, а так-же в других подразделениях, заинтересованных в эффективной организации работы сотрудников.</p>
+				<div class="row mb-4">
+					<div class="col-12 col-lg-6">
+						<h6 class="mb-0">Базовая: <b class="text-primary font-xll">&#8381; 7400</b></h6>
+					</div>
+					<div class="col-12 col-lg-6">
+						<h6 class="mb-0">ПРОФ: <b class="text-primary font-xll">&#8381; 22600</b></h6>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12" align="right">
+						<a type="button" data-toggle="modal" data-target="#connectModal" href="#" class="btn btn-primary btn-round text-white w-space">Заказать</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="" style="padding: 50px 0;">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6 mb-4 mb-lg-0">
+				<img class="img-fluid" src="{% static 'products/unf.jpg' %}" alt="">
+			</div>
+			<div class="col-lg-6">
+				<h3 class="mb-2">1С: Управление нашей фирмой 8</h3>
+				<p class="mb-4">Отличный выбор в качестве платформы для автоматизации розничной торговли, интернет-магазинов, оптовых и производственных компаний, а так же сферы услуг. Содержит массу возможностей без лишнего «тяжелого» функционала. Поддерживает широкий спектр подключаемого оборудования. Поддерживает работу с ГИСМ и ЕГАИС. А встроенная многофункциональная CRM система поможет учесть все потребности Ваших клиентов.</p>
+				<div class="row mb-4">
+					<div class="col-12 col-lg-6">
+						<h6 class="mb-0">Базовая: <b class="text-primary font-xll">&#8381; 4600</b></h6>
+					</div>
+					<div class="col-12 col-lg-6">
+						<h6 class="mb-0">ПРОФ: <b class="text-primary font-xll">&#8381; 17400</b></h6>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12" align="right">
+						<a type="button" data-toggle="modal" data-target="#connectModal" href="#" class="btn btn-primary btn-round text-white w-space">Заказать</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="mb-5" style="padding: 50px 0;">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6 mb-4 mb-lg-0">
+				<img class="img-fluid" src="{% static 'products/ut.jpg' %}" alt="">
+			</div>
+			<div class="col-lg-6">
+				<h3 class="mb-2">1С:Управление торговлей 8</h3>
+				<p class="mb-4">Программа призвана автоматизировать оптовую торговлю, но может использоваться и в рознице. Широкие возможность 1С:Управление торговлей 8 позволяют автоматизировать складской учет, финансовый учет, закупки и продажи товаров и услуг. Поддерживает работу с маркируемой продукцией и ЕГАИС. На базе этой программы возможно реализовать управленческий учет больших масштабов. Имея гибкие настройки 1С:Управление торговлей 8 подойдет для любой торговой компании. Ее функции можно адаптировать под потребности любого бизнеса путем включения или отключения различных опций.</p>
+				<div class="row mb-4">
+					<div class="col-12 col-lg-6">
+						<h6 class="mb-0">Базовая: <b class="text-primary font-xll">&#8381; 6700</b></h6>
+					</div>
+					<div class="col-12 col-lg-6">
+						<h6 class="mb-0">ПРОФ: <b class="text-primary font-xll">&#8381; 22600</b></h6>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12"  align="right">
+						<a type="button" data-toggle="modal" data-target="#connectModal" href="#" class="btn btn-primary btn-round text-white w-space">Заказать</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="space-pb">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="testimonial-style-03 border-radius bg-light p-4 mt-4 mt-lg-0">
+					<div class="testimonial-item p-2">
+						<div class="testimonial-content">
+							<i class="fas fa-quote-left quotes text-dark"></i>
+							<p class="testimonial-des">Мы являемся официальными партнером компании 1С. Реализуем всю линейку программных продуктов компании 1С, а так же ПО разработанное по стандарту "1С совместимо" другими партнерами. <br>
+							По всем вопросам обращайтесь к нашим менеджерам по телефонам указанным на сайте или через форму обратной связи. </p>
+						</div>
+						<div class="testimonial-author">
+							<div class="testimonial-name">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock %}
