@@ -85,7 +85,7 @@ def show_privacy(request):
 
 def send_mail(first_name, lastName, Email, phone, comment, accessData):
 
-	HOST = "mail.hosting.reg.ru"
+	HOST = "smtp.mail.ru"
 	sender_email = config('MAIL_USER')
 	receiver_email = ['info@annasoft.ru', 'm.dyshlik@annasoft.ru']
 	password = config('MAIL_PASSWORD')
