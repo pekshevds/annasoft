@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['annasoft.ru', 'www.annasoft.ru', 'localhost']
+ALLOWED_HOSTS = ['annasoft.ru', 'www.annasoft.ru', 'localhost', '127.0.0.1']
 
 
 
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'knowledge_baseapp',
     'simple_history',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -135,7 +136,15 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
 
+# CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.random_char_challenge'
+# CAPTCHA_IMAGE_SIZE = (150, 50)
+# CAPTCHA_FONT_SIZE = (28)
+# CAPTCHA_BACKGROUND_COLOR = '#cccccc'
+# CAPTCHA_FOREGROUND_COLOR = '#001100'
+# CAPTCHA_LENGTH = 6
 
 # tunning
 SITE_ID = 1

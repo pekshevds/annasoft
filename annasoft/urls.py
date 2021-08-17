@@ -14,6 +14,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('authapp.urls')),
     path('info/', include('knowledge_baseapp.urls')),
+    # path('captcha/', include('captcha.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
