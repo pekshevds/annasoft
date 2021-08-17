@@ -1,0 +1,18 @@
+<svg id="Var_16x16" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ef3139;
+      }
+
+      .cls-2 {
+        font-size: 150px;
+        fill: #fff;
+        font-family: Microfont;
+      }
+    </style>
+  </defs>
+  <circle id="Эллипс_1" data-name="Эллипс 1" class="cls-1" cx="251" cy="247" r="227"/>
+  <text id="A" class="cls-2" transform="translate(102.101 369.203) scale(2.218)">A</text>
+  <text id="s" class="cls-2" transform="translate(322.1 244.005) scale(1.36)">s</text>
+</svg>
