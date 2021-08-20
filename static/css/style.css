@@ -129,7 +129,10 @@ label {
   font-weight: normal; }
 
 h1 {
-  font-size: 60px;
+  /*font-size: 60px;*/
+  /*as*/
+  font-size: 36px;
+  /*as*/
   font-style: normal; }
 
 h2 {
