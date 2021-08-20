@@ -2,6 +2,18 @@
 
 {% load static %}
 
+{% block title %}
+
+Дружная команда, здоровая атмосфера | Работа в IT компании Annasoft
+
+{% endblock %}
+
+{% block description %}
+{{ block.super }}
+{% endblock %}
+
+
+
 {% block content %}
 
 <section>
@@ -24,6 +36,7 @@
 <section class="space-ptb">
   <div class="container">
     <div class="row justify-content-center">
+      <h1 class="text-dark">Актуальные вакансии</h1>
       <div class="col-xl-10 ">
         <div class="testimonial-style-03 border-radius bg-light p-5">
           <h4 class="font-weight-bold">Программист на платформе 1С:Предприятие 8</h4>

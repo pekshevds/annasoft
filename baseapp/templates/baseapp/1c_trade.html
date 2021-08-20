@@ -2,6 +2,17 @@
 
 {% load static %}
 
+{% block title %}
+
+Реализует всю линейку продуктов 1С Предприятие 8 | Annasoft
+
+{% endblock %}
+
+{% block description %}
+{{ block.super }}
+{% endblock %}
+
+
 {% block content %}
 
 <section>
@@ -36,6 +47,7 @@
 </section>
 
 <section class="" style="padding: 50px 0;">
+	<h1 hidden="true">1С Бухгалтерия 8</h1>
 	<div class="container">
 		<div class="row align-items-center">
 			<div class="col-lg-6 mb-4 mb-lg-0">

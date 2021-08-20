@@ -22,10 +22,11 @@
 
     <meta charset="utf-8">
     <meta name="keywords" content="HTML5 Template" />
-    <meta name="description" content="Annasoft - it is solution" />
+    
     <meta name="author" content="annasoft.ru" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Annasoft - это решение!</title>
+    <meta name="description" content="{% block description %}Annasoft - it is solution{% endblock %}" />
+    <title>{% block title %}Annasoft - это решение!{% endblock  %}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
@@ -202,7 +203,8 @@
             <h5 class="text-primary mb-2 mb-sm-4">Компания</h5>
             <div class="footer-link">
               <ul class="list-unstyled mb-0">
-                <li><a href="{% url 'show-show_e_commerce_and_1c' %}">Интернет магазин + 1С</a></li>
+                <li><a href="{% url 'show_e_commerce_and_1c' %}">Интернет магазин + 1С</a></li>
+                <li><a href="{% url 'show-our-tools' %}">Наши инструменты</a></li>
                 <li><a href="{% url 'trade_1c' %}">Купить 1С</a></li>
                 <li><a href="{% url 'show-about' %}">О нас</a></li>                
                 <!-- <li><a href="{% url 'show-articles' %}">Статьи</a></li>                 -->
