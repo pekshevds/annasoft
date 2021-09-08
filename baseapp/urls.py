@@ -18,8 +18,8 @@ urlpatterns = [
     
     path('service/<int:id>/', show_service, name='show-service-detail'),
     path('services/', show_services, name='show-services'),
-    path('article/<int:id>/', show_article, name='show-article-detail'),
-    path('articles/', show_articles, name='show-articles'),
+    # path('article/<int:id>/', show_article, name='show-article-detail'),
+    # path('articles/', show_articles, name='show-articles'),
     path('our-tools/', show_our_tools, name='show-our-tools'),
     path('about/', show_about, name='show-about'),
     path('work-with-us/', show_work_with_us, name='show-work-with-us'),

@@ -3,3 +3,4 @@ Disallow: /admin
 Disallow: /auth
 Disallow: /info
 Disallow: /crm
+Disallow: /send-contact-form
