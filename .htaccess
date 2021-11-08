@@ -7,5 +7,5 @@ RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} !\..+$
 RewriteCond %{REQUEST_URI} !/$
-RewriteRule (.*) https://www.annasoft.ru/$1/ [R=301,L]
+RewriteRule (.*) https://annasoft.ru/$1/ [R=301,L]
 
