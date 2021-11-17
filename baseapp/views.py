@@ -10,10 +10,16 @@ import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+# def show_index(request):
+# 	context = get_context()	
+# 	context['contact_form'] = ContactForm()
+# 	return render(request, 'baseapp/index.html', context)
+
+
 def show_index(request):
-	context = get_context()	
+	context = get_context()
 	context['contact_form'] = ContactForm()
-	return render(request, 'baseapp/index.html', context)
+	return render(request, 'baseapp/e_commerce_and_1c.html', context)
 
 
 def show_our_tools(request):
@@ -23,9 +29,9 @@ def show_our_tools(request):
 
 
 def show_about(request):
-	context = get_context()
+	context = get_context()	
 	context['contact_form'] = ContactForm()
-	return render(request, 'baseapp/about.html', context)
+	return render(request, 'baseapp/index.html', context)
 
 
 def show_article(request, id):
@@ -56,10 +62,10 @@ def show_services(request):
 	context['contact_form'] = ContactForm()
 	return render(request, 'baseapp/services.html', context)
 
-def show_e_commerce_and_1c(request):
-	context = get_context()
-	context['contact_form'] = ContactForm()
-	return render(request, 'baseapp/e_commerce_and_1c.html', context)
+# def show_e_commerce_and_1c(request):
+# 	context = get_context()	
+# 	context['contact_form'] = ContactForm()
+# 	return render(request, 'baseapp/index.html', context)
 
 
 def show_work_with_us(request):

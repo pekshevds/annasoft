@@ -6,16 +6,16 @@ from .views import show_article
 from .views import show_articles
 from .views import show_service
 from .views import show_services
-from .views import show_e_commerce_and_1c
+# from .views import show_e_commerce_and_1c
 from .views import show_work_with_us
 from .views import send_contact_form
 from .views import trade_1c
 from .views import show_privacy
 
 
-urlpatterns = [    
+urlpatterns = [
+
     path('', show_index, name='show-index'),
-    
     path('service/<int:id>/', show_service, name='show-service-detail'),
     path('services/', show_services, name='show-services'),
     path('article/<int:id>/', show_article, name='show-article-detail'),
@@ -23,7 +23,7 @@ urlpatterns = [
     path('our-tools/', show_our_tools, name='show-our-tools'),
     path('about/', show_about, name='show-about'),
     path('work-with-us/', show_work_with_us, name='show-work-with-us'),
-    path('e-commerce-and-1c/', show_e_commerce_and_1c, name='show_e_commerce_and_1c'),
+    # path('e-commerce-and-1c/', show_e_commerce_and_1c, name='show_e_commerce_and_1c'),
     path('send-contact-form/', send_contact_form, name='send_contact_form'),
     path('trade-1c/', trade_1c, name='trade_1c'),
     path('privacy/', show_privacy, name='show_privacy'),
