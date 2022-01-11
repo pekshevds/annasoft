@@ -11,16 +11,16 @@
 {% endblock %}
 
 {% block description %}
-{% if service.description %}
-{{ service.description }}
+{% if service.meta_description %}
+{{ service.meta_description }}
 {% else %}
 Решения для электронной коммерции, электронной торговли. Автоматизация электронной торговли и бизнес процессов.
 {% endif %}
 {% endblock %}
 
 {% block keywords %}
-{% if service.keywords %}
-{{ service.keywords }}
+{% if service.meta_keywords %}
+{{ service.meta_keywords }}
 {% else %}
 электронная коммерция, e commerce, мобильная коммерция, интернет маркетинг, электронный обмен данными, система управления запасами, автоматизированные системы сбора данных.
 {% endif %}

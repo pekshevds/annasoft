@@ -11,16 +11,16 @@
 {% endblock %}
 
 {% block description %}
-{% if service.description %}
-{{ service.description }}
+{% if service.meta_description %}
+{{ service.meta_description }}
 {% else %}
 Разработка современных решений для производства на платформе 1С:Предприятие 8 и внедрение решений в бизнес процессы организации.
 {% endif %}
 {% endblock %}
 
 {% block keywords %}
-{% if service.keywords %}
-{{ service.keywords }}
+{% if service.meta_keywords %}
+{{ service.meta_keywords }}
 {% else %}
 разработка 1с, внедрение1С, сопровождение 1с, решение 1с,
 {% endif %}

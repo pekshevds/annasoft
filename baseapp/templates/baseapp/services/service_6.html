@@ -11,15 +11,15 @@
 {% endblock %}
 
 {% block description %}
-{% if service.description %}
-{{ service.description }}
+{% if service.meta_description %}
+{{ service.meta_description }}
 {% else %}
 Обеспечим стабильную работу вашей IT инфраструктуры. Прокладка сетей, настройка компьютеров и оргтехники, внедрение программного обеспечения.
 {% endif %}
 {% endblock %}
 {% block keywords %}
-{% if service.keywords %}
-{{ service.keywords }}
+{% if service.meta_keywords %}
+{{ service.meta_keywords }}
 {% else %}
 системное администрирование, ит служба, внедрение программного обеспечения, внедрение по, интеграция информационных систем.
 {% endif %}

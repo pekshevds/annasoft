@@ -11,16 +11,16 @@
 {% endblock %}
 
 {% block description %}
-{% if service.description %}
-{{ service.description }}
+{% if service.meta_description %}
+{{ service.meta_description }}
 {% else %}
 Обеспечим обмен данными между интернет магазином и 1с, службой доставки, поставщиками, покупателями и любой конфигурацией 1С Предприятие 8.
 {% endif %}
 {% endblock %}
 
 {% block keywords %}
-{% if service.keywords %}
-{{ service.keywords }}
+{% if service.meta_keywords %}
+{{ service.meta_keywords }}
 {% else %}
 интеграция 1С, web решения, 1С Предприятие 8, обмен данными, обеспечение обменом данными, разработка подсистем.
 {% endif %}

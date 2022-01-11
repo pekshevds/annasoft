@@ -11,16 +11,16 @@
 {% endblock %}
 
 {% block description %}
-{% if service.description %}
-{{ service.description }}
+{% if service.meta_description %}
+{{ service.meta_description }}
 {% else %}
 Сбор и обработка статистических данных.
 {% endif %}
 {% endblock %}
 
 {% block keywords %}
-{% if service.keywords %}
-{{ service.keywords }}
+{% if service.meta_keywords %}
+{{ service.meta_keywords }}
 {% else %}
 сбор и обработка данных, сбор хранение и обработку данных, средства сбора и обработки данных, сбор информации о товарах.
 {% endif %}
