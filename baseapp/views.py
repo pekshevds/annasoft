@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Service
 from .models import Article
+from .models import Pages
 from .core import get_context
 from authapp.forms import ContactForm
 
@@ -19,18 +20,30 @@ from email.mime.multipart import MIMEMultipart
 def show_index(request):
 	context = get_context()
 	context['contact_form'] = ContactForm()
+	try:
+			context['page'] = Pages.objects.get(title__icontains='Главная')
+	except:
+			context['page'] = None
 	return render(request, 'baseapp/e_commerce_and_1c.html', context)
 
 
 def show_our_tools(request):
 	context = get_context()
 	context['contact_form'] = ContactForm()
+	try:
+			context['page'] = Pages.objects.get(title__icontains='Наши инструменты')
+	except:
+			context['page'] = None
 	return render(request, 'baseapp/our_tools.html', context)
 
 
 def show_about(request):
 	context = get_context()	
 	context['contact_form'] = ContactForm()
+	try:
+			context['page'] = Pages.objects.get(title__icontains='О нас')
+	except:
+			context['page'] = None
 	return render(request, 'baseapp/index.html', context)
 
 
@@ -71,6 +84,10 @@ def show_services(request):
 def show_work_with_us(request):
 	context = get_context()
 	context['contact_form'] = ContactForm()
+	try:
+			context['page'] = Pages.objects.get(title__icontains='Работа у нас')
+	except:
+			context['page'] = None
 	return render(request, 'baseapp/work_with_us.html', context)
 
 def send_contact_form(request):
@@ -107,11 +124,19 @@ def send_contact_form(request):
 def trade_1c(request):
 	context = get_context()
 	context['contact_form'] = ContactForm()
+	try:
+			context['page'] = Pages.objects.get(title__icontains='Купить 1С')
+	except:
+			context['page'] = None
 	return render(request, 'baseapp/1c_trade.html', context)
 
 def show_privacy(request):
 	context = get_context()
 	context['contact_form'] = ContactForm()
+	try:
+			context['page'] = Pages.objects.get(title__icontains='Политика конфиденциальности')
+	except:
+			context['page'] = None
 	return render(request, 'baseapp/privacy.html', context)
 
 

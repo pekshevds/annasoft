@@ -22,6 +22,11 @@ class Service(models.Model):
 	title = models.CharField(max_length=150, verbose_name="Заголовок", null=True)
 	pre_content = models.CharField(max_length=255, verbose_name="Краткое содержание", null=True)
 	picture = models.ImageField(upload_to=get_image_name, verbose_name='Изображение 900х550', default=None, null=True, blank=True)
+
+	meta_title 			= models.CharField(max_length=150, verbose_name='meta title', blank=True, null=True)
+	meta_description 	= models.TextField(max_length=1024, verbose_name='meta description', blank=True, null=True)
+	meta_keywords 		= models.TextField(max_length=1024, verbose_name='meta keywords', blank=True, null=True)
+
 		
 	def __str__(self):
 		return self.title
@@ -43,3 +48,17 @@ class Article(models.Model):
 	class Meta:
 		verbose_name = 'Статья'
 		verbose_name_plural = 'Статьи'
+
+class Pages(models.Model):
+
+	title 				= models.CharField(max_length=150, verbose_name="Заголовок", null=True)
+	meta_title 			= models.CharField(max_length=150, verbose_name='meta title', blank=True, null=True)
+	meta_description 	= models.TextField(max_length=1024, verbose_name='meta description', blank=True, null=True)
+	meta_keywords 		= models.TextField(max_length=1024, verbose_name='meta keywords', blank=True, null=True)
+		
+	def __str__(self):
+		return self.title
+
+	class Meta:
+		verbose_name = 'Страница'
+		verbose_name_plural = 'Страницы'

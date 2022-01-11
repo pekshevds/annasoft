@@ -3,17 +3,27 @@
 {% load static %}
 
 {% block title %}
-
+{% if service.meta_title %}
+{{ service.meta_title }}
+{% else %}
 ИНТЕГРАЦИЯ 1С | Аннасофт Белгород
-
+{% endif %}
 {% endblock %}
 
 {% block description %}
+{% if service.description %}
+{{ service.description }}
+{% else %}
 Обеспечим обмен данными между интернет магазином и 1с, службой доставки, поставщиками, покупателями и любой конфигурацией 1С Предприятие 8.
+{% endif %}
 {% endblock %}
 
 {% block keywords %}
+{% if service.keywords %}
+{{ service.keywords }}
+{% else %}
 интеграция 1С, web решения, 1С Предприятие 8, обмен данными, обеспечение обменом данными, разработка подсистем.
+{% endif %}
 {% endblock %}
 
 {% block content %}

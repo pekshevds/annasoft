@@ -3,17 +3,27 @@
 {% load static %}
 
 {% block title %}
-
+{% if page.meta_title %}
+{{ page.meta_title }}
+{% else %}
 Политика конфиденциальности Annasoft
-
+{% endif %}
 {% endblock %}
 
 {% block description %}
+{% if page.description %}
+{{ page.description }}
+{% else %}
 Политика конфиденциальности сбора информации Annasoft
+{% endif %}
 {% endblock %}
 
 {% block keywords %}
+{% if page.keywords %}
+{{ page.keywords }}
+{% else %}
 Политика конфиденциальности Annasoft
+{% endif %}
 {% endblock %}
 
 {% block content %}

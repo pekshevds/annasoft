@@ -3,17 +3,27 @@
 {% load static %}
 
 {% block title %}
-
+{% if service.meta_title %}
+{{ service.meta_title }}
+{% else %}
 Внедрение 1С | Решения для бизнеса
-
+{% endif %}
 {% endblock %}
 
 {% block description %}
+{% if service.description %}
+{{ service.description }}
+{% else %}
 Разработка современных решений для производства на платформе 1С:Предприятие 8 и внедрение решений в бизнес процессы организации.
+{% endif %}
 {% endblock %}
 
 {% block keywords %}
+{% if service.keywords %}
+{{ service.keywords }}
+{% else %}
 разработка 1с, внедрение1С, сопровождение 1с, решение 1с,
+{% endif %}
 {% endblock %}
 
 {% block content %}

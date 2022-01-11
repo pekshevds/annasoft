@@ -3,19 +3,28 @@
 {% load static %}
 
 {% block title %}
-
+{% if page.meta_title %}
+{{ page.meta_title }}
+{% else %}
 Разработка программного обеспечения | 1С:Предприятие 8
-
+{% endif %}
 {% endblock %}
 
 {% block description %}
+{% if page.description %}
+{{ page.description }}
+{% else %}
 Разработка программного обеспечения под ваши нужды на платформе 1С Предприятие 8. Решение для оптовой и розничной торговли на платформе 1С.
+{% endif %}
 {% endblock %}
 
 {% block keywords %}
+{% if page.keywords %}
+{{ page.keywords }}
+{% else %}
 ит специалисты, web разработчики, веб разработчики, внедрение программных продуктов, веб разработка, серверное оборудование.
+{% endif %}
 {% endblock %}
-
 {% block content %}
 
 <!--=================================

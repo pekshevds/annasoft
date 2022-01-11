@@ -3,19 +3,28 @@
 {% load static %}
 
 {% block title %}
-
+{% if service.meta_title %}
+{{ service.meta_title }}
+{% else %}
 Сбор и обработка данных | Парсинг
-
+{% endif %}
 {% endblock %}
 
 {% block description %}
-Сбор и обработка статистических данных. 
+{% if service.description %}
+{{ service.description }}
+{% else %}
+Сбор и обработка статистических данных.
+{% endif %}
 {% endblock %}
 
 {% block keywords %}
+{% if service.keywords %}
+{{ service.keywords }}
+{% else %}
 сбор и обработка данных, сбор хранение и обработку данных, средства сбора и обработки данных, сбор информации о товарах.
+{% endif %}
 {% endblock %}
-
 {% block content %}
 
 <section>

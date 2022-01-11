@@ -3,17 +3,27 @@
 {% load static %}
 
 {% block title %}
-
+{% if page.meta_title %}
+{{ page.meta_title }}
+{% else %}
 1С Бухгалтерия купить | Цена 5400
-
+{% endif %}
 {% endblock %}
 
 {% block description %}
+{% if page.description %}
+{{ page.description }}
+{% else %}
 Купить 1С Бухгалтерия 8 базовая цена 5400р проф 13000р
+{% endif %}
 {% endblock %}
 
 {% block keywords %}
+{% if page.keywords %}
+{{ page.keywords }}
+{% else %}
 1с бухгалтерия купить, 1с бухгалтерия 8.3 купить, 1с бухгалтерия базовая купить, 1с бухгалтерия купить цена, 1с бухгалтерия базовая версия купить, 1с бухгалтерия 8.3 купить цена, 1с 8.3 бухгалтерия базовая купить, 1с бухгалтерия версия 8.3 купить,
+{% endif %}
 {% endblock %}
 
 {% block content %}

@@ -3,17 +3,27 @@
 {% load static %}
 
 {% block title %}
-
+{% if page.meta_title %}
+{{ page.meta_title }}
+{% else %}
 Программист 1С вакансии Белгород | Аннасофт
-
+{% endif %}
 {% endblock %}
 
 {% block description %}
+{% if page.description %}
+{{ page.description }}
+{% else %}
 Внедренческий центр Аннасофт г.Белгород приглашает на работу 1С Программиста и помощника 1С программиста на платформе 1С:Предприятие 8.
+{% endif %}
 {% endblock %}
 
 {% block keywords %}
+{% if page.keywords %}
+{{ page.keywords }}
+{% else %}
 вакансии программист 1С белгород, работа программист 1с белгород, работа белгород программист. 
+{% endif %}
 {% endblock %}
 
 {% block content %}

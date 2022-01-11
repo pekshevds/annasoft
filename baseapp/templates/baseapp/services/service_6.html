@@ -3,17 +3,26 @@
 {% load static %}
 
 {% block title %}
-
+{% if service.meta_title %}
+{{ service.meta_title }}
+{% else %}
 Системное администрирование | Установка программного обеспечения
-
+{% endif %}
 {% endblock %}
 
 {% block description %}
+{% if service.description %}
+{{ service.description }}
+{% else %}
 Обеспечим стабильную работу вашей IT инфраструктуры. Прокладка сетей, настройка компьютеров и оргтехники, внедрение программного обеспечения.
+{% endif %}
 {% endblock %}
-
 {% block keywords %}
+{% if service.keywords %}
+{{ service.keywords }}
+{% else %}
 системное администрирование, ит служба, внедрение программного обеспечения, внедрение по, интеграция информационных систем.
+{% endif %}
 {% endblock %}
 
 {% block content %}

@@ -3,19 +3,28 @@
 {% load static %}
 
 {% block title %}
-
+{% if service.meta_title %}
+{{ service.meta_title }}
+{% else %}
 Электронная коммерция | Решения
-
+{% endif %}
 {% endblock %}
 
 {% block description %}
+{% if service.description %}
+{{ service.description }}
+{% else %}
 Решения для электронной коммерции, электронной торговли. Автоматизация электронной торговли и бизнес процессов.
+{% endif %}
 {% endblock %}
 
 {% block keywords %}
+{% if service.keywords %}
+{{ service.keywords }}
+{% else %}
 электронная коммерция, e commerce, мобильная коммерция, интернет маркетинг, электронный обмен данными, система управления запасами, автоматизированные системы сбора данных.
+{% endif %}
 {% endblock %}
-
 {% block content %}
 
 <section>
