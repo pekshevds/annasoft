@@ -1,6 +1,7 @@
 from django import forms
 from captcha.fields import ReCaptchaField
-from captcha.widgets import ReCaptchaV2Checkbox
+# from captcha.widgets import ReCaptchaV2Checkbox
+from captcha.widgets import ReCaptchaV2Invisible
 # from captcha.fields import CaptchaField
 # from captcha.fields import ReCaptchaField
 # from captcha.widgets import ReCaptchaV2Checkbox
@@ -46,4 +47,4 @@ class ContactForm(forms.Form):
 		}))
 	# captcha = CaptchaField(label='Введите данные с картинки')
 	# captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
-	captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+	captcha = ReCaptchaField(widget=ReCaptchaV2Invisible)
