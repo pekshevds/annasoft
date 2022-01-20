@@ -51,7 +51,7 @@ urlpatterns = [
     path('save-customer/', save_customer, name='save-customer'),
 
     # Сотрудники
-    path('new-employee/<int:customer_id>', new_employee, name='new-employee'),
+    path('new-employee/<int:customer_id>/', new_employee, name='new-employee'),
     path('employee/<int:id>/', show_employee, name='show-employee'),
     path('save-employee/', save_employee, name='save-employee'),
     
