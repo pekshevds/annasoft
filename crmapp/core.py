@@ -111,7 +111,23 @@ def get_completed_tasks(param_from, param_to, customer=None):
 					)
 
 
+def get_employee_completed_tasks(param_from, param_to, employee=None):
+	param_from = datetime(year=param_from.year, month=param_from.month, day=param_from.day,)
+	param_to = datetime(year=param_to.year, month=param_to.month, day=param_to.day,)
 
+	if employee:
+
+		return Task.objects.filter(
+					from_performer=employee,
+					date_of_completion__gte=param_from.replace(hour=0, minute=0, second=0, microsecond=0), 
+					date_of_completion__lte=param_to.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(1)
+					)
+	else:
+	
+		return Task.objects.filter(					
+					date_of_completion__gte=param_from.replace(hour=0, minute=0, second=0, microsecond=0), 
+					date_of_completion__lte=param_to.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(1)
+					)
 
 
 		

@@ -23,6 +23,7 @@ from .views import show_report_001
 from .views import show_report_002
 from .views import show_report_003
 from .views import show_report_004
+from .views import show_report_005
 
 
 from .views import send_to_B
@@ -69,6 +70,7 @@ urlpatterns = [
     path('report_002/', show_report_002, name='show-report-002'),
     path('report_003/', show_report_003, name='show-report-003'),
     path('report_004/', show_report_004, name='show-report-004'),
+    path('report_005/', show_report_005, name='show-report-005'),
 
     
     path('send-to-b/<int:id>/', send_to_B, name='send-to-b'),
