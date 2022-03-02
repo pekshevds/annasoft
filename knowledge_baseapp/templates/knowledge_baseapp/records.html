@@ -1,0 +1,131 @@
+{% extends 'baseapp/base.html' %} {% load static %} {% block content %}
+
+<section class="" style="padding: 30px 0">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-sm-12">
+        <div class="section-title text-center">
+          <h3>Информация</h3>
+          <h4>{{ customer }}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center pt-1">
+      <div class="col-lg-7 col-md-7 col-sm-8">
+        <div class="row justify-content-center p-4 p-md-5 bg-white shadow">
+          <div class="col-12 mt-1">
+            <ul class="list-list pl-0">
+              {% for item in records %}
+              <a href="{% url 'show_record' id=item.id %}" style="color: black">
+                <li class="list-group-item">{{ item }}</li>
+              </a>
+              {% endfor %}
+              <a
+                href=""
+                style="color: black"
+                data-toggle="modal"
+                data-target="#newRecordModal"
+                ><li class="list-group-item" style="text-align: right">
+                  Новая запись
+                </li></a
+              >
+            </ul>
+          </div>
+          <div class="col-6">
+            <a style="width: 100%" class="btn btn-primary" href="{% url 'show-customer' id=customer.id %}">Назад</a>
+          </div>    
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %} modal {% endcomment %}
+
+<div
+  class="modal fade"
+  id="newRecordModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="newRecordModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newRecordModalLabel">Новая запись</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="mt-4"
+          id="newRecordModalForm"
+          action="{% url 'add_record' %}"
+          method="POST"
+        >
+          {% csrf_token %}
+          <div class="form-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              name="input_title"
+              id="input_title"
+              placeholder="Заголовок"
+              required
+            />
+          </div>
+          <div class="form-group mb-3">
+            <select
+              class="form-control"
+              name="input_section"
+              id="input_section"
+              required
+            >
+              <option selected value="">...</option>
+              {% for section in select_sections %}
+              <option value="{{ section.id }}">{{ section }}</option>
+              {% endfor %} 
+            </select>
+          </div>
+          <div class="form-group mb-3">
+            <select
+              class="form-control"
+              name="input_customer"
+              id="input_customer"
+              required
+            >
+              <option value="{{ customer.id }}">{{ customer }}</option>
+            </select>
+          </div>
+          <div class="form-group mb-3">
+            <textarea
+              type="text"
+              class="form-control"
+              name="input_description"
+              id="input_description"
+              rows="15"
+              placeholder="Описание"
+            ></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Отмена
+        </button>
+        <button type="submit" class="btn btn-primary" form="newRecordModalForm">
+          Сохранить
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

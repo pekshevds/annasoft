@@ -3,6 +3,9 @@ from django.shortcuts import redirect
 from .models import Section, Record
 from crmapp.models import Customer
 from .forms import KnowledgeBaseForm
+from django.shortcuts import get_object_or_404
+from baseapp.core import get_context
+
 
 def show_knowledge_base_props(request):
 
@@ -180,7 +183,38 @@ def save_record(request, id):
 
 def show_record(request, id):
 	
-	if user.is_authenticated:
+	if request.user.is_authenticated:
 
-		pass
+		record = get_object_or_404(Record, id=id)
 
+		context = get_context()
+
+		context['record'] = record
+		context['select_sections'] = Section.objects.all().order_by('title').exclude(id=record.section.id)
+
+		return render(request, "knowledge_baseapp/record.html", context)
+
+	return redirect('show-auth')	
+
+
+def show_all_records(request):
+
+	if request.user.is_authenticated:
+
+		customer_id = request.GET.get('customer_id')
+
+		customer = get_object_or_404(Customer, id=customer_id)
+
+		if customer:
+
+			records = Record.objects.filter(customer__id=customer_id)
+
+			context = get_context()
+
+			context['records'] = records
+			context['customer'] = customer
+			context['select_sections'] = Section.objects.all().order_by('title')
+
+			return render(request, "knowledge_baseapp/records.html", context)
+			
+	return redirect('show-auth')		

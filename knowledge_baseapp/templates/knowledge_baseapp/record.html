@@ -1,0 +1,61 @@
+{% extends 'baseapp/base.html' %} 
+
+{% block content %}
+
+<section class="" style="padding: 30px 0">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-sm-12">
+        <div class="section-title text-center">
+          <h3>{{ record.title }}</h3>
+          <h4>{{ record.customer }}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center pt-1">
+      <div class="col-lg-6 col-md-7 col-sm-8 col-10">
+        <div
+          class="row justify-content-center p-3 p-md-3 bg-white shadow"
+        >
+        <div class="modal-content" style="border: none;">
+            <div class="modal-body">
+              <form class="mt-4" id="recordForm" action="{% url 'save_record' id=record.id %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control" name="input_title" id="input_title" placeholder="Название" value="{{ record.title }}" required>
+                </div>
+                <div class="form-group mb-3">
+                  <select class="form-control" name="input_section" id="input_section" required>
+                    {% if record.section %}
+                    <option selected value="{{ record.section.id }}" > {{ record.section }} </option>
+                    {% endif %}
+                    {% for section in select_sections %}
+                    {% if not section == item.section %}
+                    <option value="{{ section.id }}"> {{ section }} </option>
+                    {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="form-group mb-3">
+                  <select class="form-control" name="input_customer" id="input_customer" required>
+                    <option selected value="{{ record.customer.id }}" >{{ record.customer }}</option>
+                  </select>
+                </div>
+                <div class="form-group mb-3">
+                  <textarea type="text" class="form-control" name="input_description" id="input_description" rows="15" placeholder="Описание">{{ record.description }}</textarea>
+                </div>
+
+              </form>
+            </div>
+            <div class="modal-footer" style="border: none;">
+              <a class="btn btn-secondary" href="{% url 'show_all_records' %}?customer_id={{ record.customer.id }}" >Назад</a>
+              <button type="submit" class="btn btn-primary" form="recordForm">Сохранить</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

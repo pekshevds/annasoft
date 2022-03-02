@@ -7,6 +7,7 @@ from .views import add_property
 from .views import add_record
 from .views import show_record
 from .views import save_record
+from .views import show_all_records
 
 urlpatterns = [    
     path('properties/', show_knowledge_base_props, name='show_knowledge_base_props'),
@@ -17,4 +18,5 @@ urlpatterns = [
     path('records/add/', add_record, name='add_record'),
     path('records/save/<int:id>/', save_record, name='save_record'),
     path('records/<int:id>/', show_record, name='show_record'),
+    path('records/', show_all_records, name='show_all_records'),
 ]    

@@ -162,7 +162,7 @@
                         </div>
                       </div>
                     </div>
-                  {% if info %}<a href="" style="color: black;"><li class="list-group-item" style="text-align: right;">Все записи</li></a>{% endif %}
+                  {% if info %}<a href="{% url 'show_all_records' %}?customer_id={{ customer.instance.id }}" style="color: black;"><li class="list-group-item" style="text-align: right;">Все записи</li></a>{% endif %}
                 </ul>
               </div>
             </div>
