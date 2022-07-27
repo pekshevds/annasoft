@@ -14,7 +14,7 @@ class UserForm(forms.Form):
 
 class ContactForm(forms.Form):
 	
-	firstName = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
+	firstName = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={
 			'class': 'form-control',
 			'placeholder': 'Имя *',
 			'id': 'exampleInputName',
@@ -25,7 +25,7 @@ class ContactForm(forms.Form):
 			'placeholder': 'Фамилия',
 			'id': 'exampleInputLname',
 		}))
-	Email = forms.EmailField(max_length=30, widget=forms.TextInput(attrs={
+	Email = forms.EmailField(max_length=30, required=False, widget=forms.TextInput(attrs={
 			'class': 'form-control',
 			'placeholder': 'email',
 			'id': 'exampleInputEmail',
