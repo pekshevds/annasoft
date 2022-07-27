@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Service
 from .models import Article
 from .models import Pages
@@ -98,27 +98,36 @@ def send_contact_form(request):
 
 		contactForm = ContactForm(request.POST)
 
+		context['contact_form'] = ContactForm()
+
 		if contactForm.is_valid():
 
 			first_name = contactForm.cleaned_data['firstName']
-			lastName = contactForm.cleaned_data['lastName']
-			Email = contactForm.cleaned_data['Email']
 			phone = contactForm.cleaned_data['phone']
 			comment = contactForm.cleaned_data['comment']
 			accessData = contactForm.cleaned_data['accessData']
 
-			send_mail(first_name, lastName, Email, phone, comment, accessData)
+			send_mail(first_name, phone, comment, accessData)
 
-			message = 'Форма обратной связи успешно отправлена.'
+			return redirect('send_form_success')
 
 		else:
 
-			message = 'Некорректно заполнена форма. Попробуйте еще раз.'
+			return redirect('send_form_error')
 
-		context['message'] = message
+def send_form_success(request):
 
-	context['contact_form'] = ContactForm()	
+	context = get_context()
+	context['contact_form'] = ContactForm()
+
 	return render(request, 'baseapp/send_form_success.html', context)
+
+def send_form_error(request):
+	
+	context = get_context()
+	context['contact_form'] = ContactForm()
+
+	return render(request, 'baseapp/send_form_error.html', context)
 
 
 def trade_1c(request):
@@ -140,9 +149,20 @@ def show_privacy(request):
 	return render(request, 'baseapp/privacy.html', context)
 
 
+def show_generator_page(request):
+
+	context = get_context()
+
+	context['contact_form'] = ContactForm()
+	try:
+			context['page'] = Pages.objects.get(title__icontains='Генератор')
+	except:
+			context['page'] = None
+
+	return render(request, 'baseapp/generator.html', context)
 
 
-def send_mail(first_name, lastName, Email, phone, comment, accessData):
+def send_mail(first_name, phone, comment, accessData):
 
 	HOST = "smtp.mail.ru"
 	sender_email = config('MAIL_USER')
@@ -150,7 +170,7 @@ def send_mail(first_name, lastName, Email, phone, comment, accessData):
 	password = config('MAIL_PASSWORD')
 
 	message = MIMEMultipart("alternative")
-	message["Subject"] = "Свяжитесь с {} {}. Контакты: {} {} ".format(first_name, lastName, phone, Email) 
+	message["Subject"] = "Свяжитесь с {}. Контакты: {} ".format(first_name, phone) 
 	message["From"] = sender_email
 	message["To"] = ','.join(receiver_email)
 
@@ -160,16 +180,15 @@ def send_mail(first_name, lastName, Email, phone, comment, accessData):
 	html = """\
 	<html>
       <body>
-        <H3>Свяжитесь с {0} {1}. Контакты: {2} {3}</H3>
+        <H3>Свяжитесь с {0}. Контакты: {1}</H3>
         <H3>Контакты:</H3>
-        <p>Телефон: {2}</p>
-        <p>Email: {3}</p>
+        <p>Телефон: {1}</p>
         <p></p>
         <p>Комментарий:</p>
-        <p>{4}</p>
+        <p>{3}</p>
       </body>
     </html>
-	""".format(first_name, lastName, phone, Email, comment)
+	""".format(first_name, phone, comment)
 
 	part1 = MIMEText(text_body, "plain")
 	part2 = MIMEText(html, "html")

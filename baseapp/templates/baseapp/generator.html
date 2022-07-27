@@ -1,0 +1,104 @@
+{% extends 'baseapp/base.html' %}
+
+{% load static %}
+
+{% block title %}
+{% if page.meta_title %}
+{{ page.meta_title }}
+{% else %}
+
+{% endif %}
+{% endblock %}
+
+{% block description %}
+{% if page.meta_description %}
+{{ page.meta_description }}
+{% else %}
+
+{% endif %}
+{% endblock %}
+
+{% block keywords %}
+{% if page.meta_keywords %}
+{{ page.meta_keywords }}
+{% else %}
+
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'show-index' %}">На главную</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Генератор минус слов</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>   
+  </div>
+</section>
+
+<section class="">
+    <div class="container pb-5">
+      {% comment %} <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="section-title text-center">
+            <h1>Contact us</h1>
+            <p>Drop us a line! We’ll set up a time to chat over the phone or in-person to know more about your business needs. All primary conferences are free of charge.</p>
+          </div>
+        </div>
+      </div> {% endcomment %}
+      <div class="row justify-content-lg-around position-relative pt-0">
+        <div class="col-lg-12 col-md-12 pr-lg-12">
+          <div class="row p-3 bg-white shadow">
+            <div class="col-lg-5 mb-1">
+              <div class="form-group mb-0 p-2 m-3 as-calculator-textarea">
+                <span class="as-border-word">Ваши запросы</span>
+                <textarea class="form-control" id="input_key_phrase" placeholder="" rows="5"></textarea>
+                <span class="badge badge-secondary as-badge" onclick="beginCollectWords()" id="beginCollectWords" >Начать сбор минус слов</span>
+              </div>
+              <div class="form-group mb-0 p-2 m-3 as-calculator-textarea">
+                <span class="as-border-word">Минус слова</span>
+                <div class="row" id="stopWordsList" style="padding-right: 15px; padding-left: 15px;">
+                </div>
+                <textarea class="form-control" id="stopWordList" placeholder="" rows="5" ></textarea>
+                <span class="badge badge-secondary as-badge" onclick="getStopWordList()">Получить список минус слов</span>
+                {% comment %} <button class="">Отметить минуса</button> {% endcomment %}
+              </div>
+              <div class="form-group mb-0 p-2 m-3 as-calculator-textarea">
+                <span class="as-border-word">Рабочие слова</span>
+                <textarea class="form-control" id="workingWordList" placeholder="" rows="5"></textarea>
+                <span class="badge badge-secondary as-badge" onclick="getWorkingWordList()">Получить список рабочих слов</span>
+              </div>
+              <div class="form-group mb-0 p-2 m-3 as-calculator-textarea">
+                <span class="as-border-word">Рабочие слова без дублей</span>
+                <textarea class="form-control" id="workingWordListWithoutDoubles" placeholder="" rows="5"></textarea>
+                <span class="badge badge-secondary as-badge" onclick="deleteDouble()">Удалить дубли</span>
+              </div>
+            </div>
+            <div class="col-lg-7 mb-2" style="">
+                <div class="form-group mt-3  p-2 mb-0 as-calculator-textarea">
+                    <span class="as-border-word">Выберите минус-слова</span>
+                    <div id="main_window" style="max-height: 855px;">
+                    </div>
+                </div>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    
+{% endblock %}
+
+{% block custom_script %}
+<script src="{% static 'js/annasoft/words-generator.js' %}"></script>   
+{% endblock %}

@@ -2293,6 +2293,7 @@ hr.light-bg {
     left: calc(100% - 24px); }
 
 .pricing {
+  height: 100%;
   padding: 30px 20px;
   text-align: center;
   -webkit-box-shadow: 5px 5px 24px 0px rgba(2, 45, 98, 0.1);
@@ -4275,7 +4276,7 @@ ul.category-list {
 .header-style-02 .topbar .contact-info li i {
   -webkit-box-align: center;
       -ms-flex-align: center;
-          align-items: center;
+          /* align-items: center; */
   font-size: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -5505,7 +5506,10 @@ ul.category-list {
     .footer .social-icon li:last-child {
       margin-right: 0; }
     .footer .social-icon li a {
-      font-size: 18px;
+      /* font-size: 18px; */
+      /* +as */
+      font-size: 25px;
+      /* -as */
       color: #022d62; }
     .footer .social-icon li:hover a {
       color: #ef3139; }
@@ -5546,7 +5550,7 @@ ul.category-list {
     padding: 0 10px;
     margin-right: 8px; }
     .social-icon li i {
-      font-size: 18px; } }
+      font-size: 25px; } }
 
 /*************************
        Responsive
@@ -5607,6 +5611,11 @@ ul.category-list {
     display: none; } }
 
 @media (max-width: 575px) {
+
+  .display-3 {
+    font-size: 3.2rem;
+  }
+
   h1 {
     font-size: 30px; }
   h2 {

@@ -65,24 +65,40 @@
     <link rel="stylesheet" href="{% static 'css/swiper/swiper.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/animate/animate.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/magnific-popup/magnific-popup.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/as-style.css' %}" />
 
     <!-- Template Style -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
   <body>    
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T5XL3CK"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    {% comment %} <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T5XL3CK"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> {% endcomment %}
     <!-- End Google Tag Manager (noscript) --> 
 
     <!--=================================
     header -->
+    <div class="footer">
+      <div class="footer-bottom py-1">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 text-center text-lg-right  mb-lg-0">
+              <ul class="list-unstyled mb-0 social-icon">
+                <li><a target="_blank" href="viber://chat?number=+79036420842"><i class="fab fa-viber"></i></a></li>
+                <li><a target="_blank" href="https://wa.me/79036420842"><i class="fab fa-whatsapp"></i></a></li>
+                <li><a target="_blank" href="https://telegram.me/annasoft_developer"><i class="fab fa-telegram-plane"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <header class="header header-style-02">
       <div class="topbar">
         <div class="container">
           <div class="row">
             <div class="col-12">
-              <div class="d-sm-flex">
+              <div class="d-lg-flex">
                 <a class="navbar-brand" href="{% url 'show-index' %}">
                   <img class="img-fluid" src="{% static 'images/logo_as.png' %}" alt="разработка интернет магазина">
                 </a>
@@ -99,16 +115,17 @@
                       <i class="flaticon-call"></i>
                       <span>
                         <label class="d-block">+7 4722 500 842</label>
+                        <label class="d-block">+7 903 642 08 42</label>
                         <label class="d-block">Пон-Пят: 9:00 - 18:00</label>
                       </span>
-                      </li>
-                      <li>
+                    </li>
+                    <li>
                         <i class="flaticon-email"></i>
                         <span>
                          <label class="d-block">info@annasoft.ru</label>
                           <a class="d-block" href="{% url 'show-crm-index' %}">crm</a>
                         </span>
-                      </li>                      
+                    </li>                    
                   </ul>
                 </div>
               </div>
@@ -158,12 +175,6 @@
                   {{ contact_form.firstName }}
                 </div>
                 <div class="form-group mb-3">
-                  {{ contact_form.lastName }}
-                </div>
-                <div class="form-group mb-3">
-                  {{ contact_form.Email }}
-                </div>
-                <div class="form-group mb-3">
                   {{ contact_form.phone }}
                 </div>
                 <div class="form-group mb-4">
@@ -173,7 +184,7 @@
                   <div class="custom-control custom-checkbox">
                     <input name="accessData" checked type="checkbox" class="custom-control-input" id="customCheck1">
                     <!-- {{ contact_form.accessData }} -->
-                    <label class="custom-control-label small" for="customCheck1">Я согласен на обработку персональных данных</label>
+                    <label id="privacyLabel" style="border-radius: 5px;" class="custom-control-label small pl-1 pr-1" for="customCheck1">Я согласен на обработку <a href="{% url 'show_privacy' %}">персональных данных</a></label>
                   </div>
                 </div>
                 <div class="form-group mb-4">
@@ -188,7 +199,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-              <button type="submit" form="contactFormAnnasoft" class="btn btn-primary">Отправить</button>
+              <button id="sendFormButton" class="btn btn-primary">Отправить</button>
             </div>
           </div>
         </div>
@@ -244,12 +255,14 @@
       <div class="footer-bottom mt-3 mt-md-5 py-4">
         <div class="container">
           <div class="row">
-            <!-- <div class="col-lg-8 text-center text-lg-left mb-3 mb-lg-0">
+            <div class="col-lg-8 text-center text-lg-left mb-3 mb-lg-0">
               <ul class="list-unstyled mb-0 social-icon">
-                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>                
+                <li><a target="_blank" href="viber://chat?number=+79036420842"><i class="fab fa-viber"></i></a></li>
+                <li><a target="_blank" href="https://wa.me/79036420842"><i class="fab fa-whatsapp"></i></a></li>
+                <li><a target="_blank"href="https://telegram.me/annasoft_developer"><i class="fab fa-telegram-plane"></i></a></li>
               </ul>
-            </div> -->
-            <div class="col-lg-12 text-center">
+            </div>
+            <div class="col-lg-4 text-center">
               <p class="mb-0">©Copyright 2021 <a href="{% url 'show-index' %}">Annasoft</a> All Rights Reserved</p>
             </div>
           </div>
@@ -287,5 +300,55 @@
     <!-- Template Scripts (Do not remove)-->
     <script src="{% static 'js/custom.js' %}"></script>
     <script async="async" src="https://w.uptolike.com/widgets/v1/zp.js?pid=1945415" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+      window.onload = function() {
+        document.getElementById('sendFormButton').addEventListener('click', function(event) {
+          event.preventDefault();
+          let check = document.getElementById('customCheck1');
+          let privacyLabel = document.getElementById('privacyLabel');
+          
+          let name = document.getElementById('exampleInputName');
+          let phone = document.getElementById('exampleInputPhone');
+          let description = document.getElementById('exampleInputEnquiry-Description');
+
+          privacyLabel.style.backgroundColor = 'white';
+          name.style.backgroundColor = 'white';
+          phone.style.backgroundColor = 'white';
+          description.style.backgroundColor = 'white';
+
+          if (check.checked == true) {
+            
+            if ( name.value | phone.value | description.value ) {
+              let form = document.getElementById('contactFormAnnasoft');
+              form.submit();
+            } else {
+              if (name.value == '') {
+                name.style.backgroundColor = '#E79090';
+              };
+              if (phone.value == '') {
+                phone.style.backgroundColor = '#E79090';
+              };
+              if (description.value == '') {
+                description.style.backgroundColor = '#E79090';
+              };
+            };
+            } else {
+              privacyLabel.style.backgroundColor = '#E79090';;
+          };
+        }, false);
+        };
+
+      function inputFilter(){
+        if (event.keyCode < 48 || event.keyCode > 57) {
+          if (event.keyCode != 46){
+            event.returnValue= false;
+          }
+        }
+      };
+    
+    </script>
+    {% block custom_script %}{% endblock %}
   </body>
 </html>

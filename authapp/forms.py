@@ -16,7 +16,7 @@ class ContactForm(forms.Form):
 	
 	firstName = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
 			'class': 'form-control',
-			'placeholder': 'Имя',
+			'placeholder': 'Имя *',
 			'id': 'exampleInputName',
 
 		}))
@@ -29,21 +29,22 @@ class ContactForm(forms.Form):
 			'class': 'form-control',
 			'placeholder': 'email',
 			'id': 'exampleInputEmail',
+			
 		}))
-	phone = forms.CharField(max_length=30, required=False, widget=forms.TextInput(attrs={
+	phone = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={
 			'class': 'form-control',
-			'placeholder': 'Телефон',
+			'placeholder': 'Телефон *',
 			'id': 'exampleInputPhone',
+			'onKeyPress': 'inputFilter()',
 		}))
 	comment = forms.CharField(max_length=2048, required=False, widget=forms.Textarea(attrs={
 			'class': 'form-control',
-			'placeholder': 'Комментарий',
+			'placeholder': 'Укажите тему обращения *',
 			'id': 'exampleInputEnquiry-Description',
 		}))
 	accessData = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={
 			'class': 'custom-control-input',
 			'id': 'customCheck1',
-			'rows': '5',
 		}))
 	# captcha = CaptchaField(label='Введите данные с картинки')
 	# captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
