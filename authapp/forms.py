@@ -35,4 +35,4 @@ class ContactForm(forms.Form):
 			'class': 'custom-control-input',
 			'id': 'customCheck1',
 		}))
-	captcha = ReCaptchaField(widget=ReCaptchaV2Invisible)
+	# captcha = ReCaptchaField(widget=ReCaptchaV2Invisible)
