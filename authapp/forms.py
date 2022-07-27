@@ -18,18 +18,28 @@ class ContactForm(forms.Form):
 			'class': 'form-control',
 			'placeholder': 'Имя *',
 			'id': 'exampleInputName',
-
+			'autocomplete': 'off',
+			'onCopy':'return false',
+			'onDrag': 'return false',
+			'onDrop': 'return false',
+			'onPaste': 'return false',
 		}))
 	phone = forms.CharField(max_length=30, required=False, widget=forms.TextInput(attrs={
 			'class': 'form-control',
 			'placeholder': 'Телефон *',
 			'id': 'exampleInputPhone',
 			'onKeyPress': 'inputFilter()',
+			'autocomplete': 'off',
+			'onCopy':'return false',
+			'onDrag': 'return false',
+			'onDrop': 'return false',
+			'onPaste': 'return false',
 		}))
 	comment = forms.CharField(max_length=2048, required=False, widget=forms.Textarea(attrs={
 			'class': 'form-control',
 			'placeholder': 'Укажите тему обращения *',
 			'id': 'exampleInputEnquiry-Description',
+			'autocomplete': 'off',
 		}))
 	accessData = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={
 			'class': 'custom-control-input',
