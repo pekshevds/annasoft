@@ -1,0 +1,41 @@
+.as-h2 {
+    font-size: 14px;
+    font-weight: normal;
+    color: white;
+}
+
+.as-main-wordlist {
+    padding: 2px;
+    border-radius: 7px;
+    color: #022d62;
+}
+
+.as-badge {
+    cursor: pointer;
+    padding: 0.5em 0.4em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.as-calculator-textarea {
+    border: 1px solid #eeeeee;
+    border-radius: 5px;
+
+}
+.as-border-word {
+    font-size: 18px;
+    color: #6c757d;
+    background-color: #fff;
+    position: relative;
+    padding: 5px 5px;
+    top: -20px;
+}
+
+.as-border-word-main-window {
+    font-size: 18px;
+    color: #6c757d;
+    background-color: #fff;
+    position: relative;
+    padding: 5px 5px;
+    top: -20px;
+}
