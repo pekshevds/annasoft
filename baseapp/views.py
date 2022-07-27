@@ -97,7 +97,6 @@ def send_contact_form(request):
 	if request.method == 'POST':
 
 		contactForm = ContactForm(request.POST)
-
 		context['contact_form'] = ContactForm()
 
 		if contactForm.is_valid():
@@ -185,7 +184,7 @@ def send_mail(first_name, phone, comment, accessData):
         <p>Телефон: {1}</p>
         <p></p>
         <p>Комментарий:</p>
-        <p>{3}</p>
+        <p>{2}</p>
       </body>
     </html>
 	""".format(first_name, phone, comment)

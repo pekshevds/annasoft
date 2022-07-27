@@ -183,23 +183,17 @@
                 <div class="form-group mb-4">
                   <div class="custom-control custom-checkbox">
                     <input name="accessData" checked type="checkbox" class="custom-control-input" id="customCheck1">
-                    <!-- {{ contact_form.accessData }} -->
                     <label id="privacyLabel" style="border-radius: 5px;" class="custom-control-label small pl-1 pr-1" for="customCheck1">Я согласен на обработку <a href="{% url 'show_privacy' %}">персональных данных</a></label>
                   </div>
                 </div>
                 <div class="form-group mb-4">
                   {{ contact_form.captcha }}
-                  <!-- <div class="custom-control custom-checkbox"> -->
-                    <!-- <input name="accessData" checked type="checkbox" class="custom-control-input" id="customCheck1"> -->
-                    <!-- {{ contact_form.accessData }} -->
-                    <!-- <label class="custom-control-label small" for="customCheck1">Я согласен на обработку персональных данных</label> -->
-                  <!-- </div> -->
                 </div>
               </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-              <button id="sendFormButton" class="btn btn-primary">Отправить</button>
+              <button id="sendFormButton" form="contactFormAnnasoft" type="submit" class="btn btn-primary">Отправить</button>
             </div>
           </div>
         </div>
