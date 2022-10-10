@@ -14,7 +14,7 @@ class UserForm(forms.Form):
 
 class ContactForm(forms.Form):
 	
-	firstName = forms.CharField(max_length=30, required=False, widget=forms.TextInput(attrs={
+	firstName = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={
 			'class': 'form-control',
 			'placeholder': 'Имя *',
 			'id': 'exampleInputName',
@@ -24,7 +24,7 @@ class ContactForm(forms.Form):
 			'onDrop': 'return false',
 			'onPaste': 'return false',
 		}))
-	phone = forms.CharField(max_length=30, required=False, widget=forms.TextInput(attrs={
+	phone = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={
 			'class': 'form-control',
 			'placeholder': 'Телефон *',
 			'id': 'exampleInputPhone',
@@ -35,7 +35,7 @@ class ContactForm(forms.Form):
 			'onDrop': 'return false',
 			'onPaste': 'return false',
 		}))
-	comment = forms.CharField(max_length=2048, required=False, widget=forms.Textarea(attrs={
+	comment = forms.CharField(max_length=2048, required=True, widget=forms.Textarea(attrs={
 			'class': 'form-control',
 			'placeholder': 'Укажите тему обращения *',
 			'id': 'exampleInputEnquiry-Description',
@@ -45,4 +45,4 @@ class ContactForm(forms.Form):
 			'class': 'custom-control-input',
 			'id': 'customCheck1',
 		}))
-	# captcha = ReCaptchaField(widget=ReCaptchaV2Invisible)
+	captcha = ReCaptchaField(widget=ReCaptchaV2Invisible)

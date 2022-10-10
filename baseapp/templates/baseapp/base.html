@@ -303,42 +303,17 @@
     <script type="text/javascript">
 
       window.onload = function() {
-        document.getElementById('sendFormButton').addEventListener('click', function(event) {
-          event.preventDefault();
-          let check = document.getElementById('customCheck1');
-          let privacyLabel = document.getElementById('privacyLabel');
-          
-          let name = document.getElementById('exampleInputName');
-          let phone = document.getElementById('exampleInputPhone');
-          let description = document.getElementById('exampleInputEnquiry-Description');
-
-          privacyLabel.style.backgroundColor = 'white';
-          name.style.backgroundColor = 'white';
-          phone.style.backgroundColor = 'white';
-          description.style.backgroundColor = 'white';
-
-          if (check.checked == true) {
-            
-            if ( name.value | phone.value | description.value ) {
-              let form = document.getElementById('contactFormAnnasoft');
-              form.submit();
-            } else {
-              if (name.value == '') {
-                name.style.backgroundColor = '#E79090';
-              };
-              if (phone.value == '') {
-                phone.style.backgroundColor = '#E79090';
-              };
-              if (description.value == '') {
-                description.style.backgroundColor = '#E79090';
-              };
-            };
-            } else {
-              privacyLabel.style.backgroundColor = '#E79090';;
+        const customCheck1 = document.getElementById('customCheck1');
+        const sendFormButton = document.getElementById('sendFormButton');
+        customCheck1.addEventListener('change', function(event) {
+          if (event.currentTarget.checked==true) {
+            sendFormButton.disabled = false;
+          } else {
+            sendFormButton.disabled = true;
           };
-        }, false);
-        };
-
+        });
+      };
+      
       function inputFilter(){
         if (event.keyCode < 48 || event.keyCode > 57) {
           if (event.keyCode == 43) {
