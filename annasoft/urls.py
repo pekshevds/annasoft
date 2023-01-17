@@ -14,6 +14,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('authapp.urls')),
     path('info/', include('knowledge_baseapp.urls')),
+    path('fn/', include('FN_accounting.urls')),
+    path('api/v1/', include('apiapp.urls')),
     # path('captcha/', include('captcha.urls')),
 ]
 

@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'knowledge_baseapp',
     'simple_history',
     'captcha',
+    'FN_accounting',
+    'rest_framework',
+    'apiapp',
 ]
 
 MIDDLEWARE = [
@@ -148,6 +151,8 @@ RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
 
 # tunning
 SITE_ID = 1
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ACCOUNT_EMAIL_REQUIRED =True
 ACCOUNT_AUTHENTICATION_METHOD='email'

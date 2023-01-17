@@ -1,0 +1,56 @@
+{% extends 'baseapp/base.html' %}
+
+{% load static %}
+
+{% block custom_lib %}
+
+{% endblock %}
+
+{% block content %}
+<section class="space-ptb">
+    <div class="container-fluide">
+      <div class="row justify-content-center">
+        <div class="col-md-3">
+          <div class="section-title is-sticky" style="height:100%;overflow-y:scroll;">
+            <div onclick="checkTheClient(this);" class="pl-3 pt-2" style="cursor: pointer; border-bottom: 2px solid #022d62;">
+                <h5 class="mb-2">ИП Жигалов Николай Юрьевич</h5>
+                <p class="mb-0">ИНН: 3122134432</p>
+            </div>
+            <div onclick="checkTheClient(this);" class="pl-3 pt-2" style="cursor: pointer; border-bottom: 2px solid #022d62;">
+                <h5 class="mb-2">ИП Жигалов Николай Юрьевич</h5>
+                <p class="mb-0">ИНН: 3122134432</p>
+            </div>  
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="feature-info feature-info-style-08">
+            <div class="feature-info-inner">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block action_box %}
+{% endblock %}
+
+{% block custom_script %}
+
+<script type="text/javascript">
+    window.onload = function() {
+    };
+    function deactivateClients() {
+        clientsDiv = document.getElementsByClassName('section-title');
+        clientsDiv = clientsDiv[0].getElementsByTagName('div');
+        for (let i = 0; i < clientsDiv.length; i++) {
+            clientsDiv[i].classList.remove('active');
+        };
+    };
+    function checkTheClient(object){
+        deactivateClients();
+        object.classList.add('active');
+    };
+</script>
+{% endblock %}

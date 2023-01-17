@@ -69,6 +69,7 @@
 
     <!-- Template Style -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block custom_lib %}{% endblock %}
   </head>
   <body>    
     <!-- Google Tag Manager (noscript) -->
@@ -215,7 +216,7 @@
             <div class="footer-contact-info">
               <a href="{% url 'show-index' %}"><img class="img-fluid mb-4" src="{% static 'images/logo_as_dark.png' %}" alt="интернет магазин под ключ"></a>
               <p class="mb-2 mb-sm-4">Белгород <br/> Б.Хмельницкого проспект 111 <br/> офис 540</p>
-              <h4 class="mb-2 mb-sm-4 font-weight-bold"><a href="tel:+74722500842">+ 4722 500 842</a></h4>
+              <h4 class="mb-2 mb-sm-4 font-weight-bold"><a href="tel:+74722500842">+7 4722 500 842</a></h4>
               <a class="text-dark" href="mailto:info@annasoft.ru">info@annasoft.ru</a>
             </div>
           </div>
