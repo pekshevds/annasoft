@@ -39,3 +39,15 @@
     padding: 5px 5px;
     top: -20px;
 }
+
+.section-title .active {
+    background-color: #022d62;
+}
+
+.section-title .active h5{
+    color: #ffffff;
+}
+
+.section-title .active p{
+    color: #ffffff;
+}
