@@ -3,8 +3,9 @@ from django.db import models
 # Create your models here.
 
 def get_image_name(instance, filename):
-    new_name = ('%s' + '.' + filename.split('.')[-1]) % str(instance.id)
-    return new_name
+	
+    # new_name = ('%s' + '.' + filename.split('.')[-1]) % str(instance.title)
+    return filename
 
 
 class Category(models.Model):
