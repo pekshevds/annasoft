@@ -149,7 +149,7 @@ h5 {
   font-size: 18px; }
 
 h6 {
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.5;
   font-weight: 500; }
 
@@ -4267,7 +4267,7 @@ ul.category-list {
   display: -ms-flexbox;
   display: flex;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 20px 40px; }
+  padding: 20px 30px; }
 
 .header-style-02 .topbar .contact-info li:last-child {
   border-right: 0;
@@ -5106,7 +5106,7 @@ ul.category-list {
 
 /* Back To Top */
 .back-to-top {
-  position: fixed;
+  position: fixed !important;
   bottom: 30px;
   right: 30px;
   display: inline-block;

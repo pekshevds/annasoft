@@ -51,3 +51,17 @@
 .section-title .active p{
     color: #ffffff;
 }
+
+.customer-info-block {
+    height: 35em;
+}
+
+.customer-info-block .no-company {
+    padding: 30px;
+    border: 1px solid #676c71;
+    text-align: center;
+}
+
+.customer-info-block .customer-info {
+    border-right: 1px solid #676c71;
+}

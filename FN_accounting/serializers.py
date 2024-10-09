@@ -9,6 +9,7 @@ class Point_of_saleSerializer(serializers.ModelSerializer):
         fields = (
             'uid',
             'postcode',
+            'title',
             'region',
             'area',
             'city',
@@ -92,6 +93,20 @@ class FNSerializer(serializers.ModelSerializer):
         instance.fn_type = fn_type
         instance.save()
         return instance    
+
+class KKTFullSerializer(serializers.ModelSerializer):
+    fn = FNSerializer(read_only=True)
+    class Meta:
+        model = KKT
+        fields = (
+        'uid',
+        'rn_kkt',
+        'mn_kkt',
+        'model_kkt',
+        'fiscalization_date',
+        'fn',
+        )
+
 
 class KKTSerializer(serializers.ModelSerializer):
     customer_uid = serializers.CharField(source='customer.uid', required=False)

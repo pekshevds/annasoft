@@ -4,6 +4,7 @@ from .models import Category
 from .models import Service
 from .models import Article
 from .models import Pages
+from .models import CompanyContactData, Goods
 
 # Register your models here.
 
@@ -49,3 +50,5 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Service, ServiceAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Pages, PagesAdmin)
+admin.site.register(CompanyContactData)
+admin.site.register(Goods)

@@ -9,22 +9,22 @@
 {% block content %}
 <section class="space-ptb">
     <div class="container-fluide">
-      <div class="row justify-content-center">
+      <div id="customer-list" class="row justify-content-center">
         <div class="col-md-3">
-          <div class="section-title is-sticky" style="height:100%;overflow-y:scroll;">
-            <div onclick="checkTheClient(this);" class="pl-3 pt-2" style="cursor: pointer; border-bottom: 2px solid #022d62;">
-                <h5 class="mb-2">ИП Жигалов Николай Юрьевич</h5>
-                <p class="mb-0">ИНН: 3122134432</p>
-            </div>
-            <div onclick="checkTheClient(this);" class="pl-3 pt-2" style="cursor: pointer; border-bottom: 2px solid #022d62;">
-                <h5 class="mb-2">ИП Жигалов Николай Юрьевич</h5>
-                <p class="mb-0">ИНН: 3122134432</p>
-            </div>  
+          <div class="section-title is-sticky" style="height:100%;overflow:hidden;">
+            <customer-list-item
+              v-for="customer in customers"
+              :pk="customer.pk"
+            ></customer-list-item>
           </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
           <div class="feature-info feature-info-style-08">
             <div class="feature-info-inner">
+              <div class="p-4 bg-white shadow">
+                <customer-info>
+                </customer-info>  
+              </div>
             </div>
           </div>
         </div>
@@ -37,20 +37,267 @@
 {% endblock %}
 
 {% block custom_script %}
+<script src="https://unpkg.com/vue@next"></script>
+<script src="https://unpkg.com/vuex@next"></script>
+<script src="https://unpkg.com/axios@1.0.0/dist/axios.min.js"></script>
 
-<script type="text/javascript">
-    window.onload = function() {
-    };
-    function deactivateClients() {
-        clientsDiv = document.getElementsByClassName('section-title');
-        clientsDiv = clientsDiv[0].getElementsByTagName('div');
-        for (let i = 0; i < clientsDiv.length; i++) {
-            clientsDiv[i].classList.remove('active');
-        };
-    };
-    function checkTheClient(object){
-        deactivateClients();
-        object.classList.add('active');
-    };
+{% comment %} <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> {% endcomment %}
+<script type='text/javascript'>
+  var back_customer_list =  {{ customer_list|safe }}
+  axios.defaults.xsrfCookieName = 'csrftoken';
+  axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+</script>
+<script>
+  const store = new Vuex.Store({
+    state: {
+      customers_list: back_customer_list,
+      points_of_sale: [],
+      kkt_list: [],
+      active_kkt: [],
+    },
+    getters: {
+      customers (state) {
+        return state.customers_list
+      },
+      customerByPk (state) {
+        return customerPk => {
+          return state.customers_list.find(obj => obj.pk === customerPk)
+        }
+      },
+      activeCustomer (state) {
+        return customer => {
+          return state.customers_list.find(obj => obj.isActive == true)
+        }
+      },
+      POS (state) {
+        return state.points_of_sale
+      },
+      KKTList (state) {
+        return state.kkt_list
+      },
+      activeKKT (state) {
+        return state.active_kkt
+      },
+    },
+    mutations: {
+      activateCustomer (state, customer) {
+        if (!customer.isActive) {
+          customer.isActive = true
+        }
+      },
+      deactivateCustomers (state) {
+        for (item in this.getters.customers) {
+          if (this.getters.customers[item].isActive) {
+            this.getters.customers[item].isActive = false
+          }
+        }
+      },
+      loadPointsOfSale (state, payload) {
+        state.points_of_sale = payload
+      },
+      loadKKTList (state, payload) {
+        state.kkt_list = payload
+      },
+      loadActiveKKT (state, payload) {
+        state.active_kkt = payload
+      },
+    },
+    actions: {
+      async activateCustomer ({commit}, customer) {
+        customer_obj = this.getters.customerByPk(customer.pk)
+        commit('activateCustomer', customer_obj)
+      },
+      async deactivateCustomers ({commit}) {
+        commit('deactivateCustomers')
+      },
+      async getPointsOfSale ({commit}, pk) {
+        let resultPointsOfSale = await axios.get(`/api/v1/fn/get-pos-list/${pk}/`)
+			  commit('loadPointsOfSale', resultPointsOfSale.data)
+      },
+      async getKKTList ({commit}, uid) {
+        let resultKKTList = await axios.get(`/api/v1/fn/kkt/list/${uid}/`)
+			  commit('loadKKTList', resultKKTList.data)
+      },
+      async setActiveKKT ({commit}, payload) {
+			  commit('loadActiveKKT', payload)
+      },
+    }
+  });
+
+  const App = {
+    delimiters: ['[[', ']]'],
+    data() {
+      return {
+      }
+    },
+    store: store,
+    methods: {
+      getCustomerList () {
+				let customerList = store.getters.customers
+				return customerList
+			},
+    },
+    computed: {
+      customers () {
+				let customers = this.getCustomerList()
+				return customers
+			},
+    }
+  };
+
+  const app = Vue.createApp(App)
+  
+  app.component('customer-list-item', {
+    data() {
+      return {
+      }
+    },
+    props: ["pk"],
+    template: `
+      <div :class="{ active: customer.isActive }" @click="turnActive(this)" class="customer pl-3 pt-2" style="cursor: pointer; border-bottom: 2px solid #022d62;">
+        <h5 class="mb-2" :innerText="customer.name"></h5>
+        <p class="mb-0" :innerText="customer.inn"></p>
+      </div>`,
+    computed: {
+      customer () {
+				return store.getters.customerByPk(this.pk)
+			},
+    },
+    methods: {
+      turnActive() {
+        store.dispatch('deactivateCustomers')
+        store.dispatch('activateCustomer', this)
+        store.dispatch('getPointsOfSale', this.pk)
+        store.dispatch('setActiveKKT', "")
+      },
+    }  
+  });
+
+  app.component('customer-info', {
+    data() {
+      return {
+      }
+    },
+    props: [],
+    template: `
+    <div class="customer-info-block row" v-if="activeCustomer">
+      <div class="col-md-3 customer-info">
+        <p :innerText="activeCustomer.name"></p>
+        <div class="mt-4" style="height: 30%;">
+            <p class="">ИНН <span :innerText="activeCustomer.inn"></span></p>
+            <p class="">Тел. <span></span></p>
+          <div class="form-group mb-0">
+            {% comment %} <button type="submit" class="btn btn-primary">Добавить кассу<i class="fas fa-arrow-right pl-3"></i></button> {% endcomment %}
+          </div>
+        </div>
+        <kkt-info></kkt-info>
+      </div>
+      <div class="col-md-9">
+        <div class="accordion" id="accordionPOS">
+          <point-of-sale 
+            v-for="pos in pointsOfSale"
+            :postcode="pos.postcode"
+            :region="pos.region"
+            :uid="pos.uid"
+            :title="pos.title"
+          ></point-of-sale>
+        </div>
+      </div>
+    </div >
+    <div v-else class="customer-info-block row justify-content-center align-items-center">
+      <div class="col-4">
+        <p class="no-company">Выберите компанию</p>
+      </div>
+    </div>
+    `,
+    computed: {
+      activeCustomer () {
+        return store.getters.activeCustomer()
+			},
+      pointsOfSale() {
+        return store.getters.POS
+      }
+    },
+    methods: {
+    }  
+  })
+
+  app.component('point-of-sale', {
+    data() {
+      return {
+      }
+    },
+    props: ["region", "postcode", "uid", "title"],
+    template: `
+    <div>
+      <div class="card">
+        <div class="card-header" :id="'heading'+uid">
+          <h2 class="mb-0">
+            <button 
+              class="btn btn-link btn-block text-left"
+              type="button" 
+              data-toggle="collapse" 
+              :data-target="'#collapse'+uid" 
+              aria-expanded="true" 
+              :aria-controls="'collapse'+uid"
+              :innerText="title"
+              >
+            </button>
+          </h2>
+        </div>
+        <div :id="'collapse'+uid" class="collapse" :aria-labelledby="'heading'+uid" data-parent="#accordionPOS">
+          <div class="m-1" style="background-color:#e4e4e4; cursor:pointer;"
+            v-for="kkt in KKTList"
+            :rn_kkt="kkt.rn_kkt"
+            @click="activateKKT(kkt)"
+            >
+            <div>РН ККТ <span :innerText="kkt.rn_kkt"></span></div>
+            <div><span class="pr-1" :innerText="kkt.model_kkt"></span><span class="pl-1" :innerText="kkt.mn_kkt"></span></div>
+            <div><span class="pr-1" :innerText="kkt.fn.fn_model"></span><span class="pl-1" :innerText="kkt.fn.fn_mn"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    `,
+    computed: {
+      KKTList() {
+        return store.getters.KKTList
+      },
+    },
+    methods: {
+      getKKTList () {
+        store.dispatch('getKKTList', this.uid)
+      },
+      activateKKT (kkt_object) {
+        store.dispatch('setActiveKKT', kkt_object)
+      }
+    },
+    mounted() {
+      this.getKKTList ()
+    }
+  })
+
+  app.component('kkt-info', {
+    data() {
+      return {
+      }
+    },
+    props: [],
+    template: `
+    <div>
+      KKT info
+      <p :innerText="activeKKT.rn_kkt"></p>
+    </div>
+    `,
+    computed: {
+      activeKKT () {
+        return store.getters.activeKKT
+      }
+    },
+    methods: {
+    }
+  })
+
+  app.mount('#customer-list')
 </script>
 {% endblock %}

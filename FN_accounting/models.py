@@ -7,8 +7,9 @@ def get_uuid4():
 
 class Point_of_sale(models.Model):
 
-    uid = models.SlugField(max_length=36, verbose_name='Идентификатор', unique=True, null=True, blank=True) 
-    title = models.CharField(max_length=512, verbose_name="Адрес точки продаж")
+    uid = models.SlugField(max_length=36, verbose_name='Идентификатор', unique=True, null=True, blank=True)
+    customer = models.ForeignKey(Customer, verbose_name="Заказчик", on_delete=models.PROTECT, default=None, null=True, blank=True)
+    title = models.CharField(max_length=512, verbose_name="Адрес точки продаж", default="", null=True, blank=True)
     postcode = models.CharField(max_length=6, verbose_name="Индекс", default="", null=True, blank=True)
     region = models.CharField(max_length=50, verbose_name="Регион", default="", null=True, blank=True)
     area = models.CharField(max_length=50, verbose_name="Район", default="", null=True, blank=True)
@@ -16,7 +17,6 @@ class Point_of_sale(models.Model):
     locality = models.CharField(max_length=50, verbose_name="Населенный пункт", default="", null=True, blank=True)
     street = models.CharField(max_length=50, verbose_name="Улица", default="", null=True, blank=True)
     house = models.CharField(max_length=5, verbose_name="Дом", default="", null=True, blank=True)
-    customer = models.ForeignKey(Customer, verbose_name="Заказчик", on_delete=models.PROTECT, default=None, null=True, blank=True)
 
     def __str__(self):
 
@@ -26,12 +26,16 @@ class Point_of_sale(models.Model):
 
         if not self.uid:
             self.uid = get_uuid4()
-
+        if self.city:
+            self.title = "{0}, {1}, {2}, {3}, {4}".format(self.postcode, self.region, self.city, self.street, self.house)
+        else:
+            self.title = "{0}, {1}, {2}, {3}, {4}, {5}".format(self.postcode, self.region, self.area, self.locality, self.street, self.house)           
+        
         super(Point_of_sale, self).save(*args, **kwargs)    
 
     class Meta:
         verbose_name = 'Точка продаж'
-        verbose_name = 'точки продаж'
+        verbose_name_plural = 'Точки продаж'
 
 
 class FN_type(models.Model):
@@ -53,7 +57,7 @@ class FN_type(models.Model):
 
     class Meta:
         verbose_name = 'Тип фискального накопителя'
-        verbose_name = 'Типы фискальных накопителей'   
+        verbose_name_plural = 'Типы фискальных накопителей'   
 
 
 class FN(models.Model):
@@ -67,7 +71,7 @@ class FN(models.Model):
 
     def __str__(self):
 
-        return '{}'.format(self.title)
+        return '{}'.format(self.fn_mn)
 
     def save(self, *args, **kwargs):
 
@@ -77,8 +81,8 @@ class FN(models.Model):
         super(FN, self).save(*args, **kwargs)    
 
     class Meta:
-        verbose_name = 'Фискального накопителя'
-        verbose_name = 'Фискальных накопителей'
+        verbose_name = 'Фискальный накопитель'
+        verbose_name_plural = 'Фискальные накопители'
 
 
 class KKT(models.Model):
@@ -105,7 +109,7 @@ class KKT(models.Model):
 
     class Meta:
         verbose_name = 'ККТ'
-        verbose_name = 'ККТ'
+        verbose_name_plural = 'ККТ'
 
 
 

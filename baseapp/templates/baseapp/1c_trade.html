@@ -48,7 +48,7 @@
 <section>
 	<div class="container">
 		<div class="row justify-content-end">
-			<div class="col-12 mt-sm-n5 position-relative z-index-1">
+			<div class="col-12 position-relative z-index-1">
 				<div class="bg-primary p-4 p-sm-5 border-radius shadow d-inline-block float-left float-sm-right">
 					<a type="button" data-toggle="modal" data-target="#connectModal" class="text-white font-xlll" href="#">
 						<span>Обратный звонок</span>
@@ -58,8 +58,39 @@
 		</div>
 	</div>
 </section>
-
+{% for good in goods_list %}
 <section class="" style="padding: 50px 0;">
+	<h1 hidden="true">{{ good.title }}</h1>
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6 mb-4 mb-lg-0">
+				<img class="img-fluid" src="{% static 'products/buh.jpg' %}" alt="1с бухгалтерия купить">
+			</div>
+			<div class="col-lg-6">
+				<h3 class="mb-2">{{ good.title }}</h3>
+				<p class="mb-4">{{ good.description }}</p>
+				<div class="row mb-4">
+					{% if good.price_base %}
+					<div class="col-12 col-lg-6">
+						<h6 class="mb-0">Базовая: <b class="text-primary font-xll">&#8381; {{ good.price_base }}</b></h6>
+					</div>
+					{% endif %}
+					<div class="col-12 col-lg-6">
+						<h6 class="mb-0">ПРОФ: <b class="text-primary font-xll">&#8381; {{ good.price }}</b></h6>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12" align="right">
+						<a type="button" data-toggle="modal" data-target="#connectModal" href="#" class="btn btn-primary btn-round text-white w-space">Заказать</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endfor %}
+
+{% comment %} <section class="" style="padding: 50px 0;">
 	<h1 hidden="true">1С Бухгалтерия 8</h1>
 	<div class="container">
 		<div class="row align-items-center">
@@ -168,7 +199,7 @@
 	</div>
 </section>
 
-<section class="mb-5" style="padding: 50px 0;">
+<section class="" style="padding: 50px 0;">
 	<div class="container">
 		<div class="row align-items-center">
 			<div class="col-lg-6 mb-4 mb-lg-0">
@@ -193,9 +224,9 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section> {% endcomment %}
 
-<section class="space-pb">
+<section class="space-pb mt-5">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
