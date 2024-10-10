@@ -103,3 +103,15 @@ class Goods(models.Model):
 	class Meta:
 		verbose_name = 'Товар'
 		verbose_name_plural = 'Товары'
+
+# Почта для получения рассылки из обратной связи
+class MailingRecipients(models.Model):
+
+	email = models.EmailField(max_length = 254, verbose_name='Email')
+
+	def __str__(self) -> str:
+		return self.email
+	
+	class Meta:
+		verbose_name = 'Email для рассылки'
+		verbose_name_plural = 'Email для рассылки'

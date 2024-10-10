@@ -1,10 +1,6 @@
 from django import forms
 from captcha.fields import ReCaptchaField
-# from captcha.widgets import ReCaptchaV2Checkbox
 from captcha.widgets import ReCaptchaV2Invisible
-# from captcha.fields import CaptchaField
-# from captcha.fields import ReCaptchaField
-# from captcha.widgets import ReCaptchaV2Checkbox
 
 class UserForm(forms.Form):
 

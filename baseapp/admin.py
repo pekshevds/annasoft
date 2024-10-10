@@ -1,19 +1,19 @@
 from django.contrib import admin
 
-from .models import Category
-from .models import Service
-from .models import Article
-from .models import Pages
-from .models import CompanyContactData, Goods
-
-# Register your models here.
-
+from .models import (
+    Category,
+    Service,
+    Article,
+    Pages,
+    CompanyContactData,
+    Goods,
+    MailingRecipients
+)
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'name',
     )
-
     search_fields = ('name',)
 
 
@@ -32,7 +32,6 @@ class ArticleAdmin(admin.ModelAdmin):
         'date',
         'category',
     )
-
     search_fields = ('title',)
     list_filter = ('category',)
 
@@ -42,7 +41,6 @@ class PagesAdmin(admin.ModelAdmin):
         'title',
         'meta_title',
     )
-
     search_fields = ('title',)       
 
 
@@ -52,3 +50,4 @@ admin.site.register(Article, ArticleAdmin)
 admin.site.register(Pages, PagesAdmin)
 admin.site.register(CompanyContactData)
 admin.site.register(Goods)
+admin.site.register(MailingRecipients)

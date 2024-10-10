@@ -6,7 +6,7 @@
 {% if page.meta_title %}
 {{ page.meta_title }}
 {% else %}
-Разработка программного обеспечения | 1С:Предприятие 8
+Разработка Интернет Магазина под ключ с интеграцией 1С
 {% endif %}
 {% endblock %}
 
@@ -14,7 +14,7 @@
 {% if page.meta_description %}
 {{ page.meta_description }}
 {% else %}
-Разработка программного обеспечения под ваши нужды на платформе 1С Предприятие 8. Решение для оптовой и розничной торговли на платформе 1С.
+Индивидуальная разработка интернет магазина с интеграцией 1С любой конфигурации без использования CMS. Автоматический обмен данными сайта с 1С. Полный пакет услуг по разработке и сопровождению.
 {% endif %}
 {% endblock %}
 
@@ -22,254 +22,514 @@
 {% if page.meta_keywords %}
 {{ page.meta_keywords }}
 {% else %}
-ит специалисты, web разработчики, веб разработчики, внедрение программных продуктов, веб разработка, серверное оборудование.
+разработка интернет магазина москва, создание интернет магазина москва, интернет магазин под ключ москва, интернет магазин с нуля москва
 {% endif %}
 {% endblock %}
+
+
 {% block content %}
-
-<!--=================================
-    About -->
-    <section class="space-ptb">
-      <div class="container">
-        <div class="row justify-content-center pb-4 pb-md-5">
-          <div class="col-lg-12">
-            <div class="d-lg-flex align-items-center">
-              <div class="mr-4">
-                <p class="mb-0">Объединились в</p>
-                <h3 class="display-3 font-weight-bold text-primary mb-0">2011</h3>
-              </div>
-              <div class="mr-3">
-                <h2 class="mb-3 mb-lg-0">Обеспечим постоянное и динамичное развитие Вашей компании.</h2>
-              </div>
-              <div class="ml-auto">
-                <a href="{% url 'show-about' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Подробнее<i class="fas fa-arrow-right pl-3"></i></a>
-              </div>
-            </div>
-          </div>
+<section class="bg-primary overflow-hidden mb-2">
+  <div class="container">
+    <div class="row align-items-stretch">
+      <div class="col-12 col-lg-6 offset-lg-1 d-none d-lg-block order-md-2">
+        <img class="" width="1330" src="{% static 'images/demo.jpg' %}" alt="Разработка интернет магазина с интеграцией 1С под ключ">
+      </div>
+      <div class="col-12 col-lg-5 order-md-1 py-6">
+        <h1 class="font-weight-bold display-3 text-white">Разработка интернет магазина с интеграцией 1С под ключ</h1>
+        {% comment %} <h1 class="font-weight-bold display-3 text-white text-center">+</h1>
+        <h1 class="font-weight-bold display-3 text-white text-center">1С</h1> {% endcomment %}
+        <h2 class="as-h2">
+          Разработаем для Вашего бизнеса современный, адаптивный, оптимизированный к поиску, быстрый интернет магазин с интеграцией 1С: Предприятие 8 под 
+          ключ любой конфигурации без использования CMS. Только чистый, открытый код с возможностью масштабирования проекта до маркетплейса. Передовые
+          технологии, современный дизайн, грамотный digital маркетинг. Будьте выше на голову своих конкурентов, используйте наши технологии для своего бизнеса.
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row justify-content-end">
+      <div class="col-12 mt-5 mt-sm-n5 position-relative z-index-1">
+        <div class="bg-primary p-4 p-sm-5 border-radius shadow d-inline-block float-left float-sm-right">
+          <a  type="button" data-toggle="modal" data-target="#connectModal" class="text-white font-xlll" href="#">
+            <span>Обратный звонок</span>
+          </a>
         </div>
-        <div class="row">
-          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-            <div class="feature-info feature-info-style-07">
-              <div class="feature-info-img">
-                <img class="img-fluid" src="{% static 'images/mission.jpg' %}" alt="разработка программного обеспечения">
-              </div>
-              <div class="feature-info-content">
-                <h4 class="feature-info-title mb-2">Миссия и принципы</h4>
-                <p>Наши принципы обеспечивают успешное завершение десятков проектов. Мы понимаем потребности заказчиков и предлагаем лучшие решения.</p>
-               
+      </div>
+    </div>
+  </div>
+</section>
+<section class="space-ptb">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-9">
+        <div class="section-title text-center">
+          <h2>Преимущества нашего предложения.</h2>
+          <!-- <p>Positive pleasure-oriented goals are much more powerful motivators than negative fear-based ones.</p> -->
+        </div>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-9">
+        <div class="accordion" id="career-opportunities">
+          <div class="card">
+            <div class="accordion-icon card-header" id="headingOne">
+              <h4 class="mb-0">
+                <button class="btn" type="button" data-toggle="collapse" data-target="#security-manager" aria-expanded="false" aria-controls="security-manager">Оригинальная разработка</button>
+              </h4>
+            </div>
+            <div id="security-manager" class="collapse show" aria-labelledby="headingOne" data-parent="#career-opportunities">
+              <div class="card-body">
+                <ul class="list list-unstyled ckeck-list mb-4 mb-md-5">
+                  <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>Не используем CMS, все делается руками под Ваши требования.</span></li>
+                  <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>Можем адаптировать HTML-верстку любого дизайна под Ваши требования.</span></li>
+                </ul>
               </div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-            <div class="feature-info feature-info-style-07">
-              <div class="feature-info-img">
-                <img class="img-fluid" src="{% static 'images/call.jpg' %}" alt="прикладные решения">
-              </div>
-              <div class="feature-info-content">
-                <h4 class="feature-info-title mb-2">Вызовы</h4>
-                <p>Нам доверяют проектирование и разработку систем уровня предприятия. Интересные проекты и решения успешно реализованы в различных областях промышленности и торговли.</p>
-                
+          <div class="card">
+            <div class="accordion-icon card-header" id="headingTwo">
+              <h4 class="mb-0">
+                <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#business-partner" aria-expanded="true" aria-controls="business-partner">Использование передовых инструментов и технологий</button>
+              </h4>
+            </div>
+            <div id="business-partner" class="collapse" aria-labelledby="headingTwo" data-parent="#career-opportunities">
+              <div class="card-body">
+                <ul class="list list-unstyled ckeck-list mb-4 mb-md-5">
+                  <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>Для разработки пользовательского интерфейса используем всю мощь Vue.</span></li>
+                  <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>Для разработки серверной части - python/django.</span></li>
+                </ul>
               </div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6  mb-4 mb-md-0">
-            <div class="feature-info feature-info-style-07">
-              <div class="feature-info-img">
-                <img class="img-fluid" src="{% static 'images/team.jpg' %}" alt="разработка на платформе 1с">
-              </div>
-              <div class="feature-info-content">
-                <h4 class="feature-info-title mb-2">Наша команда</h4>
-                <p>Мы - команда, состоящая из профессионалов с опытом разработки и внедрения 10-15 лет. Мы понимаем потребности бизнеса благодаря обширнейшей гамме направлений деятельности наших постоянных клиентов.</p>
-                
-              </div>
+          <div class="card">
+            <div class="accordion-icon card-header" id="headingThree">
+              <h4 class="mb-0">
+                <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#outreach-representative" aria-expanded="true" aria-controls="outreach-representative">Интеграция с 1С:Предприятие 8</button>
+              </h4>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="mb-4">
-              <div class="background-border-top"></div>
-              <div class="p-4">
-                <h4 class="text-primary">Наши инструменты</h4>
-                <p class="mb-3">В производстве мы используем популярные стеки инструментов и технологий, обеспечивающие стабильную скорость проектирования и разработки, а так же широчайшие возможности адаптации под новые требования и интеграции с существующими информационными системами.</p>
-                <a class="btn btn-primary-round btn-round mx-0 mx-md-3" href="{% url 'show-our-tools' %}">Подробнее<i class="fas fa-arrow-right pl-3"></i></a>
+            <div id="outreach-representative" class="collapse" aria-labelledby="headingThree" data-parent="#career-opportunities">
+              <div class="card-body">
+                <ul class="list list-unstyled ckeck-list mb-4 mb-md-5">
+                  <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>Обеспечим передачу информации из любой конфигурации 1С на сайт и обратно.</span></li>
+                  <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>Не нужно запускать выгрузку данных из 1С на сайт руками или по расписанию, данные сразу выгружаются при их изменении.</span></li>
+                  <li class="d-flex"><i class="fas fa-check pr-2 pt-1 text-primary"></i><span>Оперативное получение заказов с сайта — при сохранении заказа на сайте данные сразу передаются в 1С.</span></li>
+                </ul>
               </div>
-            </div>
-            <div class="p-4 bg-dark border-radius text-white">
-              <h4 class="text-white">Карьера у нас</h4>
-              <p>Целеустремленность, творчество и эффективность во всем, что делаем. Если Вы разделяете наши ценности, будем рады видеть Вас в нашей команде.</p>
-              <a class="btn btn-link text-primary" href="{% url 'show-work-with-us' %}">Наши вакансии<i class="fas fa-arrow-right pl-3"></i></a>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!--=================================
-    About -->
+    </div>
 
-    <!--=================================
-    Category -->
-    <section class="space-ptb bg-dark-half-md">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-10">
-            <div class="section-title text-center">
-              <h2 class="text-white">Мы преуспеваем в своей деятельности и Вам поможем преуспеть в своей.</h2>
-              <p class="lead text-white">Это лишь некоторые отрасли, в которых мы добились глубокого понимания имеющихся процессов.</p>
-            </div>
-          </div>
+  </div>
+</section>
+
+<section class="space-ptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="section-title is-sticky">
+          <h2>Этапы разработки интернет магазина</h2>
+          {% comment %} <p class="mb-4 mb-md-5">Process that guarantees high productivity and profitability for your solution.</p>
+          <a href="#" class="btn btn-light-round btn-round">Let's Start Project<i class="fas fa-arrow-right pl-3"></i></a> {% endcomment %}
         </div>
-        <div class="row mb-3">
-          <div class="col-sm-12">
-            <div class="category category-grid-style-01">
-              <div class="category-item">
-                <div class="category-icon">
-                  <i class="flaticon-car"></i>
-                </div>
-                <a style="" class="category-title">Автомобили и автозапчасти</a>
+      </div>
+      <div class="col-md-6">
+        <div class="feature-info feature-info-style-08">
+          <div class="feature-info-inner">
+            <div class="feature-info-item">
+              <div class="feature-info-number"><span>01</span></div>
+              <div class="feature-info-content">
+                <h5 class="mb-3 feature-info-title">Интервью и заполнение Брифа</h5>
+                <p class="mb-0">
+                  Заполняем бриф, обговариваем структуру интернет магазина и его функционал. Определяемся по объёму контента на ресурсе для старта. 
+                  Выбираем шрифты и цветовую гамму. Сбор контента (картинки, текст).
+                </p>
               </div>
-              <div class="category-item">
-                <div class="category-icon">
-                  <i class="flaticon-order"></i>
-                </div>
-                <a class="category-title">Склады и сборка грузов</a>
+            </div>
+            <div class="feature-info-item">
+              <div class="feature-info-number"><span>02</span></div>
+              <div class="feature-info-content">
+                <h5 class="mb-3 feature-info-title">Анализ</h5>
+                <p class="mb-0">
+                  Сбор и анализ данных ближайших конкурентов, на основе собранных данных, формируем уникальное торговое предложение, 
+                  отличное от общей массы предложений. 
+                </p>
               </div>
-              <div class="category-item">
-                <div class="category-icon">
-                  <i class="flaticon-icon-626443"></i>
-                </div>
-                <a href="#" class="category-title">Розница, фаст-фуд, кафе и рестораны</a>
+            </div>
+            <div class="feature-info-item">
+              <div class="feature-info-number"><span>03</span></div>
+              <div class="feature-info-content">
+                <h5 class="mb-3 feature-info-title">Проектирование</h5>
+                <p class="mb-0">
+                  Главный этап в разработке интернет магазина. Мы должны понять, как наш интернет магазин будет работать, какие цели необходимо достигнуть. 
+                  Грамотное проектирование будущего интернет магазина позволит сэкономить при разработке время, разделить работу на этапы, благоприятствует 
+                  достижению положительного результата.
+                </p>
               </div>
-              <div class="category-item">
-                <div class="category-icon">
-                  <i class="flaticon-author"></i>
-                </div>
-                <a class="category-title">Торговые представители и мобильная торговля</a>
-              </div>              
-              <div class="category-item">
-                <div class="category-icon">
-                  <i class="flaticon-classified"></i>
-                </div>
-                <a class="category-title">Производство и оказание услуг</a>
+            </div>
+            <div class="feature-info-item">
+              <div class="feature-info-number"><span>04</span></div>
+              <div class="feature-info-content">
+                <h5 class="mb-3 feature-info-title">Согласование</h5>
+                <p class="mb-0">
+                  На этапе согласования подбиваем все материалы, технологии, задачи, которые необходимо реализовать в проекте. Уточняем вопросы, 
+                  возникшие в процессе проектирования и сбора данных.
+                </p>
               </div>
-              <div class="category-item">
-                <div class="category-icon">
-                  <i class="flaticon-piggy-bank"></i>
-                </div>
-                <a class="category-title">Финансовые службы и бухгалтерия</a>
+            </div>
+            <div class="feature-info-item">
+              <div class="feature-info-number"><span>05</span></div>
+              <div class="feature-info-content">
+                <h5 class="mb-3 feature-info-title">Программирование</h5>
+                <p class="mb-0">
+                  На данном этапе пишем внутреннюю часть сайта (движок), алгоритмы которого будут осуществлять работу интернет магазина в скрытой части 
+                  работы ресурса (Серверную часть на Python \ Django). И внешнюю часть нашего интернет магазина, интерфейс (Клиентскую на JavaScript \ Vue.js). 
+                  Проводим интеграцию с 1С:Предприятие 8, с доставкой и онлайн оплатой.
+                </p>
               </div>
-              <div class="category-item">
-                <div class="category-icon">
-                  <i class="flaticon-support"></i>
-                </div>
-                <a class="category-title">Call-центры и службы поддержки</a>
+            </div>
+            <div class="feature-info-item">
+              <div class="feature-info-number"><span>06</span></div>
+              <div class="feature-info-content">
+                <h5 class="mb-3 feature-info-title">Тестирование</h5>
+                <p class="mb-0">
+                  После того как интернет магазин собран он проходит ряд тестовых заданий по функционалу, сервисам оплаты, доставки, оформления и отправки 
+                  товара. Проверку интеграций, все ли отгружается как положено или нет. Вносятся правки, замечания и отправляются на исправление.
+                </p>
               </div>
-              <div class="category-item">
-                <div class="category-icon">
-                  <i class="flaticon-lamp"></i>
-                </div>
-                <a class="category-title">Оптовая торговля различных видов</a>
-              </div>              
-              <div class="category-item">
-                <div class="category-icon">
-                  <i class="flaticon-trolley"></i>
-                </div>
-                <a class="category-title">Логистика и службы доставки</a>
+            </div>
+            <div class="feature-info-item">
+              <div class="feature-info-number"><span>07</span></div>
+              <div class="feature-info-content">
+                <h5 class="mb-3 feature-info-title">Отладка</h5>
+                <p class="mb-0">
+                  В процессе отладки устраняются все замечания по вопросам работы интернет магазина, его систем и интеграций. После отладки проводим 
+                  тестирование и согласование. Эти процессы могут повторяться до получения желаемого результата.
+                </p>
               </div>
-              <div class="category-item">
-                <div class="category-icon">
-                  <i class="flaticon-thunder"></i>
-                </div>
-                <a class="category-title">Сервисные центры</a>
-              </div>              
+            </div>
+            <div class="feature-info-item">
+              <div class="feature-info-number"><span>08</span></div>
+              <div class="feature-info-content">
+                <h5 class="mb-3 feature-info-title">Запуск</h5>
+                <p class="mb-0">
+                  Размещение интернет магазина на хостинге и подключение домена. С этого момента Ваш интернет магазин в общем доступе поисковых систем 
+                  Яндекс и Google. Пройдет какое-то время индексации ресурса поисковыми роботами и наступит момент начать продвигать его сети интернет.
+                </p>
+              </div>
+            </div>
+            <div class="feature-info-item">
+              <div class="feature-info-number"><span>09</span></div>
+              <div class="feature-info-content">
+                <h5 class="mb-3 feature-info-title">Продвижение</h5>
+                <p class="mb-0">
+                  SEO и контекстная реклама на поиске Яндекс и РСЯ. SEO — долгий и кропотливый путь продвижения сайта по определённым запросам на поиске 
+                  на первые позиции (ТОП 5, ТОП 10). SEO продвижение занимает больше времени до получения первых результатов в отличии от контекстной рекламы. 
+                  Контекстная реклама приводит первых клиентов на следующий день после запуска рекламных компаний, самый быстрый способ привлечь первых клиентов.
+                </p>
+              </div>
+            </div>
+            <div class="feature-info-item">
+              <div class="feature-info-number"><span>10</span></div>
+              <div class="feature-info-content">
+                <h5 class="mb-3 feature-info-title">Тех поддержка</h5>
+                <p class="mb-0">
+                  24 \ 7 техническая поддержка на связи.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!--=================================
-    Category -->
+    </div>
+  </div>
+</section>
 
+<section class="space-ptb bg-dark">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="section-title text-center">
+          <h2 class="text-white"><span class="text-primary">Инструменты, </span>которые используем при разработке</h2>
+          <p class="text-white">Наша команда разработчиков «Аннасофт» постоянно повышаем свой уровень знаний языков программирования, следим за всеми новшествами в IT индустрии и разработки программного обеспечения.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-3 col-md-6 text-center mb-4">
+        <div class="p-2 d-inline-block border-radius bg-overlay-white-10 p-3 pt-5 h-100">
+          <img class="img-fluid center-block mx-auto w-25" src="{% static 'images/svg/javascript.svg' %}" alt="">
+          <h5 class="mb-4 mt-3 text-white">JavaScript</h5>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 text-center mb-4">
+        <div class="p-2 d-inline-block border-radius bg-overlay-white-10 p-3 pt-5 h-100">
+          <img class="img-fluid center-block mx-auto w-25" src="{% static 'images/svg/MySQL.png' %}" alt="">
+          <h5 class="mb-4 mt-3 text-white">SQL</h5>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 text-center mb-4">
+        <div class="p-2 d-inline-block border-radius bg-overlay-white-10 p-3 pt-5 h-100">
+          <img class="img-fluid center-block mx-auto w-25" src="{% static 'images/svg/python.svg' %}" alt="">
+          <h5 class="mb-4 mt-3 text-white">Python</h5>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 text-center mb-4">
+        <div class="p-2 d-inline-block border-radius bg-overlay-white-10 p-3 pt-5 h-100">
+          <img class="img-fluid center-block mx-auto w-25" src="{% static 'images/svg/1C.png' %}" alt="">
+          <h5 class="mb-4 mt-3 text-white">1C</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="space-ptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="testimonial-style-03 border-radius bg-light p-4 mt-4 mt-lg-0">
+        <div class="testimonial-item p-2">
+          <div class="testimonial-content">
+            <i class="fas fa-quote-left quotes text-dark"></i>
+            <p class="testimonial-des">
+              В чём заключается уникальность нашего предложения, почему необходимо выбрать нас в качестве разработчика интернет магазина или сайта? 
+              Мы IT компания полного цикла, в команде есть все необходимые специалисты, которые будут заниматься вашим проектом от идеи до продвижения в 
+              сети интернет. Вам нужны будут доработки, расширения или интеграция с маркетплейсами, мы всегда рядом, поможем, мы одна команда. 
+              Необходимо продвижение интернет магазина и товаров в сети интернет, и в этом случае — мы с Вами. С интернет магазином Вы получаете 
+              команду специалистов, а значит комплексное решение. После создания сайта Вам не нужно бегать искать программиста 1С, веб программиста, 
+              директолога, или seo специалиста. Вы получите индивидуальный подход команды профессионалов и никакой головной боли!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="space-ptb">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="section-title text-center">
+          <h2>Заказав разработку интернет магазина с интеграцией 1С:Предприятие 8 у нас вы получаете:</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-sm-6 mb-4 mb-sm-0">
+        <div class="feature-info feature-info-style-02 bg-dark text-white">
+          <div class="feature-info-icon">
+            <i class="flaticon-idea-1 text-white"></i>
+            <h4 class="mb-0 ml-4 feature-info-title text-white">Современный адаптивный дизайн</h4>
+          </div>
+          <div class="feature-info-content">
+            <p class="mb-0">
+              Дизайн интернет магазина лаконичный и понятный для потенциального клиента. Соответствует всем современным
+              законам дизайна и «юзабилити» сайта. Мы удешевляем разработку интернет магазина за счет использования 
+              готовых дизайн шаблонов у веб-дизайнеров. 
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="feature-info feature-info-style-02 bg-primary text-white">
+          <div class="feature-info-icon">
+            <i class="flaticon-mouse text-white"></i>
+            <h4 class="mb-0 ml-4 feature-info-title text-white">Удобный серфинг</h4>
+          </div>
+          <div class="feature-info-content">
+            <p class="mb-0">
+              Удобная и легко узнаваемая структура интернет магазина с лёгкостью позволит клиенту ориентироваться по всей 
+              структуре сайта.<br> Без особых усилий выбирать и заказывать товары, размещая в корзину и оплачивая товары по карте.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
     
-    <!--=================================
-    Category -->
-    <section class="space-pb">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-xl-9 col-lg-10">
-            <div class="section-title text-center">
-              <h2>Направления нашей деятельности для Вашего скорейшего роста.</h2>
-              
-            </div>
-          </div>
-        </div>
-        <div class="row">
+  </div>
+</section>
 
-          {% for service in services %}
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="feature-info feature-info-style-02">
-              <div class="feature-info-icon">
-                <i class="flaticon-data mr-4"></i>
-                <h5 class="mb-0 feature-info-title">{{ service.title }}</h5>
-              </div>
-              <div class="feature-info-content">
-                <p class="mb-0">{{ service.pre_content }}</p>
-                <a href="{% url 'show-service-detail' id=service.id %}" class="icon-btn"><i class="fas fa-long-arrow-alt-right"></i></a>
-              </div>
-              <div class="feature-info-bg-img"></div>
-            </div>
-          </div>
-          {% endfor %}
-      </div>
-    </section>
-    <!--=================================
-    Category -->
+<section class="space-pb">
+  <div class="container">
+    <div class="row justify-content-center">
 
-    <!--=================================
-    Blog -->
-<!--     <section class="space-pb">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-9">
-            <div class="section-title text-center">
-              <h2>Новости, статьи и события</h2>
-              
-            </div>
+      <div class="col-sm-6 mb-4 mb-sm-0">
+        <div class="feature-info feature-info-style-02 bg-primary text-white">
+          <div class="feature-info-icon">
+            <i class="flaticon-diamond text-white"></i>
+            <h4 class="mb-0 ml-4 feature-info-title text-white">Индивидуальность</h4>
           </div>
-        </div>
-        <div class="row border-bottom">
-
-          {% for article in articles %}
-          <div class="col-lg-4 col-sm-6 mb-4">
-            <div class="blog-post">
-              <div class="blog-post-image">
-                <img class="img-fluid" src="{% static 'images/blog/01.jpg' %}" alt="">
-              </div>
-              <div class="blog-post-content">
-                <div class="blog-post-info">
-                  <div class="blog-post-author">
-                    <a href="#" class="btn btn-light-round btn-round text-primary">{{ article.category }}</a>
-                  </div>
-                  <div class="blog-post-date">
-                    <a href="#">{{ article.date }}</a>
-                  </div>
-                </div>
-                <div class="blog-post-details">
-                  <h5 class="blog-post-title">
-                    <a href="{% url 'show-article-detail' id=article.id %}">{{ article.title }}</a>
-                  </h5>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-        <div class="row mt-5">
-          <div class="col-12 d-md-flex justify-content-center align-items-center">
-            <p class="mb-3 mb-md-0 mx-0 mx-md-3 text-light">У нас есть статьи на разные темы</p>
-            <a href="{% url 'show-articles' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Подробнее<i class="fas fa-arrow-right pl-3"></i></a>
+          <div class="feature-info-content">
+            <p class="mb-0">
+              Индивидуальность интернет магазина начинается с логотипа и названия магазина. Как говорится, как корабль назовёшь 
+              так он и поплывёт. Без условно индивидуального дизайна в той массе сайтов, которые находятся в сети интернет сложно 
+              придумать, но мы это сделаем хоть и прибегаем к услугам сторонних веб-дизайнеров. Ведь в деталях кроется индивидуальность,
+              и вы её получите. 
+            </p>
           </div>
         </div>
       </div>
-    </section> -->
-    <!--=================================
-    BLog -->
+      <div class="col-sm-6">
+        <div class="feature-info feature-info-style-02  bg-dark text-white">
+          <div class="feature-info-icon">
+            <i class="flaticon-mobile-phone text-white"></i>
+            <h4 class="mb-0 ml-4 feature-info-title text-white">Адаптивность</h4>
+          </div>
+          <div class="feature-info-content">
+            <p class="mb-0">
+              Адаптивный интернет магазин ко всем современным устройствам.<br> На сегодняшний день 70% потенциальных клиентов
+              совершают покупки со своего смартфона, оплачивают,<br> заказываю доставку и процент заказа со смартфона постоянно 
+              повышается.<br> Адаптивный дизайн сайта не позволит упустить столь ценных клиентов.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="space-pb">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="testimonial-style-03 border-radius bg-light p-4 mt-4 mt-lg-0">
+        <div class="testimonial-item p-2">
+          <div class="testimonial-content">
+            <i class="fas fa-quote-left quotes text-dark"></i>
+            <p class="testimonial-des">
+              SEO – это то без чего сайту, интернет магазину не выжить в плотной конкурентной борьбе за первое место в выдаче Яндекс или Google. 
+              Сложный и дорогостоящий процесс оптимизации сайта, страниц, товаров, текстов и картинок под силу только опытным seo-специалистам, 
+              знающим всю кухню продвижения товаров и услуг в сети интернет. Путь продвижения, будь то сайт, интернет магазин, товар или услуга, – 
+              долгий, первые результаты можно будет наблюдать не раньше года. Процесс продвижения непрерывный, иначе все труды откатываются к прежним 
+              показателям. Начинай все сначала. Первичная SEO оптимизация входит в стоимость разработки интернет магазина.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="space-pb bg-dark py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
+        <div class="counter">
+          <div class="counter-icon">
+            <i class="flaticon-emoji"></i>
+          </div>
+          <div class="counter-content">
+            <span class="timer" data-to="1000" data-speed="10000">1000</span>
+            <label>Счастливых клиентов</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
+        <div class="counter">
+          <div class="counter-icon">
+            <i class="flaticon-trophy"></i>
+          </div>
+          <div class="counter-content align-self-center">
+            <span class="timer" data-to="350" data-speed="10000">350</span>
+            <label>Завершенных проектов</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 mb-4 mb-sm-0">
+        <div class="counter">
+          <div class="counter-icon">
+            <i class="flaticon-strong"></i>
+          </div>
+          <div class="counter-content">
+            <span class="timer" data-to="6" data-speed="10000">6</span>
+            <label>Специалистов в команде</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="counter">
+          <div class="counter-icon">
+            <i class="flaticon-icon-149196"></i>
+          </div>
+          <div class="counter-content">
+            <span class="timer" data-to="70" data-speed="10000">70</span>
+            <label>Лет общего опыта в команде</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="space-ptb">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="section-title text-center">
+          <h2>Выберете пакет разработки вашего будущего интернет магазина</h2>
+          <p>Нажмите кнопку заказать, заполните контактные данные. Мы свяжемся с Вами в ближайшее время.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 pb-4 pb-md-0">
+        <div class="pricing">
+          <h4 class="pricing-title">Интернет магазин</h4>
+          <ul class="pricing-list" style="text-align:left;">
+            <li>Адаптивный дизайн</li>
+            <li>Рукописный движок</li>
+            <li>Форма обратной связи</li>
+            <li>Удобная корзина</li>
+            <li>Скорость работы</li>
+            <li>Админ панель</li>
+            <li>Онлайн оплата</li>
+            <li>Хостинг, домен</li>
+          </ul>
+          <a href="#" data-toggle="modal" data-target="#connectModal" class="btn btn-light-round btn-round">Заказать<i class="fas fa-arrow-right pl-3"></i></a>
+        </div>
+      </div>
+      <div class="col-md-4 pb-4 pb-md-0">
+        <div class="pricing active">
+          <h4 class="pricing-title">Интернет магазин + 1С</h4>
+          <ul class="pricing-list" style="text-align:left;">
+            <li>Адаптивный дизайн</li>
+            <li>Рукописный движок</li>
+            <li>Форма обратной связи</li>
+            <li>Удобная корзина</li>
+            <li>Скорость работы</li>
+            <li>Админ панель</li>
+            <li>Онлайн оплата</li>
+            <li>Доставка (Интеграция по API)</li>
+            <li>Интеграция интернет магазина с 1С</li>
+            <li>Фильтры</li>
+            <li>Хостинг, домен</li>
+          </ul>
+          <a href="#" data-toggle="modal" data-target="#connectModal" class="btn btn-light-round btn-round">Выбрать<i class="fas fa-arrow-right pl-3"></i></a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="pricing">
+          <h4 class="pricing-title">Кастом ИМ</h4>
+          <ul class="pricing-list" style="text-align:left; margin-top:5px;">
+            <li>Интернет магазин с индивидуальным
+              дизайном и функционалом, 
+             кастомная CRM система, интеграция 
+             с 1С и маркетплейсами. </li>
+          </ul>
+          <a href="#" data-toggle="modal" data-target="#connectModal" class="btn btn-light-round btn-round">Выбрать<i class="fas fa-arrow-right pl-3"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
