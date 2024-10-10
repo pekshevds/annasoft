@@ -14,7 +14,7 @@ def send_mail(contact_data: ContactForm):
 	if len(receiver_email) > 0:
 		password = config('MAIL_PASSWORD')
 		message = MIMEMultipart("alternative")
-		message["Subject"] = "Свяжитесь с {}. Контакты: {} ".format(contact_data.get('first_name'), contact_data.get('phone')) 
+		message["Subject"] = "Свяжитесь с {}. Контакты: {} ".format(contact_data.get('firstName'), contact_data.get('phone')) 
 		message["From"] = sender_email
 		message["To"] = ','.join(receiver_email)
 		text_body = """\
@@ -30,7 +30,7 @@ def send_mail(contact_data: ContactForm):
             <p>{2}</p>
         </body>
         </html>
-        """.format(contact_data.get('first_name'), contact_data.get('phone'), contact_data.get('comment'))
+        """.format(contact_data.get('firstName'), contact_data.get('phone'), contact_data.get('comment'))
 		part1 = MIMEText(text_body, "plain")
 		part2 = MIMEText(html, "html")
 		message.attach(part1)
