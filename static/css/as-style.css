@@ -65,3 +65,15 @@
 .customer-info-block .customer-info {
     border-right: 1px solid #676c71;
 }
+
+.as-record-list-item:hover {
+    background-color: #c9c9c9;
+}
+
+.list-list a {
+    color: #022d62 !important;
+}
+
+.list-list li {
+    margin-top: 3px;
+}

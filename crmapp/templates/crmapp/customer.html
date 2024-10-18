@@ -113,10 +113,10 @@
                 <ul class="list-list pl-0">
                   {% if info %}
                   {% for item in info %}
-                  <a href="" style="color: black;" data-toggle="modal" data-target="#recordModal{{ item.id }}"><li class="list-group-item">{{ item }}</li></a>
+                  <a href="" data-toggle="modal" data-target="#recordModal{{ item.id }}"><li class="list-group-item as-record-list-item">{{ item }}</li></a>
                   {% endfor %}
                   {% endif %}
-                  <a href="" style="color: black;" data-toggle="modal" data-target="#newRecordModal"><li class="list-group-item" style="text-align: right;">Новая запись</li></a>
+                  <a href="" data-toggle="modal" data-target="#newRecordModal"><li class="list-group-item as-record-list-item" style="text-align: right;">Новая запись</li></a>
 
                     <div class="modal fade" id="newRecordModal" tabindex="-1" role="dialog" aria-labelledby="newRecordModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
@@ -144,9 +144,6 @@
                               <div class="form-group mb-3">
                                 <select class="form-control" name="input_customer" id="input_customer" required>
                                   <option value="{{ customer.instance.id }}">{{ customer.instance.name }}</option>
-                                  <!-- {% for cust_id in select_customers %}
-                                  <option value="{{ cust_id.id }}"> {{ cust_id }} </option>
-                                  {% endfor %} -->
                                 </select>
                               </div>
                               <div class="form-group mb-3">
@@ -162,7 +159,7 @@
                         </div>
                       </div>
                     </div>
-                  {% if info %}<a href="{% url 'show_all_records' %}?customer_id={{ customer.instance.id }}" style="color: black;"><li class="list-group-item" style="text-align: right;">Все записи</li></a>{% endif %}
+                  {% if info %}<a href="{% url 'show_all_records' %}?customer_id={{ customer.instance.id }}"><li class="list-group-item as-record-list-item" style="text-align: right;">Все записи</li></a>{% endif %}
                 </ul>
               </div>
             </div>

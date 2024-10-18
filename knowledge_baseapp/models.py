@@ -6,15 +6,12 @@ from simple_history.models import HistoricalRecords
 class Section(models.Model):
 
 	title = models.CharField(max_length=255, verbose_name="Заголовок")
-
 	history = HistoricalRecords()
 
 	def get_records(self):
-
 		return Record.objects.filter(section=self)
 
 	def __str__(self):
-
 		return self.title
 
 	class Meta:
@@ -31,7 +28,6 @@ class Record(models.Model):
 	history = HistoricalRecords()
 
 	def __str__(self):
-
 		return self.title
 
 	class Meta:

@@ -4,11 +4,7 @@
 
 {% block content %}
 
-
 {% if user.is_authenticated %}
-<!--=================================
-    Contat Form -->
-
     <section class="" style="padding: 30px 0;">
       <div class="container">
         <div class="row justify-content-center">
@@ -86,19 +82,25 @@
                   </tr>
                 </thead>
                 <tbody>
-                 {% for record in records %}
-
-                  <tr>
-                    
-                    <td scope="row">{{ forloop.counter }}</td>                    
-                    <td>{{ record.customer }}</td>
-                   
-                    <td>{{ record.time_scheduled }}</td>
-                    <td>{{ record.time_actual }}</td>
-                    <td>{{ record.profit }}</td>
+                  {% for tasks_info in grouped_tasks %}
+                  <tr style="background-color: #adadad;">
+                    <td></td>                    
+                    <td>{{ tasks_info.customer }}</td>
+                    <td>{{ tasks_info.time_actual_amount }}</td>
+                    <td>{{ tasks_info.time_scheduled_amount }}</td>
+                    <td>{{ tasks_info.profit }}</td>
                     <td>{% if task.for_payment %} V {% else %} {% endif %}</td>
-
                   </tr>
+                  {% for task in tasks_info.tasks %}
+                  <tr>
+                    <td scope="row">{{ forloop.counter }}</td>                    
+                    <td><a href="{% url 'show-task' id=task.id %}" class="text-dark">{{ task }}</a></td>
+                    <td>{{ task.get_time_scheduled_h }}</td>
+                    <td>{{ task.get_time_actual_h }}</td>
+                    <td>{{ task.get_profit }}</td>
+                    <td>{% if task.for_payment %} V {% else %} {% endif %}</td>
+                  </tr>
+                  {% endfor %}
                   {% endfor %}
                   
                 </tbody>
@@ -108,8 +110,8 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
 
-                    <th scope="col">{{ time_scheduled }}</th>
                     <th scope="col">{{ time_actual }}</th>
+                    <th scope="col">{{ time_scheduled }}</th>
                     <th scope="col">{{ profit }}</th>
                   </tr>
                 </tfoot>
@@ -122,9 +124,6 @@
 
       </div>
     </section>
-
-    <!--=================================
-    Contat Form  -->
 {% endif %}
 
 {% endblock %}

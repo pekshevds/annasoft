@@ -5,9 +5,6 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-
-    <!--=================================
-    Category -->
     <section class="space-ptb bg-dark-half-md">
       <div class="container">
         <div class="row justify-content-center">
@@ -21,56 +18,56 @@
         <div class="row mb-3">
           <div class="col-sm-12">
             <div class="category category-grid-style-01">
-              
-              
-              
               <div class="category-item">
                 <div class="category-icon">
-                  <a href="#"><i class="flaticon-emoji"></i></a>
+                  <a href="{% url 'show-report-001' %}"><i class="flaticon-emoji"></i></a>
                 </div>               
                 <a href="{% url 'show-report-001' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Отчет.1</a>
-                <p>Закрытые задачи (позадачно)</p>
+                <a href="{% url 'show-report-001' %}" class="as-report-link">
+                  <p>Закрытые задачи (позадачно)</p>
+                </a>
               </div>
-
               <div class="category-item">
                 <div class="category-icon">
-                  <a href="#"><i class="flaticon-emoji"></i></a>
+                  <a href="{% url 'show-report-002' %}"><i class="flaticon-emoji"></i></a>
                 </div>               
                 <a href="{% url 'show-report-002' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Отчет.2</a>
-                <p>Выработка по клиентам</p>
+                <a href="{% url 'show-report-002' %}" class="as-report-link">
+                  <p>Выработка по клиентам</p>
+                </a>
               </div>
-
               <div class="category-item">
                 <div class="category-icon">
-                  <a href="#"><i class="flaticon-emoji"></i></a>
+                  <a href="{% url 'show-report-003' %}"><i class="flaticon-emoji"></i></a>
                 </div>               
                 <a href="{% url 'show-report-003' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Отчет.3</a>
-                <p>Выработка по исполнителям</p>
+                <a href="{% url 'show-report-003' %}" class="as-report-link">
+                  <p>Выработка по исполнителям</p>
+                </a>
               </div>
-
               <div class="category-item">
                 <div class="category-icon">
-                  <a href="#"><i class="flaticon-emoji"></i></a>
+                  <a href="{% url 'show-report-004' %}"><i class="flaticon-emoji"></i></a>
                 </div>               
                 <a href="{% url 'show-report-004' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Отчет.4</a>
-                <p>Закрытые задачи (по клиентам)</p>
+                <a href="{% url 'show-report-004' %}" class="as-report-link">
+                  <p>Закрытые задачи (по клиентам)</p>
+                </a>
               </div>
-
               <div class="category-item">
                 <div class="category-icon">
-                  <a href="#"><i class="flaticon-emoji"></i></a>
+                  <a href="{% url 'show-report-005' %}"><i class="flaticon-emoji"></i></a>
                 </div>               
                 <a href="{% url 'show-report-005' %}" class="btn btn-primary-round btn-round mx-0 mx-md-3">Отчет.5</a>
-                <p>Закрытые задачи (по исполнителям)</p>
+                <a href="{% url 'show-report-005' %}" class="as-report-link">
+                  <p>Закрытые задачи (по исполнителям)</p>
+                </a>
               </div>
-              
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!--=================================
-    Category -->
 {% endif %}
 
 {% endblock %}

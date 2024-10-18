@@ -77,7 +77,7 @@
                 <thead>
                   <tr>
                     <th scope="col"></th>
-                    <th scope="col">Заказчик</th>
+                    <th scope="col">Исполнитель/Заказчик</th>
                     <th scope="col">Задача</th>
                     <th scope="col">Описание</th>
                     <th scope="col">Норма, час.</th>
@@ -85,27 +85,26 @@
                   </tr>
                 </thead>
                 <tbody>
-                 {% for item in sorted_tasks %}
-                  <tr>
+                {% for task_info in grouped_tasks %}
+                  <tr style="background-color: #adadad;">
+                    <td></td>                    
+                    <td>{{ task_info.employee }}</td>
                     <td></td>
-                    <td style="font-weight: bold;">{{ item.0 }}</td>
                     <td></td>
+                    <td>{{ task_info.time_scheduled_amount }}</td>
                     <td></td>
-                    <td style="font-weight: bold;">{{ item.2 }}</td>
-                    <td></td>
-                  </tr>  
-                  {% for task in item.1 %}
-                  <tr>
-                    <td></td>
-                    <td>{{ forloop.counter }}</td>
-                    <td><a href="{% url 'show-task' id=task.id %}" class="text-dark">{{ task }}</a></td>
-                    <td>{{ task.description|slice:":300" }}</td>
-                    <td>{{ task.get_time_actual_h }}</td>
-                    <td>{% if task.for_payment %} V {% endif %}</td>
-                  </tr> 
+                  </tr>
+                    {% for task in task_info.tasks %}
+                    <tr>
+                      <td scope="row">{{ forloop.counter }}</td>  
+                      <td >{{ task.customer }}</td>
+                      <td><a href="{% url 'show-task' id=task.id %}" class="text-dark">{{ task }}</a></td>
+                      <td>{{ task.description|slice:":300" }}</td>
+                      <td>{{ task.get_time_scheduled_h }}</td>
+                      <td>{% if task.for_payment %} V {% endif %}</td>
+                    </tr>
+                    {% endfor %}
                   {% endfor %}
-                  
-                {% endfor %}
                 </tbody>
                 <tfoot>
                   <tr>
@@ -113,7 +112,7 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col" style="text-align: right;">Итого:</th>
-                    <th scope="col">{{ time_actual }}</th>
+                    <th scope="col">{{ time_scheduled }}</th>
                     <th scope="col"></th>
                   </tr>
                 </tfoot>

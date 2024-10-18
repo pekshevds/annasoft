@@ -16,16 +16,15 @@
           <div class="col-12 mt-1">
             <ul class="list-list pl-0">
               {% for item in records %}
-              <a href="{% url 'show_record' id=item.id %}" style="color: black">
-                <li class="list-group-item">{{ item }}</li>
+              <a href="{% url 'show_record' id=item.id %}">
+                <li class="list-group-item as-record-list-item">{{ item }}</li>
               </a>
               {% endfor %}
               <a
                 href=""
-                style="color: black"
                 data-toggle="modal"
                 data-target="#newRecordModal"
-                ><li class="list-group-item" style="text-align: right">
+                ><li class="list-group-item as-record-list-item" style="text-align: right">
                   Новая запись
                 </li></a
               >
@@ -88,7 +87,6 @@
               id="input_section"
               required
             >
-              <option selected value="">...</option>
               {% for section in select_sections %}
               <option value="{{ section.id }}">{{ section }}</option>
               {% endfor %} 

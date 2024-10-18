@@ -1,22 +1,15 @@
 from django.urls import path
-from .views import show_knowledge_base_props
-from .views import  show_knowledge_base_customers
-from .views import show_property
-from .views import show_customer
-from .views import add_property
-from .views import add_record
-from .views import show_record
-from .views import save_record
-from .views import show_all_records
+
+from knowledge_baseapp.views import (
+    RecordsListView,
+    RecordView,
+    AddRecordView,
+    SaveRecordView
+)
 
 urlpatterns = [    
-    path('properties/', show_knowledge_base_props, name='show_knowledge_base_props'),
-    path('properties/<int:id>/', show_property, name='show_property'),
-    path('properties/add/', add_property, name='add_property'),
-    path('customers/', show_knowledge_base_customers, name='show_knowledge_base_customers'),
-    path('customers/<int:id>/', show_customer, name='show_customer'),
-    path('records/add/', add_record, name='add_record'),
-    path('records/save/<int:id>/', save_record, name='save_record'),
-    path('records/<int:id>/', show_record, name='show_record'),
-    path('records/', show_all_records, name='show_all_records'),
+    path('records/add/', AddRecordView.as_view(), name='add_record'),
+    path('records/save/<int:id>/', SaveRecordView.as_view(), name='save_record'),
+    path('records/<int:id>/', RecordView.as_view(), name='show_record'),
+    path('records/', RecordsListView.as_view(), name='show_all_records'),
 ]    

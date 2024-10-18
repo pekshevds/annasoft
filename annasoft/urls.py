@@ -10,7 +10,7 @@ urlpatterns = [
     path('', include('baseapp.urls')),
     path('crm/', include('crmapp.urls')),
     path('admin/', admin.site.urls),
-    path('auth/', include('authapp.urls')),
+    path('auth/', include('authapp.urls', namespace="authapp")),
     path('info/', include('knowledge_baseapp.urls')),
     path('fn/', include('FN_accounting.urls')),
     path('api/v1/', include('apiapp.urls')),

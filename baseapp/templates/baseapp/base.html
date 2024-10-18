@@ -84,7 +84,7 @@
                 <li><a target="_blank" href="https://telegram.me/{{ company_contact_data.telegram_name }}"><i class="fab fa-telegram-plane"></i></a></li>
                 <li><a href="{% url 'show-crm-index' %}"><i class="fa fa-user"></i></a></li>
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out-alt"></i></a></li>
+                <li><a href="{% url 'authapp:logout' %}"><i class="fa fa-sign-out-alt"></i></a></li>
                 {% endif %}
               </ul>
             </div>

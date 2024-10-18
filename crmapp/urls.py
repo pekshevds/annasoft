@@ -1,80 +1,64 @@
 from django.urls import path
 
-from .views import show_index
-
-from .views import show_persons
-from .views import new_person
-from .views import save_person
-from .views import show_person
-
-from .views import show_customers
-from .views import new_customer
-from .views import show_customer
-from .views import save_customer
-
-from .views import new_employee
-from .views import show_employee
-from .views import save_employee
-
-from .views import show_kanban
-
-from .views import show_reports
-from .views import show_report_001
-from .views import show_report_002
-from .views import show_report_003
-from .views import show_report_004
-from .views import show_report_005
-
-
-from .views import send_to_B
-from .views import send_to_C
-from .views import send_to_D
-from .views import send_to_E
-
-from .views import new_task
-from .views import save_task
-from .views import show_task
+from crmapp.views import (
+    CRMIndexView,
+    KanbanView,
+    ReportListView,
+    Report001View,
+    Report002View,
+    Report003View,
+    Report004View,
+    Report005View,
+    NewTaskView,
+    TaskView,
+    SaveTaskView,
+    PersonView,
+    PersonListView,
+    NewPersonView,
+    CustomerView,
+    NewCustomerView,
+    CustomerListView,
+    NewEmployeeView,
+    EmployeeView,
+    SendToBView,
+    SendToCView,
+    SendToDView,
+    SendToEView,
+)
 
 urlpatterns = [    
-    path('', show_index, name='show-crm-index'),        
-    
-    # Частные лица
-    path('persons/', show_persons, name='persons'),
-    path('new-person/', new_person, name='new-person'),
-    path('person/<int:id>/', show_person, name='show-person'),
-    path('save-person/', save_person, name='save-person'),
-
-    # Заказчики
-    path('customers/', show_customers, name='customers'),
-    path('new-customer/', new_customer, name='new-customer'),
-    path('customer/<int:id>/', show_customer, name='show-customer'),
-    path('save-customer/', save_customer, name='save-customer'),
-
-    # Сотрудники
-    path('new-employee/<int:customer_id>/', new_employee, name='new-employee'),
-    path('employee/<int:id>/', show_employee, name='show-employee'),
-    path('save-employee/', save_employee, name='save-employee'),
-    
+    path('', CRMIndexView.as_view(), name='show-crm-index'),
+     # Отчеты
+    path('reports/', ReportListView.as_view(), name='show-reports'),
+    path('report_001/', Report001View.as_view(), name='show-report-001'),
+    path('report_002/', Report002View.as_view(), name='show-report-002'),
+    path('report_003/', Report003View.as_view(), name='show-report-003'),
+    path('report_004/', Report004View.as_view(), name='show-report-004'),
+    path('report_005/', Report005View.as_view(), name='show-report-005'),
+    # Канбан
+    path('kanban/', KanbanView.as_view(), name='show-kanban'),
+    path('my-kanban/', KanbanView.as_view(), {'onUser': True}, name='show-my-kanban'),
     # Задачи
-    path('new-task/<int:customer_id>/', new_task, name='new-task'),
-    path('task/<int:id>/', show_task, name='show-task'),
-    path('save-task/', save_task, name='save-task'),
+    path('new-task/<int:customer_id>/', NewTaskView.as_view(), name='new-task'),
+    path('task/<int:id>/', TaskView.as_view(), name='show-task'),
+    path('save-task/', SaveTaskView.as_view(), name='save-task'),
+    # Частные лица
+    path('persons/', PersonListView.as_view(), name='persons'),
+    path('new-person/', NewPersonView.as_view(), name='new-person'),
+    path('person/<int:id>/', PersonView.as_view(), name='show-person'),
+    path('save-person/', PersonView.as_view(), name='save-person'),
+    # Заказчики
+    path('customers/', CustomerListView.as_view(), name='customers'),
+    path('new-customer/', NewCustomerView.as_view(), name='new-customer'),
+    path('customer/<int:id>/', CustomerView.as_view(), name='show-customer'),
+    path('save-customer/', CustomerView.as_view(), name='save-customer'),
+    # Сотрудники
+    path('new-employee/<int:customer_id>/', NewEmployeeView.as_view(), name='new-employee'),
+    path('employee/<int:id>/', EmployeeView.as_view(), name='show-employee'),
+    path('save-employee/', EmployeeView.as_view(), name='save-employee'),
     
-    path('kanban/', show_kanban, name='show-kanban'),
-    path('my-kanban/', show_kanban, {'onUser': True}, name='show-my-kanban'),
-
-
-    path('reports/', show_reports, name='show-reports'),
-    
-    path('report_001/', show_report_001, name='show-report-001'),
-    path('report_002/', show_report_002, name='show-report-002'),
-    path('report_003/', show_report_003, name='show-report-003'),
-    path('report_004/', show_report_004, name='show-report-004'),
-    path('report_005/', show_report_005, name='show-report-005'),
-
-    
-    path('send-to-b/<int:id>/', send_to_B, name='send-to-b'),
-    path('send-to-c/<int:id>/', send_to_C, name='send-to-c'),
-    path('send-to-d/<int:id>/', send_to_D, name='send-to-d'),
-    path('send-to-e/<int:id>/', send_to_E, name='send-to-e'),
+    path('send-to-b/<int:id>/', SendToBView.as_view(), name='send-to-b'),
+    path('send-to-c/<int:id>/', SendToCView.as_view(), name='send-to-c'),
+    path('send-to-d/<int:id>/', SendToDView.as_view(), name='send-to-d'),
+    path('send-to-e/<int:id>/', SendToEView.as_view(), name='send-to-e'),
 ]

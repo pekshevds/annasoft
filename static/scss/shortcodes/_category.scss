@@ -76,6 +76,15 @@ ul.category-list li a:after,
 			z-index: 2;
 			font-size: 16px;
 		}
+		.as-report-link {
+			position: relative;
+			z-index: 2;
+			color: #676c71;
+
+			p {
+				padding-top: 10px;
+			}
+		}
 	}
 	.show-more-cat {
 		display: flex;

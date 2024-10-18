@@ -77,7 +77,7 @@
                   <tr>
                     <th scope="col">#</th>
                     
-                    <th scope="col">Исполнитель</th>
+                    <th scope="col">Исполнитель/Задача</th>
                     
                     <th scope="col">Фактически, час.</th>
                     <th scope="col">По норме, час.</th>
@@ -85,17 +85,24 @@
                   </tr>
                 </thead>
                 <tbody>
-                 {% for record in records %}
-
-                  <tr>
-                    
-                    <td scope="row">{{ forloop.counter }}</td>                    
-                    <td>{{ record.employee.get_fio_person }}</td>
+                 {% for task_info in grouped_tasks %}
+                  <tr style="background-color: #adadad;">
+                    <td></td>                    
+                    <td>{{ task_info.employee }}</td>
                    
-                    <td>{{ record.time_scheduled }}</td>
-                    <td>{{ record.time_actual }}</td>
-                    <td>{{ record.profit }}</td>
+                    <td>{{ task_info.time_actual_amount }}</td>
+                    <td>{{ task_info.time_scheduled_amount }}</td>
+                    <td>{{ task_info.profit }}</td>
                   </tr>
+                    {% for task in task_info.tasks %}
+                    <tr>
+                      <td scope="row">{{ forloop.counter }}</td>                    
+                      <td><a href="{% url 'show-task' id=task.id %}" class="text-dark">{{ task }}</a></td>
+                      <td>{{ task.get_time_scheduled_h }}</td>
+                      <td>{{ task.get_time_actual_h }}</td>
+                      <td>{{ task.get_profit }}</td>
+                    </tr>
+                    {% endfor %}
                   {% endfor %}
                   
                 </tbody>
@@ -105,8 +112,8 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
 
-                    <th scope="col">{{ time_scheduled }}</th>
                     <th scope="col">{{ time_actual }}</th>
+                    <th scope="col">{{ time_scheduled }}</th>
                     <th scope="col">{{ profit }}</th>
                   </tr>
                 </tfoot>

@@ -1,14 +1,14 @@
-from .models import Task
-from .models import Customer
-from .models import Person
-from .models import Employee
-from .models import Record
-
+from django.db.models import Sum, Count
 
 from datetime import datetime
 from datetime import timedelta
 
-import pandas as pd
+from .models import (
+	Task,
+	Customer,
+	Employee,
+	Record
+) 
 
 
 def get_tasks_A():
@@ -34,7 +34,7 @@ def get_tasks(status="A", user=None):
 	return Task.objects.filter(task_status=status)
 
 
-def send_task_to_B(id, user):
+def send_task_to_B(id: str, user):
 
 	task = Task.objects.get(id=id)
 	task.task_status = "B"
@@ -92,164 +92,93 @@ def get_current_employee(request):
 	return None
 
 
-def get_completed_tasks(param_from, param_to, customer=None):
+def get_completed_tasks(param_from: datetime.date, param_to: datetime.date, customer: Customer = None):
 	param_from = datetime(year=param_from.year, month=param_from.month, day=param_from.day,)
 	param_to = datetime(year=param_to.year, month=param_to.month, day=param_to.day,)
-
+	task_list = Task.objects.filter(					
+					date_of_completion__gte=param_from.replace(hour=0, minute=0, second=0, microsecond=0), 
+					date_of_completion__lte=param_to.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(1),
+					task_status = 'D'
+				)
 	if customer:
-
-		return Task.objects.filter(
-					customer=customer,
-					date_of_completion__gte=param_from.replace(hour=0, minute=0, second=0, microsecond=0), 
-					date_of_completion__lte=param_to.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(1)
-					)
-	else:
-	
-		return Task.objects.filter(					
-					date_of_completion__gte=param_from.replace(hour=0, minute=0, second=0, microsecond=0), 
-					date_of_completion__lte=param_to.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(1)
-					)
+		task_list = task_list.filter(customer=customer)
+	time_scheduled = round(task_list.aggregate(total_h = Sum("time_scheduled_h", default=0))['total_h'] + \
+		task_list.aggregate(total_m = Sum("time_scheduled_m", default=0))['total_m']/60, 1)
+	time_actual = round(task_list.aggregate(total_h = Sum("time_actual_h", default=0))['total_h'] + \
+		task_list.aggregate(total_m = Sum("time_actual_m", default=0))['total_m']/60, 1)
+	return {
+		'task_list': task_list,
+		'time_scheduled': time_scheduled,
+		'time_actual': time_actual
+	}
 
 
-def get_employee_completed_tasks(param_from, param_to, employee=None):
+def get_employee_completed_tasks(param_from: datetime.date, param_to: datetime.date, employee: Employee = None):
 	param_from = datetime(year=param_from.year, month=param_from.month, day=param_from.day,)
 	param_to = datetime(year=param_to.year, month=param_to.month, day=param_to.day,)
-
+	task_list = Task.objects.filter(					
+					date_of_completion__gte=param_from.replace(hour=0, minute=0, second=0, microsecond=0), 
+					date_of_completion__lte=param_to.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(1),
+					task_status = 'D'
+				)
 	if employee:
+		task_list = task_list.filter(from_performer = employee)
 
-		return Task.objects.filter(
-					from_performer=employee,
-					date_of_completion__gte=param_from.replace(hour=0, minute=0, second=0, microsecond=0), 
-					date_of_completion__lte=param_to.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(1)
-					)
-	else:
+	time_scheduled = round(task_list.aggregate(total_h = Sum("time_scheduled_h", default=0))['total_h'] + \
+		task_list.aggregate(total_m = Sum("time_scheduled_m", default=0))['total_m']/60, 1)
+	time_actual = round(task_list.aggregate(total_h = Sum("time_actual_h", default=0))['total_h'] + \
+		task_list.aggregate(total_m = Sum("time_actual_m", default=0))['total_m']/60, 1)
 	
-		return Task.objects.filter(					
-					date_of_completion__gte=param_from.replace(hour=0, minute=0, second=0, microsecond=0), 
-					date_of_completion__lte=param_to.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(1)
-					)
+	return {
+		'task_list': task_list,
+		'time_scheduled': time_scheduled,
+		'time_actual': time_actual
+	}
 
 
-		
-
-def get_completed_tasks_on_customers(param_from, param_to, customer=None):
-	
-	class Record:
-	
-		def __init__(self, customer, time_scheduled, time_actual):
-			self.customer = customer
-			self.time_scheduled = time_scheduled
-			self.time_actual = time_actual
-			self.profit = round(self.time_actual-self.time_scheduled, 1)
-
-
-
-	tasks = get_completed_tasks(param_from=param_from, param_to=param_to, customer=customer)
-
-	df = pd.DataFrame.from_records(tasks.values('customer', 'time_scheduled_h', 'time_scheduled_m',
-												'time_actual_h', 'time_actual_m'))
-
-	# df = df.groupby(['customer'], as_index=False).agg({
-	# 	'time_scheduled_h': 'sum',
-	# 	'time_scheduled_m': 'sum',
-	# 	'time_actual_h': 'sum',
-	# 	'time_actual_m': 'sum',
-	# 	})
-
-	records = []
-
-	if tasks:
-		df = df.groupby(['customer'], as_index=False)[
-			'time_scheduled_h',
-			'time_scheduled_m',
-			'time_actual_h',
-			'time_actual_m',
-			].sum()
-
-	
-	
-		for item in df.itertuples(index=False):
-			records.append(Record(Customer.objects.get(id=item.customer),
-								item.time_scheduled_h + round(item.time_scheduled_m/60, 1),
-								item.time_actual_h + round(item.time_actual_m/60, 1)))
-	
-	return records
+def group_task_by_customer(tasks):
+	customer_list = (tasks
+		.values('customer')
+		.annotate(item_count=Count('customer'))
+		.order_by()
+	)
+	grouped_tasks = []
+	for customer_id in customer_list:
+		customer = Customer.objects.get(id=customer_id.get('customer'))
+		time_actual_amount = round(tasks.filter(customer=customer).aggregate(total_h = Sum("time_actual_h", default=0))['total_h'] + \
+				tasks.filter(customer=customer).aggregate(total_m = Sum("time_actual_m", default=0))['total_m']/60, 1)
+		time_scheduled_amount = round(tasks.filter(customer=customer).aggregate(total_h = Sum("time_scheduled_h", default=0))['total_h'] + \
+				tasks.filter(customer=customer).aggregate(total_m = Sum("time_scheduled_m", default=0))['total_m']/60, 1)
+		profit = time_actual_amount - time_scheduled_amount
+		grouped_tasks.append({
+				'customer': customer.name,
+				'tasks': tasks.filter(customer=customer),
+				'time_actual_amount': time_actual_amount,
+				'time_scheduled_amount': time_scheduled_amount,
+				'profit': round(profit, 1)
+			})
+	return grouped_tasks
 
 
-
-def get_completed_tasks_on_employees(param_from, param_to, employee=None):
-
-	class Record:
-	
-		def __init__(self, employee, time_scheduled, time_actual):
-			self.employee = employee
-			self.time_scheduled = time_scheduled
-			self.time_actual = time_actual
-			self.profit = round(self.time_actual-self.time_scheduled, 1)
-
-	
-	param_from = datetime(year=param_from.year, month=param_from.month, day=param_from.day,)
-	param_to = datetime(year=param_to.year, month=param_to.month, day=param_to.day,)
-
-	if employee:
-
-		tasks = Task.objects.filter(
-					from_performer=employee,
-					date_of_completion__gte=param_from.replace(hour=0, minute=0, second=0, microsecond=0), 
-					date_of_completion__lte=param_to.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(1)
-					)
-	else:
-	
-		tasks = Task.objects.filter(					
-					date_of_completion__gte=param_from.replace(hour=0, minute=0, second=0, microsecond=0), 
-					date_of_completion__lte=param_to.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(1)
-					)
-
-	df = pd.DataFrame.from_records(tasks.values('from_performer', 'time_scheduled_h', 'time_scheduled_m',
-												'time_actual_h', 'time_actual_m'))
-
-	# df = df.groupby(['customer'], as_index=False).agg({
-	# 	'time_scheduled_h': 'sum',
-	# 	'time_scheduled_m': 'sum',
-	# 	'time_actual_h': 'sum',
-	# 	'time_actual_m': 'sum',
-	# 	})
-
-	records = []
-
-	if tasks:
-		df = df.groupby(['from_performer'], as_index=False)[
-			'time_scheduled_h',
-			'time_scheduled_m',
-			'time_actual_h',
-			'time_actual_m',
-			].sum()
-
-	
-	
-		for item in df.itertuples(index=False):
-			records.append(Record(Employee.objects.get(id=item.from_performer),
-								item.time_scheduled_h + round(item.time_scheduled_m/60, 1),
-								item.time_actual_h + round(item.time_actual_m/60, 1)))
-	
-	return records
-
-def sort_task_by_customer(tasks):
-
-	temp_customer = []
-	sorted_tasks = []
-	for task in tasks.order_by('customer'):
-		if task.customer not in temp_customer:
-
-			sorted_tasks.append([task.customer, tasks.filter(customer=task.customer), get_summ_of_tasks(tasks.filter(customer=task.customer))])
-
-			temp_customer.append(task.customer)
-
-	return sorted_tasks
-
-def get_summ_of_tasks(tasks):
-	summ = 0
-	for task in tasks:
-		summ += task.get_time_actual_h()
-
-	return summ
+def group_task_by_employee(tasks):
+	employee_list = (tasks
+		.values('from_performer')
+		.annotate(item_count=Count('from_performer'))
+		.order_by()
+	)
+	grouped_tasks = []
+	for employee_id in employee_list:
+		employee = Employee.objects.get(id=employee_id.get('from_performer'))
+		time_actual_amount = round(tasks.filter(from_performer=employee).aggregate(total_h = Sum("time_actual_h", default=0))['total_h'] + \
+					tasks.filter(from_performer=employee).aggregate(total_m = Sum("time_actual_m", default=0))['total_m']/60, 1)
+		time_scheduled_amount = round(tasks.filter(from_performer=employee).aggregate(total_h = Sum("time_scheduled_h", default=0))['total_h'] + \
+					tasks.filter(from_performer=employee).aggregate(total_m = Sum("time_scheduled_m", default=0))['total_m']/60, 1)
+		profit = time_actual_amount - time_scheduled_amount
+		grouped_tasks.append({
+				'employee': employee.get_fio_person,
+				'tasks': tasks.filter(from_performer=employee),
+				'time_actual_amount': time_actual_amount,
+				'time_scheduled_amount': time_scheduled_amount,
+				'profit': profit
+			})
+	return grouped_tasks

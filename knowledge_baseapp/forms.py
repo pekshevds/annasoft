@@ -1,6 +1,6 @@
 from django import forms
  
-class KnowledgeBaseForm(forms.Form):
+class KnowledgeBaseRecordForm(forms.Form):
 
 	input_title  		= forms.CharField(max_length = 100)
 	input_customer  	= forms.CharField(max_length = 50, required=False)

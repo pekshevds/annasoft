@@ -4,6 +4,7 @@ from .views import show_auth
 from .views import set_login
 from .views import set_logout
 
+app_name = 'authapp'
 
 urlpatterns = [    
     path('', show_auth, name='show-auth'),
