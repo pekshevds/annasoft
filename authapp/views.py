@@ -1,41 +1,52 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import (
+	render,
+	redirect
+)
+from django.contrib.auth import (
+	authenticate,
+	login,
+	logout
+)
+from django.http import (
+	HttpRequest,
+	HttpResponse
+)
+from django.views.generic import View
+from django.contrib import messages
 
-from baseapp.core import get_context
+from authapp.forms import UserForm
 
-from django.contrib.auth import authenticate
-from django.contrib.auth import login
-from django.contrib.auth import logout
+class LoginView(View):
 
-from .forms import UserForm
-
-# Create your views here.
-def show_auth(request):
-
-	context = get_context()
-	return render(request, "authapp/auth.html", context)
-
-
-def set_login(request):
-
-	if request.method == 'POST':
-		userForm = UserForm(request.POST)
-
-		if userForm.is_valid():
-			
-			username = userForm.cleaned_data['username']
-			password = userForm.cleaned_data['password']
-			
-			user = authenticate(request, username=username, password=password)			
+	def get(self, request: HttpRequest) -> HttpResponse:
+		return render(request, 'authapp/auth.html')
+	
+	def post(self, request: HttpRequest) -> HttpResponse:
+		user_form = UserForm(request.POST)
+		if user_form.is_valid():
+			input_username = user_form.cleaned_data.get('username')
+			input_password = user_form.cleaned_data.get('password')
+			user = authenticate(
+				request = request, 
+				username = input_username, 
+				password = input_password
+			)
 			if user is not None:
 				login(request, user)
 				return redirect('show-crm-index')
-	return redirect(request.META['HTTP_REFERER'])
+			else:
+				messages.info(request, 'Комбинации пароль-логин не существует!')
+				request.session['user_data'] = {
+					'username': input_username,
+					'password': input_password
+				}	
+		else:
+			messages.info(request, 'Ошибка при вводе данных в форму!')		
+		return redirect('authapp:show-auth')	
 
 
+class LogoutView(View):
 
-def set_logout(request):
-
-	if request.user.is_authenticated:
+	def get(self, request: HttpRequest) -> HttpResponse:
 		logout(request)
-	return redirect('show-index')
+		return redirect('show-index')

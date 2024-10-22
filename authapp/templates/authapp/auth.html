@@ -10,7 +10,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="section-title text-center">                         
-              <p>Введите логин и пароль</p>              
+              <p>Введите логин и пароль</p>           
             </div>
           </div>
         </div>
@@ -20,11 +20,22 @@
               <form class="mt-4" action="{% url 'authapp:login' %}" method="post">
                 {% csrf_token %}
                 <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="username" placeholder="Имя пользователя">
+                  {% if request.session.user_data %}
+                  <input value="{{ request.session.user_data.username }} "type="text" class="form-control" name="username" placeholder="Имя пользователя" required>
+                  {% else %}
+                  <input type="text" class="form-control" name="username" placeholder="Имя пользователя" required>
+                  {% endif %}
                 </div>
                 <div class="form-group mb-3">
-                  <input type="password" class="form-control" name="password" placeholder="Пароль">
+                  {% if request.session.user_data %}
+                  <input value="{{ request.session.user_data.password }}" type="password" class="form-control" name="password" placeholder="Пароль" required>
+                  {% else %}
+                  <input type="password" class="form-control" name="password" placeholder="Пароль" required>
+                  {% endif %}
                 </div>
+                {% for message in messages %}
+                  <p  style="color: red" class="text-uppercase" >* {{ message }} </p>
+                {% endfor %}
                 <div class="form-group mb-0">
                   <button type="submit" class="btn btn-primary">Войти<i class="fas fa-arrow-right pl-3"></i></button>
                 </div>

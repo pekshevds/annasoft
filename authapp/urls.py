@@ -1,13 +1,14 @@
 from django.urls import path
 
-from .views import show_auth
-from .views import set_login
-from .views import set_logout
+from authapp.views import (
+    LoginView,
+    LogoutView
+)
 
 app_name = 'authapp'
 
 urlpatterns = [    
-    path('', show_auth, name='show-auth'),
-    path('login/', set_login, name='login'),
-    path('logout/', set_logout, name='logout'),
+    path('', LoginView.as_view(), name='show-auth'),
+    path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]

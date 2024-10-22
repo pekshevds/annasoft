@@ -1,6 +1,11 @@
 from django.urls import path
-from FN_accounting.views import FNList, FNDetail, Point_of_saleList
-from FN_accounting.views import KKTDetail, KKTFilterByPointOfSalesList
+from FN_accounting.views import (
+    FNList,
+    FNDetail,
+    Point_of_saleList,
+    KKTDetail,
+    KKTFilterByPointOfSalesList
+)
 
 urlpatterns = [
     path('fn/kkt/list/<str:uid>/', KKTFilterByPointOfSalesList.as_view()),
