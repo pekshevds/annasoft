@@ -6,14 +6,14 @@ from baseapp.views import (
     AboutView,
     WorkWithUsView,
     Sale1CView,
-    PrivacyView,
+    # PrivacyView,
     GeneratorView,
     ServiceView,
     ArticleView,
     ArticleListView,
-    SendContactFormView,
-    ContactFormErrorView,
-    ContactFormSuccessView
+    # SendContactFormView,
+    # ContactFormErrorView,
+    # ContactFormSuccessView
 )
 
 
@@ -29,8 +29,8 @@ urlpatterns = [
     path('trade-1c/', Sale1CView.as_view(), name='trade_1c'),
     # path('privacy/', PrivacyView.as_view(), name='show_privacy'),
     path('generator/', GeneratorView.as_view(), name='show_generator_page'),
-    path('send-contact-form/', SendContactFormView.as_view(), name='send_contact_form'),
-    path('send-form-success/', ContactFormSuccessView.as_view(), name='send_form_success'),
-    path('send-form-error/', ContactFormErrorView.as_view(), name='send_form_error'),
+    # path('send-contact-form/', SendContactFormView.as_view(), name='send_contact_form'),
+    # path('send-form-success/', ContactFormSuccessView.as_view(), name='send_form_success'),
+    # path('send-form-error/', ContactFormErrorView.as_view(), name='send_form_error'),
 
 ]

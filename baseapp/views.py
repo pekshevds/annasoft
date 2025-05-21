@@ -98,7 +98,6 @@ class SendContactFormView(View):
 	def post(self, request: HttpRequest) -> HttpResponse:
 		contactForm = ContactForm(request.POST)
 		if contactForm.is_valid():
-			print(contactForm.cleaned_data)
 			try:
 				send_mail(contactForm.cleaned_data)
 				return redirect('send_form_success')

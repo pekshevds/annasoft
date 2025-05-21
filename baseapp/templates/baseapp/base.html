@@ -141,7 +141,7 @@
 
 <!--=================================
     Action Box -->
-    {% block action_box %}
+    {% comment %} {% block action_box %}
     <section class="space-pb dark-background">
       <div class="container">
         <div class="bg-dark text-center rounded py-5 px-3">
@@ -151,10 +151,11 @@
         </div>
       </div>
     </section>
+    {% endblock %} {% endcomment %}
     <!--=================================
     Action Box -->
-    {% endblock %}
-    <div class="modal fade bd-example-modal-lg" id="connectModal" tabindex="-1" role="dialog" aria-labelledby="connectModalLabel" aria-hidden="true">
+    
+    {% comment %} <div class="modal fade bd-example-modal-lg" id="connectModal" tabindex="-1" role="dialog" aria-labelledby="connectModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -177,12 +178,12 @@
                 <div class="form-group mb-4">
                   {{ contact_form.comment }}
                 </div>
-                {% comment %} <div class="form-group mb-4">
+                <div class="form-group mb-4">
                   <div class="custom-control custom-checkbox">
                     <input name="accessData" checked type="checkbox" class="custom-control-input" id="customCheck1">
                     <label id="privacyLabel" style="border-radius: 5px;" class="custom-control-label small pl-1 pr-1" for="customCheck1">Я согласен на обработку <a href="{% url 'show_privacy' %}">персональных данных</a></label>
                   </div>
-                </div> {% endcomment %}
+                </div>
                 <div class="form-group mb-4">
                   {{ contact_form.captcha }}
                 </div>
@@ -195,7 +196,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> {% endcomment %}
 
 
 <!--=================================
@@ -294,17 +295,17 @@
 
     <script type="text/javascript">
 
-      window.onload = function() {
+      {% comment %} window.onload = function() {
         const customCheck1 = document.getElementById('customCheck1');
         const sendFormButton = document.getElementById('sendFormButton');
-        {% comment %} customCheck1.addEventListener('change', function(event) {
+        customCheck1.addEventListener('change', function(event) {
           if (event.currentTarget.checked==true) {
             sendFormButton.disabled = false;
           } else {
             sendFormButton.disabled = true;
           };
-        }); {% endcomment %}
-      };
+        });
+      }; {% endcomment %}
       
       function inputFilter(){
         if (event.keyCode < 48 || event.keyCode > 57) {

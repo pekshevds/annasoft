@@ -45,7 +45,7 @@
   </div>
 </section>
 
-<section>
+{% comment %} <section>
 	<div class="container">
 		<div class="row justify-content-end">
 			<div class="col-12 position-relative z-index-1">
@@ -57,7 +57,7 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section> {% endcomment %}
 {% for good in goods_list %}
 <section class="" style="padding: 50px 0;">
 	<h1 hidden="true">{{ good.title }}</h1>
@@ -79,11 +79,11 @@
 						<h6 class="mb-0">ПРОФ: <b class="text-primary font-xll">&#8381; {{ good.price }}</b></h6>
 					</div>
 				</div>
-				<div class="row">
+				{% comment %} <div class="row">
 					<div class="col-12" align="right">
 						<a type="button" data-toggle="modal" data-target="#connectModal" href="#" class="btn btn-primary btn-round text-white w-space">Заказать</a>
 					</div>
-				</div>
+				</div> {% endcomment %}
 			</div>
 		</div>
 	</div>
