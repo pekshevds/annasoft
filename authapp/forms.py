@@ -37,8 +37,8 @@ class ContactForm(forms.Form):
 			'id': 'exampleInputEnquiry-Description',
 			'autocomplete': 'off',
 		}))
-	accessData = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={
-			'class': 'custom-control-input',
-			'id': 'customCheck1',
-		}))
+	# accessData = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={
+	# 		'class': 'custom-control-input',
+	# 		'id': 'customCheck1',
+	# 	}))
 	captcha = ReCaptchaField(widget=ReCaptchaV2Invisible)
