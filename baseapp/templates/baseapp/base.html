@@ -232,7 +232,7 @@
                 <li><a href="{% url 'show-about' %}">О нас</a></li>                
                 <!-- <li><a href="{% url 'show-articles' %}">Статьи</a></li>                 -->
                 <li><a href="{% url 'show-work-with-us' %}">Работа у нас </a></li>
-                <li><a href="{% url 'show_privacy' %}">Политика конфиденциальности</a></li>
+                {% comment %} <li><a href="{% url 'show_privacy' %}">Политика конфиденциальности</a></li> {% endcomment %}
 
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'show-crm-index' %}"><span class="badge badge-success ml-2">crm</span></a></li>
